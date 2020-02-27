@@ -283,7 +283,7 @@ void loop(void)
 }
 ```
 
-The following are debug terminal output and screen shot when running example [AdvancedWebServer](examples/AdvancedWebServer) on Teensy 4.0
+The following are debug terminal output and screen shot when running example [AdvancedWebServer](examples/AdvancedWebServer) on STM32 Nucleo-144 F767ZI STM32F767 DEV EVAL BOARD
 
 <p align="center">
     <img src="https://github.com/khoih-prog/EthernetWebServer_STM32/blob/master/pics/AdvancedWebServer.png">
