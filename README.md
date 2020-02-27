@@ -21,7 +21,7 @@ The EthernetWebServer class found in `EthernetWebServer.h` header, is a simple w
 
 ## Prerequisite
 1. [`Arduino IDE 1.8.11 or later` for Arduino](https://www.arduino.cc/en/Main/Software)
-2. `Arduino AVR core 1.8.2 or later` for Arduino (Use Arduino Board Manager)
+2. [`Arduino Core for STM32 1.8.0 or later`](https://github.com/stm32duino/Arduino_Core_STM32) for STM32 (Use Arduino Board Manager)
 3. Depending on which Ethernet card you're using:
    - [STM32Ethernet library](https://github.com/stm32duino/STM32Ethernet) for built-in Ethernet on (Nucleo-144, Discovery)
    - [UIPEthernet library](https://github.com/UIPEthernet/UIPEthernet) for ENC28J60
