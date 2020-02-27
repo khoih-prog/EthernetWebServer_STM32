@@ -3,10 +3,10 @@
 [![arduino-library-badge](https://www.ardu-badge.com/badge/EthernetWebServer_STM32.svg?)](https://www.ardu-badge.com/EthernetWebServer_STM32)
 
 This library currently supports
- * 1) STM32 boards with built-in Ethernet such as :
- *    - ***Nucleo-144 (F429ZI, F767ZI)***
- *    - ***Discovery (STM32F746G-DISCOVERY)***
- * 2) ***STM32 boards (with 64+K Flash) running EMC28J60 shields***
+1. STM32 boards with built-in Ethernet such as :
+  - ***Nucleo-144 (F429ZI, F767ZI)***
+  - ***Discovery (STM32F746G-DISCOVERY)***
+2. ***STM32 boards (with 64+K Flash) running EMC28J60 shields***
 
 This is simple yet complete WebServer library for `STM32` boards running built-in Ethernet (Nucleo-144, Discovery) or EMC28J60 Ethernet shields. The functions are similar and compatible to ESP8266/ESP32 WebServer libraries to make life much easier to port sketches from ESP8266/ESP32.
 
