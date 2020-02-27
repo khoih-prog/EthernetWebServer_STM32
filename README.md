@@ -291,7 +291,7 @@ The following are debug terminal output and screen shot when running example [Ad
 
 ```
 
-Starting AdvancedServer on TEENSY 4.0
+Starting AdvancedServer
 HTTP EthernetWebServer is @ IP : 192.168.2.100
 [ETHERNET_WEBSERVER] send1: len =  289
 [ETHERNET_WEBSERVER] content =  <html><head><meta http-equiv='refresh' content='5'/><title>ESP8266 Demo</title><style>body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }</style></head><body><h1>Hello from ESP8266!</h1><p>Uptime: 00:00:27</p><img src="/test.svg" /></body></html>
