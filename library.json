@@ -1,0 +1,13 @@
+{
+  "name": "EthernetWebServer_STM32",
+  "keywords": "WebServer, built-in Ethernet, Arduino, STM32, Ethernet shield, Nucleo-144",
+  "description": "Simple EthernetWebServer library for STM32 boards running built-in Ethernet or Ethernet shields",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/khoih-prog/EthernetWebServer"
+  },
+  "frameworks": "arduino",
+  "platforms": "ststm32",
+  "version": "1.0.0"
+}
