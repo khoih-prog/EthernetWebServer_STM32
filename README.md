@@ -7,6 +7,7 @@ This library currently supports
   - ***Nucleo-144 (F429ZI, F767ZI)***
   - ***Discovery (STM32F746G-DISCOVERY)***
 2. ***STM32 boards (with 64+K Flash) running EMC28J60 shields***
+3. See [EthernetWebServer Library Issue 1](https://github.com/khoih-prog/EthernetWebServer/issues/1) for reason to create this separate library from [EthernetWebServer library](https://github.com/khoih-prog/EthernetWebServer)
 
 This is simple yet complete WebServer library for `STM32` boards running built-in Ethernet (Nucleo-144, Discovery) or EMC28J60 Ethernet shields. The functions are similar and compatible to ESP8266/ESP32 WebServer libraries to make life much easier to port sketches from ESP8266/ESP32.
 
@@ -340,14 +341,36 @@ This library currently supports
 1. STM32 boards with built-in Ethernet such as :
   - Nucleo-144 (F429ZI, F767ZI)
   - Discovery (STM32F746G-DISCOVERY)
+  
 2. STM32 boards (with 64+K Flash) running EMC28J60 shields
+- Nucleo-144
+- Nucleo-64
+- Discovery
+- STM32MP1
+- Generic STM32F1 (with 64+K Flash): C8 and up
+- Generic STM32F4
+- STM32L0
+- LoRa boards
+- 3-D printer boards
+- Generic Flight Controllers
+- Midatronics boards
+
+and these boards are not supported:
+
+- Nucleo-32 (small Flash/memory)
+- Eval (no Serial, just need to redefine in sketch, library and UIPEthernet)
+- Generic STM32F0 (small Flash/memory)
+- Generic STM32F1 (with <64K Flash): C6
+- Generic STM32F3 : no HardwareSPI.h
+- Electronics Speed Controllers (small Flash/memory)
+
 3. HTTP Server and Client
 4. HTTP GET and POST requests, provides argument parsing, handles one client at a time.
 
 ## TO DO
 1. Bug Searching and Killing
 2. Add SSL/TLS Client and Server support
-3. Support more types of boards using Ethernet shields.
+3. Support more types of Ethernet shields such as W5x00, etc.
 
 
 ### Contributions and thanks
