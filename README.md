@@ -2,13 +2,18 @@
 
 [![arduino-library-badge](https://www.ardu-badge.com/badge/EthernetWebServer_STM32.svg?)](https://www.ardu-badge.com/EthernetWebServer_STM32)
 
+### New in Version v1.0.1
+
+1. Add support to ***W5x00*** Ethernet shields to all STM32 boards having 64+K bytes Flash.
+
 This library currently supports
 1. STM32 boards with built-in Ethernet such as :
   - ***Nucleo-144 (F429ZI, F767ZI)***
   - ***Discovery (STM32F746G-DISCOVERY)***
   - ***All STM32 Boards with Built-in Ethernet***, See [How To Use Built-in Ethernet](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
-2. ***STM32 boards (with 64+K Flash) running EMC28J60 shields***
-3. See [EthernetWebServer Library Issue 1](https://github.com/khoih-prog/EthernetWebServer/issues/1) for reason to create this separate library from [EthernetWebServer library](https://github.com/khoih-prog/EthernetWebServer)
+2. ***STM32 boards (with 64+K Flash) running ENC28J60 shields***
+3. ***STM32 boards (with 64+K Flash) running W5x00 shields***
+4. See [EthernetWebServer Library Issue 1](https://github.com/khoih-prog/EthernetWebServer/issues/1) for reason to create this separate library from [EthernetWebServer library](https://github.com/khoih-prog/EthernetWebServer)
 
 This is simple yet complete WebServer library for `STM32` boards running built-in Ethernet (Nucleo-144, Discovery) or EMC28J60 Ethernet shields. The functions are similar and compatible to ESP8266/ESP32 WebServer libraries to make life much easier to port sketches from ESP8266/ESP32.
 
@@ -333,6 +338,9 @@ HTTP EthernetWebServer is @ IP : 192.168.2.100
 </g>
 </svg>
 ```
+### Version v1.0.1
+
+1. Add support to W5x00 Ethernet shields to all STM32 boards having 64+K bytes Flash.
 
 ### Version v1.0.0
 

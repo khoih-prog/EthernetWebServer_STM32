@@ -1,6 +1,6 @@
 {
   "name": "EthernetWebServer_STM32",
-  "keywords": "WebServer, built-in Ethernet, Arduino, STM32, Ethernet shield, Nucleo-144",
+  "keywords": "WebServer, built-in Ethernet, Arduino, STM32, Ethernet shield, Nucleo-144, ENC28J60, W5x00",
   "description": "Simple EthernetWebServer library for STM32 boards running built-in Ethernet or Ethernet shields",
   "repository":
   {
@@ -9,5 +9,5 @@
   },
   "frameworks": "arduino",
   "platforms": "ststm32",
-  "version": "1.0.0"
+  "version": "1.0.1"
 }

@@ -7,7 +7,7 @@
  * Forked and modified from ESP8266 https://github.com/esp8266/Arduino/releases
  * Built by Khoi Hoang https://github.com/khoih-prog/ESP8266_AT_WebServer
  * Licensed under MIT license
- * Version: 1.0.0
+ * Version: 1.0.1
  *
  * Original author:
  * @file       Esp8266WebServer.h
@@ -15,7 +15,8 @@
  *
  * Version Modified By   Date      Comments
  * ------- -----------  ---------- -----------
- *  1.0.0   K Hoang      13/02/2020 Initial coding for STM32 with built-in Ethernet (Nucleo-144, DISCOVERY, etc)
+ *  1.0.0   K Hoang      26/02/2020 Initial coding for STM32 with built-in Ethernet (Nucleo-144, DISCOVERY, etc) and ENC28J60
+ *  1.0.1   K Hoang      28/02/2020 Add W5x00 Ethernet shields using Ethernet library
  *****************************************************************************************************************************/
  
 #ifndef EthernetWebServer_STM32_impl_h
