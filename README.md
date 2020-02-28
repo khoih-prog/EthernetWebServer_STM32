@@ -6,6 +6,7 @@ This library currently supports
 1. STM32 boards with built-in Ethernet such as :
   - ***Nucleo-144 (F429ZI, F767ZI)***
   - ***Discovery (STM32F746G-DISCOVERY)***
+  - ***All STM32 Boards with Built-in Ethernet***, See [How To Use Built-in Ethernet](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
 2. ***STM32 boards (with 64+K Flash) running EMC28J60 shields***
 3. See [EthernetWebServer Library Issue 1](https://github.com/khoih-prog/EthernetWebServer/issues/1) for reason to create this separate library from [EthernetWebServer library](https://github.com/khoih-prog/EthernetWebServer)
 
@@ -341,6 +342,7 @@ This library currently supports
 1. STM32 boards with built-in Ethernet such as :
   - Nucleo-144 (F429ZI, F767ZI)
   - Discovery (STM32F746G-DISCOVERY)
+  - All STM32 Boards with Built-in Ethernet, See [How To Use Built-in Ethernet](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
   
 2. STM32 boards (with 64+K Flash) running EMC28J60 shields
 - Nucleo-144
