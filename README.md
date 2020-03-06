@@ -4,7 +4,7 @@
 
 ### New in Version v1.0.2
 
-1. Remove dependendy on [`Functional-VLPP library`](https://github.com/khoih-prog/functional-vlpp).
+1. Remove dependency on [`Functional-VLPP library`](https://github.com/khoih-prog/functional-vlpp).
 2. Enhance examples and update README.md
 
 ### New in Version v1.0.1
