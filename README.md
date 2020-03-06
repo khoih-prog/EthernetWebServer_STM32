@@ -2,12 +2,17 @@
 
 [![arduino-library-badge](https://www.ardu-badge.com/badge/EthernetWebServer_STM32.svg?)](https://www.ardu-badge.com/EthernetWebServer_STM32)
 
+### New in Version v1.0.2
+
+1. Remove dependendy on [`Functional-VLPP library`](https://github.com/khoih-prog/functional-vlpp).
+2. Enhance examples and update README.md
+
 ### New in Version v1.0.1
 
 1. Add support to ***W5x00*** Ethernet shields to all STM32 boards having 64+K bytes Flash.
 
 This library currently supports
-1. STM32 boards with built-in Ethernet LAN8742A such as :
+1. STM32 boards with built-in Ethernet such as :
   - ***Nucleo-144 (F429ZI, F767ZI)***
   - ***Discovery (STM32F746G-DISCOVERY)***
   - ***All STM32 Boards with Built-in Ethernet***, See [How To Use Built-in Ethernet](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
@@ -15,7 +20,7 @@ This library currently supports
 3. ***STM32 boards (with 64+K Flash) running W5x00 shields***
 4. See [EthernetWebServer Library Issue 1](https://github.com/khoih-prog/EthernetWebServer/issues/1) for reason to create this separate library from [EthernetWebServer library](https://github.com/khoih-prog/EthernetWebServer)
 
-This is simple yet complete WebServer library for `STM32` boards running built-in Ethernet LAN8742A (Nucleo-144, Discovery) or EMC28J60 Ethernet shields. The functions are similar and compatible to ESP8266/ESP32 WebServer libraries to make life much easier to port sketches from ESP8266/ESP32.
+This is simple yet complete WebServer library for `STM32` boards running built-in Ethernet (Nucleo-144, Discovery) or EMC28J60 Ethernet shields. The functions are similar and compatible to ESP8266/ESP32 WebServer libraries to make life much easier to port sketches from ESP8266/ESP32.
 
 The library supports 
 1. HTTP Server and Client
@@ -32,13 +37,14 @@ The EthernetWebServer class found in `EthernetWebServer.h` header, is a simple w
 3. Depending on which Ethernet card you're using:
    - [STM32Ethernet library](https://github.com/stm32duino/STM32Ethernet) for built-in Ethernet on (Nucleo-144, Discovery)
    - [UIPEthernet library](https://github.com/UIPEthernet/UIPEthernet) for ENC28J60
-4. [`Functional-VLPP library`](https://github.com/khoih-prog/functional-vlpp) to use lambda function
-5. [LwIP library](https://github.com/stm32duino/LwIP) for built-in Ethernet on (Nucleo-144, Discovery)
+   - [Standard Ethernet library](https://www.arduino.cc/en/Reference/Ethernet) for W5x00
+4. [LwIP library](https://github.com/stm32duino/LwIP) for built-in Ethernet on (Nucleo-144, Discovery)
 
 ## Installation
 
 ### Use Arduino Library Manager
-Another way is to use `Arduino Library Manager` or [![arduino-library-badge](https://www.ardu-badge.com/badge/EthernetWebServer_STM32.svg?)](https://www.ardu-badge.com/EthernetWebServer_STM32). Search for `EthernetWebServer_STM32`, then select / install the latest version.
+The best way is to use `Arduino Library Manager`. Search for `EthernetWebServer_STM32`, then select / install the latest version. 
+You can also use this link [![arduino-library-badge](https://www.ardu-badge.com/badge/EthernetWebServer_STM32.svg?)](https://www.ardu-badge.com/EthernetWebServer_STM32) for more detailed instructions.
 
 ### Manual Install
 
@@ -216,11 +222,50 @@ Please take a look at examples, as well.
  * 1) STM32 boards with built-in Ethernet (to use USE_BUILTIN_ETHERNET = true) such as :
  *    - Nucleo-144 (F429ZI, F767ZI)
  *    - Discovery (STM32F746G-DISCOVERY)
+ *    - All STM32 Boards with Built-in Ethernet, See How To Use Built-in Ethernet at (https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
  * 2) STM32 boards (with 64+K Flash) running EMC28J60 shields (to use USE_BUILTIN_ETHERNET = false)
+ * 3) STM32 boards (with 32+K Flash) running W5x00 Ethernet shields
  * 
  */
 
-#define USE_BUILTIN_ETHERNET   false    //true
+#if defined(ESP8266) || defined(ESP32) || defined(AVR) || (ARDUINO_SAM_DUE)
+#error This code is designed to run on STM32 platform, not AVR, SAM DUE, SAMD, ESP8266 nor ESP32! Please check your Tools->Board setting.
+#endif
+
+#define USE_BUILTIN_ETHERNET    true
+//  If don't use USE_BUILTIN_ETHERNET, and USE_UIP_ETHERNET => use W5x00 with Ethernet library
+#define USE_UIP_ETHERNET        false 
+
+#if (USE_BUILTIN_ETHERNET)
+  #define ETHERNET_NAME     "Built-in LAN8742A Ethernet"
+#elif (USE_UIP_ETHERNET)
+  #define ETHERNET_NAME     "ENC28J60 Ethernet Shield"
+#else
+  #define ETHERNET_NAME     "W5x00 Ethernet Shield"
+#endif
+
+#if defined(STM32F0)
+  #warning STM32F0 board selected
+  #define DEVICE_NAME  "STM32F0"
+#elif defined(STM32F1)
+  #warning STM32F1 board selected
+  #define DEVICE_NAME  "STM32F1"
+#elif defined(STM32F2)
+  #warning STM32F2 board selected
+  #define DEVICE_NAME  "STM32F2"
+#elif defined(STM32F3)
+  #warning STM32F3 board selected
+  #define DEVICE_NAME  "STM32F3"
+#elif defined(STM32F4)
+  #warning STM32F4 board selected
+  #define DEVICE_NAME  "STM32F4"
+#elif defined(STM32F7)
+  #warning STM32F7 board selected
+  #define DEVICE_NAME  "STM32F7"
+#else
+  #warning STM32 unknown board selected
+  #define DEVICE_NAME  "STM32 Unknown"
+#endif
 
 #include <EthernetWebServer_STM32.h>
   
@@ -265,7 +310,7 @@ void setup(void)
   // Open serial communications and wait for port to open:
   Serial.begin(115200);
   delay(1000);
-  Serial.println("\nStarting HelloServer on Nucleo-144");
+  Serial.println("\nStart HelloServer on " + String(DEVICE_NAME) + " board, running " + String(ETHERNET_NAME));
 
   // start the ethernet connection and the server:
   Ethernet.begin(mac, ip);
@@ -338,16 +383,22 @@ HTTP EthernetWebServer is @ IP : 192.168.2.100
 </g>
 </svg>
 ```
+
+### New in Version v1.0.2
+
+1. Remove dependendy on [`Functional-VLPP library`](https://github.com/khoih-prog/functional-vlpp).
+2. Enhance examples and update README.md
+
 ### Version v1.0.1
 
 1. Add support to W5x00 Ethernet shields to all STM32 boards having 64+K bytes Flash.
 
 ### Version v1.0.0
 
-This is simple yet complete WebServer library for `STM32` boards running built-in Ethernet LAN8742A (Nucleo-144, Discovery) or EMC28J60 Ethernet shields. ***The functions are similar and compatible to ESP8266/ESP32 WebServer libraries*** to make life much easier to port sketches from ESP8266/ESP32.
+This is simple yet complete WebServer library for `STM32` boards running built-in Ethernet (Nucleo-144, Discovery) or EMC28J60 Ethernet shields. ***The functions are similar and compatible to ESP8266/ESP32 WebServer libraries*** to make life much easier to port sketches from ESP8266/ESP32.
 
 This library currently supports
-1. STM32 boards with built-in Ethernet LAN8742A such as :
+1. STM32 boards with built-in Ethernet such as :
   - Nucleo-144 (F429ZI, F767ZI)
   - Discovery (STM32F746G-DISCOVERY)
   - All STM32 Boards with Built-in Ethernet, See [How To Use Built-in Ethernet](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
@@ -370,7 +421,7 @@ and these boards are not supported:
 - Nucleo-32 (small Flash/memory)
 - Eval (no Serial, just need to redefine in sketch, library and UIPEthernet)
 - Generic STM32F0 (small Flash/memory)
-- Generic STM32F1 (with <64K Flash): C6
+- Generic STM32F1 (with 64-K Flash): C6
 - Generic STM32F3 : no HardwareSPI.h
 - Electronics Speed Controllers (small Flash/memory)
 

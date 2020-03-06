@@ -9,7 +9,7 @@
    Forked and modified from ESP8266 https://github.com/esp8266/Arduino/releases
    Built by Khoi Hoang https://github.com/khoih-prog/ESP8266_AT_WebServer
    Licensed under MIT license
-   Version: 1.0.1
+   Version: 1.0.2
 
    Original author:
    @file       Esp8266WebServer.h
@@ -19,23 +19,21 @@
    ------- -----------  ---------- -----------
     1.0.0   K Hoang      26/02/2020 Initial coding for STM32 with built-in Ethernet (Nucleo-144, DISCOVERY, etc) and ENC28J60
     1.0.1   K Hoang      28/02/2020 Add W5x00 Ethernet shields using Ethernet library
+    1.0.2   K Hoang      05/03/2020 Remove dependency on functional-vlpp
  *****************************************************************************************************************************/
 
 #include "cdecode.h"
 
 int base64_decode_value(char value_in) {
   static const char decoding[] = { 62, -1, -1, -1, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -2, -1, -1, -1,
-                                   0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
-                                   -1, -1, -1, -1, -1, -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42,
-                                   43, 44, 45, 46, 47, 48, 49, 50, 51
+                                   0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+                                   25, -1, -1, -1, -1, -1, -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
+                                   42, 43, 44, 45, 46, 47, 48, 49, 50, 51
                                  };
-
+                                 
   static const char decoding_size = sizeof(decoding);
   value_in -= 43;
-
-  if (value_in < 0 || value_in > decoding_size)
-    return -1;
-
+  if (value_in < 0 || value_in > decoding_size) return -1;
   return decoding[(int)value_in];
 }
 
