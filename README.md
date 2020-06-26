@@ -6,6 +6,8 @@
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](#Contributing)
 [![GitHub issues](https://img.shields.io/github/issues/khoih-prog/EthernetWebServer_STM32.svg)](http://github.com/khoih-prog/EthernetWebServer_STM32/issues)
 
+---
+
 ### New in Version v1.0.2
 
 1. Remove dependency on [`Functional-VLPP library`](https://github.com/khoih-prog/functional-vlpp).
@@ -35,9 +37,11 @@ Library is based on and modified from:
 
 The EthernetWebServer class found in `EthernetWebServer.h` header, is a simple web server that knows how to handle HTTP requests such as GET and POST and can only support one simultaneous client.
 
+---
+
 ## Prerequisite
 1. [`Arduino IDE 1.8.11 or later` for Arduino](https://www.arduino.cc/en/Main/Software)
-2. [`Arduino Core for STM32 1.8.0 or later`](https://github.com/stm32duino/Arduino_Core_STM32) for STM32 (Use Arduino Board Manager)
+2. [`Arduino Core for STM32 1.9.0 or later`](https://github.com/stm32duino/Arduino_Core_STM32) for STM32 (Use Arduino Board Manager)
 3. Depending on which Ethernet card you're using:
    - [STM32Ethernet library](https://github.com/stm32duino/STM32Ethernet) for built-in Ethernet on (Nucleo-144, Discovery)
    - [UIPEthernet library](https://github.com/UIPEthernet/UIPEthernet) for ENC28J60
@@ -58,6 +62,15 @@ You can also use this link [![arduino-library-badge](https://www.ardu-badge.com/
 4. Copy whole 
   - `EthernetWebServer_STM32-master` folder to Arduino libraries' directory such as `~/Arduino/libraries/`.
 
+---
+
+#### Important Notes
+
+1. Install the latest [`Arduino Core for STM32 1.9.0 or later`](https://github.com/stm32duino/Arduino_Core_STM32) for STM32
+2. Install the UIPthernet patch [new STM32 core F3/F4 compatibility](https://github.com/UIPEthernet/UIPEthernet/commit/c6d6519a260166b722b9cee5dd1f0fb2682e6782) to avoid errors `#include HardwareSPI.h` on some STM32 boards (Nucleo-32 F303K8, etc.)
+
+ 
+---
 
 #### Usage
 
@@ -208,6 +221,7 @@ Example:*
   size_t streamFile();
 ```
 
+---
 
 Also see examples: 
  1. [HelloServer](examples/HelloServer)
@@ -217,8 +231,9 @@ Also see examples:
  5. [PostServer](examples/PostServer)
  6. [SimpleAuthentication](examples/SimpleAuthentication)
 
-## Example
-Please take a look at examples, as well.
+## Example [HelloServer](examples/HelloServer)
+
+Please take a look at other examples, as well.
 
 ```cpp
 /*
@@ -346,7 +361,6 @@ The following are debug terminal output and screen shot when running example [Ad
 </p>
 
 ```
-
 Starting AdvancedServer
 HTTP EthernetWebServer is @ IP : 192.168.2.100
 [ETHERNET_WEBSERVER] send1: len =  289
@@ -388,6 +402,8 @@ HTTP EthernetWebServer is @ IP : 192.168.2.100
 </svg>
 ```
 
+---
+
 ### New in Version v1.0.2
 
 1. Remove dependendy on [`Functional-VLPP library`](https://github.com/khoih-prog/functional-vlpp).
@@ -422,7 +438,7 @@ This library currently supports
 
 and these boards are not supported:
 
-- Nucleo-32 (small Flash/memory)
+- Some Nucleo-32 (small Flash/memory)
 - Eval (no Serial, just need to redefine in sketch, library and UIPEthernet)
 - Generic STM32F0 (small Flash/memory)
 - Generic STM32F1 (with 64-K Flash): C6
@@ -437,9 +453,10 @@ and these boards are not supported:
 2. Add SSL/TLS Client and Server support
 3. Support more types of Ethernet shields such as W5x00, etc.
 
+---
 
 ### Contributions and thanks
-1. Forked from [Ivan Grokhotkov's ESP8266WebServer](https://github.com/esp8266/Arduino/tree/master/libraries/ESP8266WebServer)
+1. Based on and modified from [Ivan Grokhotkov's ESP8266WebServer](https://github.com/esp8266/Arduino/tree/master/libraries/ESP8266WebServer)
 2. [jandrassy](https://github.com/jandrassy) for [UIPEthernet library](https://github.com/UIPEthernet/UIPEthernet)
 
 ## Contributing
