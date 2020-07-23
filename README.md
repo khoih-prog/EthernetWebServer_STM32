@@ -13,6 +13,7 @@
 1. Fix bug not closing client and releasing socket.
 2. Merge new features from latest ESP8266WebServer
 3. Add and enhance examples.
+4. Add back dependency to [`Functional-VLPP library`](https://github.com/khoih-prog/functional-vlpp).
 
 ### New in Version v1.0.2
 
@@ -53,13 +54,13 @@ The EthernetWebServer class found in `EthernetWebServer_STM32.h` header, is a si
  2. [`Arduino Core for STM32 1.9.0+`](https://github.com/stm32duino/Arduino_Core_STM32) for STM32 (Use Arduino Board Manager)
  3. [`Functional-VLPP library v1.0.1+`](https://github.com/khoih-prog/functional-vlpp) to use server's lambda function. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/Functional-Vlpp.svg?)](https://www.ardu-badge.com/Functional-Vlpp)
  4. Depending on which Ethernet card you're using:
-   - [STM32Ethernet library](https://github.com/stm32duino/STM32Ethernet) for built-in Ethernet on (Nucleo-144, Discovery)
-   - [`Ethernet library`](https://www.arduino.cc/en/Reference/Ethernet) for W5100, W5200 and W5500.
-   - [`EthernetLarge library`](https://github.com/OPEnSLab-OSU/EthernetLarge) for W5100, W5200 and W5500.
-   - [`Ethernet2 library`](https://github.com/khoih-prog/Ethernet2) for W5500.
-   - [`Ethernet3 library`](https://github.com/sstaub/Ethernet3) for W5500/WIZ550io/WIZ850io/USR-ES1 with Wiznet W5500 chip.
-   - [`UIPEthernet`](https://github.com/UIPEthernet/UIPEthernet) for ENC28J60
- 4. [LwIP library](https://github.com/stm32duino/LwIP) for built-in Ethernet on (Nucleo-144, Discovery)
+   - [`STM32Ethernet library v1.2.0+`](https://github.com/stm32duino/STM32Ethernet) for built-in Ethernet on (Nucleo-144, Discovery)
+   - [`Ethernet library v2.0.0+`](https://www.arduino.cc/en/Reference/Ethernet) for W5100, W5200 and W5500.
+   - [`EthernetLarge library v2.0.0+`](https://github.com/OPEnSLab-OSU/EthernetLarge) for W5100, W5200 and W5500.
+   - [`Ethernet2 library v1.0.4+`](https://github.com/khoih-prog/Ethernet2) for W5500.
+   - [`Ethernet3 library v1.5.3+`](https://github.com/sstaub/Ethernet3) for W5500/WIZ550io/WIZ850io/USR-ES1 with Wiznet W5500 chip.
+   - [`UIPEthernet v2.0.8+`](https://github.com/UIPEthernet/UIPEthernet) for ENC28J60
+ 4. [`LwIP library v2.1.2+`](https://github.com/stm32duino/LwIP) for built-in Ethernet on (Nucleo-144, Discovery)
 
 ---
 
@@ -143,18 +144,20 @@ Select ***one and only one*** Ethernet library to use as follows:
 ```
 ---
 
-#### 1. Using new Ethernet Library and shield
+### HOWTO
+
+#### 1. Use new Ethernet Library and shield
 
  1. The ***Ethernet_Shield_W5200, EtherCard, EtherSia  libraries are not supported***. Don't use unless you know how to modify those libraries.
  2. Requests to support for any future custom Ethernet library will be ignored. ***Use at your own risk***.
 
-#### 2. How to select another CS/SS pin to use
+#### 2. Select another CS/SS pin to use
 
 The default CS/SS pin is 10 for all boards.
 
 ---
 
-#### Usage
+### Usage
 
 #### Class Constructor
 
@@ -305,6 +308,8 @@ Example:*
 
 ---
 
+## Examples
+
 Also see examples: 
  1. [HelloServer](examples/HelloServer)
  2. [HelloServer2](examples/HelloServer2)
@@ -318,7 +323,7 @@ Also see examples:
 10. [WebClientRepeating](examples/WebClientRepeating)
 11. [WebServer](examples/WebServer)
 
-## Example [AdvancedWebServer](examples/AdvancedWebServer)
+### Example [AdvancedWebServer](examples/AdvancedWebServer)
 
 Please take a look at other examples, as well.
 
@@ -729,13 +734,14 @@ Disconnecting from server...
 
 ---
 
-#### New in v1.0.3
+### Version v1.0.3
 
 1. Fix bug not closing client and releasing socket.
 2. Merge new features from latest ESP8266WebServer
 3. Add and enhance examples.
+4. Add back dependency to [`Functional-VLPP library`](https://github.com/khoih-prog/functional-vlpp).
 
-### New in Version v1.0.2
+### Version v1.0.2
 
 1. Remove dependendy on [`Functional-VLPP library`](https://github.com/khoih-prog/functional-vlpp).
 2. Enhance examples and update README.md
@@ -749,12 +755,12 @@ Disconnecting from server...
 This is simple yet complete WebServer library for `STM32` boards running built-in Ethernet (Nucleo-144, Discovery) or EMC28J60 Ethernet shields. ***The functions are similar and compatible to ESP8266/ESP32 WebServer libraries*** to make life much easier to port sketches from ESP8266/ESP32.
 
 This library currently supports
-1. STM32 boards with built-in Ethernet such as :
+1. ***STM32 boards with built-in Ethernet*** such as :
   - Nucleo-144 (F429ZI, F767ZI)
   - Discovery (STM32F746G-DISCOVERY)
   - All STM32 Boards with Built-in Ethernet, See [How To Use Built-in Ethernet](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
   
-2. STM32 boards (with 64+K Flash) running EMC28J60 shields
+2. ***STM32 boards (with 64+K Flash) running EMC28J60 shields***
 - Nucleo-144
 - Nucleo-64
 - Discovery
@@ -781,7 +787,7 @@ and these boards are not supported:
 
 ---
 
-## TO DO
+### TO DO
 
 1. Bug Searching and Killing
 2. Add SSL/TLS Client and Server support
