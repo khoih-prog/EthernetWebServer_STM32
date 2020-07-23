@@ -122,11 +122,19 @@ void loop()
   unsigned long startMs = millis();
   while (!Udp.available() && (millis() - startMs) < UDP_TIMEOUT) {}
 
-  Serial.println(Udp.parsePacket());
+  // if there's data available, read a packet
+  int packetSize = Udp.parsePacket();
 
-  if (Udp.parsePacket())
+  if (packetSize)
   {
-    Serial.println(F("UDP Packet received"));
+    Serial.print(F("UDP Packet received, size "));
+    Serial.println(packetSize);
+    Serial.print(F("From "));
+    IPAddress remoteIp = Udp.remoteIP();
+    Serial.print(remoteIp);
+    Serial.print(F(", port "));
+    Serial.println(Udp.remotePort());
+    
     // We've received a packet, read the data from it into the buffer
     Udp.read(packetBuffer, NTP_PACKET_SIZE);
 
