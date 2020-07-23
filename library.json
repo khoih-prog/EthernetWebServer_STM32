@@ -1,13 +1,28 @@
 {
   "name": "EthernetWebServer_STM32",
-  "keywords": "WebServer, built-in Ethernet, Arduino, STM32, Ethernet shield, Nucleo-144, ENC28J60, W5x00",
-  "description": "Simple EthernetWebServer library for STM32 boards running built-in Ethernet or Ethernet shields",
+  "version": "1.0.3",
+  "keywords": "WebServer, built-in Ethernet, Arduino, STM32F, Ethernet shield, Nucleo-144, LAN8742A, ENC28J60, W5x00",
+  "description": "Simple EthernetWebServer library for STM32F boards running built-in Ethernet LAN8742A or Ethernet W5x00, ENC28J60 shields",
+  "authors":
+  {
+    "name":  "Khoi Hoang",
+    "url":   "https://github.com/khoih-prog",
+    "maintainer": true
+  },  
   "repository":
   {
     "type": "git",
-    "url": "https://github.com/khoih-prog/EthernetWebServer"
+    "url": "https://github.com/khoih-prog/EthernetWebServer_STM32"
   },
+  "homepage": "https://github.com/khoih-prog/EthernetWebServer_STM32",
+  "export": {
+    "exclude": [
+      "linux",
+      "extras",
+      "tests"
+    ]
+  },  
   "frameworks": "arduino",
   "platforms": "ststm32",
-  "version": "1.0.2"
+  "examples": "examples/*/*/*.ino"
 }

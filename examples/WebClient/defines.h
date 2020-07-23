@@ -1,18 +1,17 @@
 /****************************************************************************************************************************
-   HTTPBasicAuth.h - Dead simple web-server for Ethernet shields
+    defines.h for WebClient.ino
+    For STM32 with built-in Ethernet (Nucleo-144, DISCOVERY, etc)
 
-   For STM32 with built-in Ethernet (Nucleo-144, DISCOVERY, etc)
+    EthernetWebServer_STM32 is a library for the STM32 run built-in Ethernet WebServer
 
-   EthernetWebServer_STM32 is a library for the STM32 run built-in Ethernet WebServer
+    Forked and modified from ESP8266 https://github.com/esp8266/Arduino/releases
+    Built by Khoi Hoang https://github.com/khoih-prog/ESP8266_AT_WebServer
+    Licensed under MIT license
+    Version: 1.0.3
 
-   Forked and modified from ESP8266 https://github.com/esp8266/Arduino/releases
-   Built by Khoi Hoang https://github.com/khoih-prog/ESP8266_AT_WebServer
-   Licensed under MIT license
-   Version: 1.0.3
-
-   Original author:
-   @file       Esp8266WebServer.h
-   @author     Ivan Grokhotkov
+    Original author:
+    @file       Esp8266WebServer.h
+    @author     Ivan Grokhotkov
 
    Version Modified By   Date      Comments
    ------- -----------  ---------- -----------
@@ -31,6 +30,9 @@
    3) STM32 boards (with 32+K Flash) running W5x00 Ethernet shields
 
 */
+
+#ifndef defines_h
+#define defines_h
 
 #if !( defined(STM32F0) || defined(STM32F1) || defined(STM32F2) || defined(STM32F3)  ||defined(STM32F4) || defined(STM32F7) )
 #error This code is designed to run on STM32F platform! Please check your Tools->Board setting.
@@ -111,53 +113,5 @@ byte mac[][NUMBER_OF_MAC] =
 // Select the IP address according to your local network
 IPAddress ip(192, 168, 2, 232);
 
-EthernetWebServer server(80);
 
-const char* www_username = "admin";
-const char* www_password = "ethernet";
-
-void setup()
-{
-  Serial.begin(115200);
-  delay(1000);
-  Serial.println("\nStart HTTPBasicAuth on " + String(BOARD_NAME) + " board, running " + String(ETHERNET_NAME));
-
-  // start the ethernet connection and the server
-  // Use random mac
-  srand(1);
-  uint16_t index = rand() % NUMBER_OF_MAC;
-  //uint16_t index = random(NUMBER_OF_MAC);
-
-  // Use Static IP
-  //Ethernet.begin(mac[index], ip);
-  // Use DHCP dynamic IP and random mac
-  Ethernet.begin(mac[index]);
-
-  server.on("/", []()
-  {
-    if (!server.authenticate(www_username, www_password))
-    {
-      return server.requestAuthentication();
-    }
-    server.send(200, "text/plain", "Login OK");
-  });
-
-  server.begin();
-
-  Serial.print(F("HTTP EthernetWebServer started @ IP : "));
-  Serial.println(Ethernet.localIP());
-
-  Serial.print(F("Open http://"));
-  Serial.print(Ethernet.localIP());
-  Serial.println(F("/ in your browser to see it working"));
-
-  Serial.print(F("Login using username = "));
-  Serial.print(www_username);
-  Serial.print(F(" and password = "));
-  Serial.println(www_password);
-}
-
-void loop()
-{
-  server.handleClient();
-}
+#endif    //defines_h
