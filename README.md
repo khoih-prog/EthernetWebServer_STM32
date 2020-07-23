@@ -11,6 +11,11 @@
 #### New in v1.0.4
 
 1. Add support to all STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash.
+  - STM32L0, STM32L1, STM32L4
+  - STM32G0, STM32G4
+  - STM32H7
+  - STM32WB
+  - STM32MP1
 
 #### New in v1.0.3
 
@@ -780,6 +785,15 @@ Disconnecting from server...
 ```
 
 ---
+
+#### New in v1.0.4
+
+1. Add support to all STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash.
+  - STM32L0, STM32L1, STM32L4
+  - STM32G0, STM32G4
+  - STM32H7
+  - STM32WB
+  - STM32MP1
 
 ### Version v1.0.3
 
