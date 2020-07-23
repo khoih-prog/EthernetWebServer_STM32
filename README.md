@@ -8,6 +8,10 @@
 
 ---
 
+#### New in v1.0.4
+
+1. Add support to all STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash.
+
 #### New in v1.0.3
 
 1. Fix bug not closing client and releasing socket.
@@ -24,14 +28,31 @@
 
 1. Add support to ***W5x00*** Ethernet shields to all STM32 boards having 64+K bytes Flash.
 
+---
+
 This library currently supports
-1. STM32 boards with built-in Ethernet such as :
+1. ***STM32 boards with built-in Ethernet LAN8742A*** such as :
   - ***Nucleo-144 (F429ZI, F767ZI)***
   - ***Discovery (STM32F746G-DISCOVERY)***
-  - ***All STM32 Boards with Built-in Ethernet***, See [How To Use Built-in Ethernet](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
-2. ***STM32 boards (with 64+K Flash) running ENC28J60 shields***
-3. ***STM32 boards (with 64+K Flash) running W5x00 shields***
-4. See [EthernetWebServer Library Issue 1](https://github.com/khoih-prog/EthernetWebServer/issues/1) for reason to create this separate library from [EthernetWebServer library](https://github.com/khoih-prog/EthernetWebServer)
+  - ***All STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet***
+  - See [How To Use Built-in Ethernet](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
+  
+2. ***STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running W5x00 or ENC28J60 shields)***
+- Nucleo-144
+- Nucleo-64
+- Discovery
+- Generic STM32F0, STM32F1, STM32F2, STM32F3, STM32F4, STM32F7 (with 64+K Flash): x8 and up
+- STM32L0, STM32L1, STM32L4
+- STM32G0, STM32G4
+- STM32H7
+- STM32WB
+- STM32MP1
+- LoRa boards
+- 3-D printer boards
+- Generic Flight Controllers
+- Midatronics boards
+
+3. See [EthernetWebServer Library Issue 1](https://github.com/khoih-prog/EthernetWebServer/issues/1) for reason to create this separate library from [EthernetWebServer library](https://github.com/khoih-prog/EthernetWebServer)
 
 ---
 
@@ -333,24 +354,26 @@ Please take a look at other examples, as well.
    1) STM32 boards with built-in Ethernet (to use USE_BUILTIN_ETHERNET = true) such as :
       - Nucleo-144 (F429ZI, F767ZI)
       - Discovery (STM32F746G-DISCOVERY)
-      - All STM32 Boards with Built-in Ethernet, See How To Use Built-in Ethernet at (https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
-   2) STM32 boards (with 64+K Flash) running EMC28J60 shields (to use USE_BUILTIN_ETHERNET = false)
-   3) STM32 boards (with 32+K Flash) running W5x00 Ethernet shields
-
+      - STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet, 
+      - See How To Use Built-in Ethernet at (https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
+   2) STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running ENC28J60 shields (to use USE_BUILTIN_ETHERNET = false)
+   3) STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running W5x00 shields
 */
 
-#if !( defined(STM32F0) || defined(STM32F1) || defined(STM32F2) || defined(STM32F3)  ||defined(STM32F4) || defined(STM32F7) )
-#error This code is designed to run on STM32F platform! Please check your Tools->Board setting.
+#if !( defined(STM32F0) || defined(STM32F1) || defined(STM32F2) || defined(STM32F3)  ||defined(STM32F4) || defined(STM32F7) || \
+       defined(STM32L0) || defined(STM32L1) || defined(STM32L4) || defined(STM32H7)  ||defined(STM32G0) || defined(STM32G4) || \
+       defined(STM32WB) || defined(STM32MP1) )
+#error This code is designed to run on STM32F/L/H/G/WB/MP1 platform! Please check your Tools->Board setting.
 #endif
 
 #define DEBUG_ETHERNET_WEBSERVER_PORT       Serial
 
 // Debug Level from 0 to 4
-#define _ETHERNET_WEBSERVER_LOGLEVEL_       4
+#define _ETHERNET_WEBSERVER_LOGLEVEL_       1
 
-#define USE_BUILTIN_ETHERNET    true
+#define USE_BUILTIN_ETHERNET    false
 //  If don't use USE_BUILTIN_ETHERNET, and USE_UIP_ETHERNET => use W5x00 with Ethernet library
-#define USE_UIP_ETHERNET        true  //false 
+#define USE_UIP_ETHERNET        false  //false 
 
 #if (USE_BUILTIN_ETHERNET)
 #define ETHERNET_NAME     "Built-in LAN8742A Ethernet"
@@ -378,13 +401,37 @@ Please take a look at other examples, as well.
 #elif defined(STM32F7)
 #warning STM32F7 board selected
 #define BOARD_TYPE  "STM32F7"
+#elif defined(STM32L0)
+#warning STM32L0 board selected
+#define BOARD_TYPE  "STM32L0"
+#elif defined(STM32L1)
+#warning STM32L1 board selected
+#define BOARD_TYPE  "STM32L1"
+#elif defined(STM32L4)
+#warning STM32L4 board selected
+#define BOARD_TYPE  "STM32L4"
+#elif defined(STM32H7)
+#warning STM32H7 board selected
+#define BOARD_TYPE  "STM32H7"
+#elif defined(STM32G0)
+#warning STM32G0 board selected
+#define BOARD_TYPE  "STM32G0"
+#elif defined(STM32G4)
+#warning STM32G4 board selected
+#define BOARD_TYPE  "STM32G4"
+#elif defined(STM32WB)
+#warning STM32WB board selected
+#define BOARD_TYPE  "STM32WB"
+#elif defined(STM32MP1)
+#warning STM32MP1 board selected
+#define BOARD_TYPE  "STM32MP1"
 #else
 #warning STM32 unknown board selected
 #define BOARD_TYPE  "STM32 Unknown"
 #endif
 
 #ifndef BOARD_NAME
-  #define BOARD_NAME    BOARD_TYPE
+#define BOARD_NAME    BOARD_TYPE
 #endif
 
 #include <EthernetWebServer_STM32.h>
@@ -427,9 +474,9 @@ const int led = 13;
 void handleRoot()
 {
   digitalWrite(led, 1);
-  
-  #define BUFFER_SIZE     400
-  
+
+#define BUFFER_SIZE     400
+
   char temp[BUFFER_SIZE];
   int sec = millis() / 1000;
   int min = sec / 60;
@@ -440,7 +487,7 @@ void handleRoot()
            "<html>\
 <head>\
 <meta http-equiv='refresh' content='5'/>\
-<title>AdvancedServer %s</title>\
+<title>AdvancedWebServer %s</title>\
 <style>\
 body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }\
 </style>\
@@ -454,7 +501,7 @@ body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Col
 </html>", BOARD_NAME, BOARD_NAME, day, hr % 24, min % 60, sec % 60);
 
   server.send(200, "text/html", temp);
-  
+
   digitalWrite(led, 0);
 }
 
@@ -754,20 +801,24 @@ Disconnecting from server...
 
 This is simple yet complete WebServer library for `STM32` boards running built-in Ethernet (Nucleo-144, Discovery) or EMC28J60 Ethernet shields. ***The functions are similar and compatible to ESP8266/ESP32 WebServer libraries*** to make life much easier to port sketches from ESP8266/ESP32.
 
+---
+
 This library currently supports
-1. ***STM32 boards with built-in Ethernet*** such as :
+1. ***STM32 boards with built-in Ethernet LAN8742A*** such as :
   - Nucleo-144 (F429ZI, F767ZI)
   - Discovery (STM32F746G-DISCOVERY)
   - All STM32 Boards with Built-in Ethernet, See [How To Use Built-in Ethernet](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
   
-2. ***STM32 boards (with 64+K Flash) running EMC28J60 shields***
+2. ***STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running W5x00 or ENC28J60 shields)***
 - Nucleo-144
 - Nucleo-64
 - Discovery
+- Generic STM32F0, STM32F1, STM32F2, STM32F3, STM32F4, STM32F7 (with 64+K Flash): x8 and up
+- STM32L0, STM32L1, STM32L4
+- STM32G0, STM32G4
+- STM32H7
+- STM32WB
 - STM32MP1
-- Generic STM32F1 (with 64+K Flash): C8 and up
-- Generic STM32F4
-- STM32L0
 - LoRa boards
 - 3-D printer boards
 - Generic Flight Controllers
@@ -791,17 +842,17 @@ and these boards are not supported:
 
 1. Bug Searching and Killing
 2. Add SSL/TLS Client and Server support
-3. Support more types of Ethernet shields such as W5x00, etc.
-4. Support more non-compatible Ethernet Libraries such as Ethernet_Shield_W5200, EtherCard, EtherSia
-5. Add mDNS features.
-6. Use AsyncTCP features from [Phil Bowles' STM32AsyncTCP](https://github.com/philbowles/STM32AsyncTCP).
+3. Support more non-compatible Ethernet Libraries such as Ethernet_Shield_W5200, EtherCard, EtherSia
+4. Add mDNS features.
+5. Use AsyncTCP features from [Phil Bowles' STM32AsyncTCP](https://github.com/philbowles/STM32AsyncTCP).
 
 ### DONE
 
  1. Add support to ***STM32F1,2,3,4,7 boards*** with 64K+ Flash.
  2. Add support to ***built-in Ethernet LAN8742A*** using [STM32Ethernet library](https://github.com/stm32duino/STM32Ethernet) , for boards such as Nucleo-144 NUCLEO_F767ZI.
  3. Add support to ***Ethernet W5x00***, using either [`Ethernet`](https://www.arduino.cc/en/Reference/Ethernet), [`Ethernet2`](https://github.com/khoih-prog/Ethernet2), [`Ethernet3`](https://github.com/sstaub/Ethernet3) or [`EthernetLarge`](https://github.com/OPEnSLab-OSU/EthernetLarge) library
- 4. Add support to Ethernet ***ENC28J60***, using [`UIPEthernet`](https://github.com/UIPEthernet/UIPEthernet) library
+ 4. Add support to Ethernet ***ENC28J60***, using [`UIPEthernet`](https://github.com/UIPEthernet/UIPEthernet) library 
+ 5. Add support to all STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash.
  
 ---
 

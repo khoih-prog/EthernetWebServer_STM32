@@ -1,49 +1,52 @@
 /****************************************************************************************************************************
-   HTTPBasicAuth.h - Dead simple web-server for Ethernet shields
+    HTTPBasicAuth.h - Dead simple web-server for Ethernet shields
+    For STM32 with built-in Ethernet (Nucleo-144, DISCOVERY, etc) or W5x00/ENC28J60 Ethernet
+    
+    EthernetWebServer_STM32 is a library for the STM32 run built-in Ethernet WebServer
 
-   For STM32 with built-in Ethernet (Nucleo-144, DISCOVERY, etc)
-
-   EthernetWebServer_STM32 is a library for the STM32 run built-in Ethernet WebServer
-
-   Forked and modified from ESP8266 https://github.com/esp8266/Arduino/releases
-   Built by Khoi Hoang https://github.com/khoih-prog/ESP8266_AT_WebServer
-   Licensed under MIT license
-   Version: 1.0.3
-
-   Original author:
-   @file       Esp8266WebServer.h
-   @author     Ivan Grokhotkov
-
-   Version Modified By   Date      Comments
-   ------- -----------  ---------- -----------
+    Based on and modified from ESP8266 https://github.com/esp8266/Arduino/releases
+    Built by Khoi Hoang https://github.com/khoih-prog/EthernetWebServer_STM32
+    Licensed under MIT license
+    
+    Original author:
+    @file       Esp8266WebServer.h
+    @author     Ivan Grokhotkov
+    
+    Version: 1.0.4
+    
+    Version Modified By   Date      Comments
+    ------- -----------  ---------- -----------
     1.0.0   K Hoang      26/02/2020 Initial coding for STM32 with built-in Ethernet (Nucleo-144, DISCOVERY, etc) and ENC28J60
     1.0.1   K Hoang      28/02/2020 Add W5x00 Ethernet shields using Ethernet library
     1.0.2   K Hoang      05/03/2020 Remove dependency on functional-vlpp
-    1.0.3   K Hoang      22/07/2020 Fix bug not closing client & releasing socket. Add features & dependency on functional-vlpp
+    1.0.3   K Hoang      22/07/2020 Fix bug not closing client and releasing socket. Add features.
+    1.0.4   K Hoang      23/07/2020 Add support to all STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash.
  *****************************************************************************************************************************/
 /*
    Currently support
    1) STM32 boards with built-in Ethernet (to use USE_BUILTIN_ETHERNET = true) such as :
       - Nucleo-144 (F429ZI, F767ZI)
       - Discovery (STM32F746G-DISCOVERY)
-      - All STM32 Boards with Built-in Ethernet, See How To Use Built-in Ethernet at (https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
-   2) STM32 boards (with 64+K Flash) running EMC28J60 shields (to use USE_BUILTIN_ETHERNET = false)
-   3) STM32 boards (with 32+K Flash) running W5x00 Ethernet shields
-
+      - STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet, 
+      - See How To Use Built-in Ethernet at (https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
+   2) STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running ENC28J60 shields (to use USE_BUILTIN_ETHERNET = false)
+   3) STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running W5x00 shields
 */
 
-#if !( defined(STM32F0) || defined(STM32F1) || defined(STM32F2) || defined(STM32F3)  ||defined(STM32F4) || defined(STM32F7) )
-#error This code is designed to run on STM32F platform! Please check your Tools->Board setting.
+#if !( defined(STM32F0) || defined(STM32F1) || defined(STM32F2) || defined(STM32F3)  ||defined(STM32F4) || defined(STM32F7) || \
+       defined(STM32L0) || defined(STM32L1) || defined(STM32L4) || defined(STM32H7)  ||defined(STM32G0) || defined(STM32G4) || \
+       defined(STM32WB) || defined(STM32MP1) )
+#error This code is designed to run on STM32F/L/H/G/WB/MP1 platform! Please check your Tools->Board setting.
 #endif
 
 #define DEBUG_ETHERNET_WEBSERVER_PORT       Serial
 
 // Debug Level from 0 to 4
-#define _ETHERNET_WEBSERVER_LOGLEVEL_       4
+#define _ETHERNET_WEBSERVER_LOGLEVEL_       1
 
-#define USE_BUILTIN_ETHERNET    true
+#define USE_BUILTIN_ETHERNET    false
 //  If don't use USE_BUILTIN_ETHERNET, and USE_UIP_ETHERNET => use W5x00 with Ethernet library
-#define USE_UIP_ETHERNET        true  //false 
+#define USE_UIP_ETHERNET        false  //false 
 
 #if (USE_BUILTIN_ETHERNET)
 #define ETHERNET_NAME     "Built-in LAN8742A Ethernet"
@@ -71,6 +74,30 @@
 #elif defined(STM32F7)
 #warning STM32F7 board selected
 #define BOARD_TYPE  "STM32F7"
+#elif defined(STM32L0)
+#warning STM32L0 board selected
+#define BOARD_TYPE  "STM32L0"
+#elif defined(STM32L1)
+#warning STM32L1 board selected
+#define BOARD_TYPE  "STM32L1"
+#elif defined(STM32L4)
+#warning STM32L4 board selected
+#define BOARD_TYPE  "STM32L4"
+#elif defined(STM32H7)
+#warning STM32H7 board selected
+#define BOARD_TYPE  "STM32H7"
+#elif defined(STM32G0)
+#warning STM32G0 board selected
+#define BOARD_TYPE  "STM32G0"
+#elif defined(STM32G4)
+#warning STM32G4 board selected
+#define BOARD_TYPE  "STM32G4"
+#elif defined(STM32WB)
+#warning STM32WB board selected
+#define BOARD_TYPE  "STM32WB"
+#elif defined(STM32MP1)
+#warning STM32MP1 board selected
+#define BOARD_TYPE  "STM32MP1"
 #else
 #warning STM32 unknown board selected
 #define BOARD_TYPE  "STM32 Unknown"

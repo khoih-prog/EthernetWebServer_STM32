@@ -7,7 +7,7 @@
    Based on and modified from ESP8266 https://github.com/esp8266/Arduino/releases
    Built by Khoi Hoang https://github.com/khoih-prog/EthernetWebServer_STM32
    Licensed under MIT license
-   Version: 1.0.3
+   Version: 1.0.4
 
    Original author:
    @file       Esp8266WebServer.h
@@ -19,13 +19,16 @@
     1.0.1   K Hoang      28/02/2020 Add W5x00 Ethernet shields using Ethernet library
     1.0.2   K Hoang      05/03/2020 Remove dependency on functional-vlpp
     1.0.3   K Hoang      22/07/2020 Fix bug not closing client and releasing socket. Add features.
+    1.0.4   K Hoang      23/07/2020 Add support to all STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash.
  *****************************************************************************************************************************/
 
 #ifndef EthernetWebServer_STM32_h
 #define EthernetWebServer_STM32_h
 
-#if !( defined(STM32F0) || defined(STM32F1) || defined(STM32F2) || defined(STM32F3)  ||defined(STM32F4) || defined(STM32F7) )
-#error This code is designed to run on STM32F platform! Please check your Tools->Board setting.
+#if !( defined(STM32F0) || defined(STM32F1) || defined(STM32F2) || defined(STM32F3)  ||defined(STM32F4) || defined(STM32F7) || \
+       defined(STM32L0) || defined(STM32L1) || defined(STM32L4) || defined(STM32H7)  ||defined(STM32G0) || defined(STM32G4) || \
+       defined(STM32WB) || defined(STM32MP1) )
+ #error This code is designed to run on STM32F/L/H/G/WB/MP1 platform! Please check your Tools->Board setting.
 #endif
 
 #define USE_NEW_WEBSERVER_VERSION     true
