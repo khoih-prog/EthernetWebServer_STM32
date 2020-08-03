@@ -10,7 +10,7 @@
 
 #### New in v1.0.4
 
-1. Add support to all STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash.
+1. Add support to all STM32 boards (***STM32F/L/H/G/WB/MP1***) with 32K+ Flash.
   - STM32L0, STM32L1, STM32L4
   - STM32G0, STM32G4
   - STM32H7
@@ -130,11 +130,22 @@ You can also use this link [![arduino-library-badge](https://www.ardu-badge.com/
 - [w5100.h](LibraryPatches/EthernetLarge/src/utility/w5100.h)
 - [w5100.cpp](LibraryPatches/EthernetLarge/src/utility/w5100.cpp)
 
-4. To fix [`UIPEthernet`](https://github.com/UIPEthernet/UIPEthernet), just copy these following files into the [`UIPEthernet`](https://github.com/UIPEthernet/UIPEthernet) directory to overwrite the old files:
+4. To fix [`Ethernet2 library`](https://github.com/khoih-prog/Ethernet2), just copy these following files into the [`Ethernet2 library`](https://github.com/khoih-prog/Ethernet2) directory to overwrite the old files:
+- [Ethernet2.h](LibraryPatches/Ethernet2/src/Ethernet2.h)
+- [Ethernet2.cpp](LibraryPatches/Ethernet2/src/Ethernet2.cpp)
+
+5. To fix [`Ethernet3 library`](https://github.com/sstaub/Ethernet3), just copy these following files into the [`Ethernet3 library`](https://github.com/sstaub/Ethernet3) directory to overwrite the old files:
+- [Ethernet3.h](LibraryPatches/Ethernet3/src/Ethernet3.h)
+- [Ethernet3.cpp](LibraryPatches/Ethernet3/src/Ethernet3.cpp)
+
+6. ***To be able to compile and run on nRF52 boards with ENC28J60 using UIPEthernet library***, you have to copy these following files into the UIPEthernet `utility` directory to overwrite the old files:
+
+- [UIPEthernet.h](LibraryPatches/UIPEthernet/UIPEthernet.h)
+- [UIPEthernet.cpp](LibraryPatches/UIPEthernet/UIPEthernet.cpp)
 - [Enc28J60Network.h](LibraryPatches/UIPEthernet/utility/Enc28J60Network.h)
 - [Enc28J60Network.cpp](LibraryPatches/UIPEthernet/utility/Enc28J60Network.cpp)
 
-5. Check if you need to install the UIPthernet patch [new STM32 core F3/F4 compatibility](https://github.com/UIPEthernet/UIPEthernet/commit/c6d6519a260166b722b9cee5dd1f0fb2682e6782) to avoid errors `#include HardwareSPI.h` on some STM32 boards (Nucleo-32 F303K8, etc.)
+7. Check if you need to install the UIPthernet patch [new STM32 core F3/F4 compatibility](https://github.com/UIPEthernet/UIPEthernet/commit/c6d6519a260166b722b9cee5dd1f0fb2682e6782) to avoid errors `#include HardwareSPI.h` on some STM32 boards (Nucleo-32 F303K8, etc.)
 
 ---
 
@@ -866,7 +877,7 @@ and these boards are not supported:
  2. Add support to ***built-in Ethernet LAN8742A*** using [STM32Ethernet library](https://github.com/stm32duino/STM32Ethernet) , for boards such as Nucleo-144 NUCLEO_F767ZI.
  3. Add support to ***Ethernet W5x00***, using either [`Ethernet`](https://www.arduino.cc/en/Reference/Ethernet), [`Ethernet2`](https://github.com/khoih-prog/Ethernet2), [`Ethernet3`](https://github.com/sstaub/Ethernet3) or [`EthernetLarge`](https://github.com/OPEnSLab-OSU/EthernetLarge) library
  4. Add support to Ethernet ***ENC28J60***, using [`UIPEthernet`](https://github.com/UIPEthernet/UIPEthernet) library 
- 5. Add support to all STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash.
+ 5. Add support to all STM32 boards (***STM32F/L/H/G/WB/MP1***) with 32K+ Flash.
  
 ---
 
@@ -879,7 +890,7 @@ and these boards are not supported:
   <tr>
     <td align="center"><a href="https://github.com/igrr"><img src="https://github.com/igrr.png" width="100px;" alt="igrr"/><br /><sub><b>⭐️ igrr</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/jandrassy"><img src="https://github.com/jandrassy.png" width="100px;" alt="jandrassy"/><br /><sub><b>jandrassy</b></sub></a><br /></td>
-<td align="center"><a href="https://github.com/tcpipchip"><img src="https://github.com/tcpipchip.png" width="100px;" alt="tcpipchip"/><br /><sub><b>tcpipchip</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/tcpipchip"><img src="https://github.com/tcpipchip.png" width="100px;" alt="tcpipchip"/><br /><sub><b>tcpipchip</b></sub></a><br /></td>
   </tr> 
 </table>
 
@@ -890,6 +901,8 @@ If you want to contribute to this project:
 - Ask for enhancements
 - Create issues and pull requests
 - Tell other people about this library
+
+---
 
 ## Copyright
 
