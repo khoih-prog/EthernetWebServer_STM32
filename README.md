@@ -7,6 +7,53 @@
 [![GitHub issues](https://img.shields.io/github/issues/khoih-prog/EthernetWebServer_STM32.svg)](http://github.com/khoih-prog/EthernetWebServer_STM32/issues)
 
 ---
+---
+
+### Important Note for STM32F boards using built-in LAN8742A Ethernet
+
+This [**EthernetWebServer_STM32 Library**](https://github.com/khoih-prog/EthernetWebServer_STM32), by design, is working synchronously. The Client requests must be handled by continuously checking in loop() using :
+
+```cpp
+void loop(void)
+{
+  server.handleClient();
+}
+```
+
+The new [**AsyncWebServer_STM32 Library**](https://github.com/khoih-prog/AsyncWebServer_STM32), in contrast, is designed to work asynchronously. The Client requests are handled on demand, without continuously checking in loop(). The loop() now can be as simple as :
+
+```cpp
+void loop(void)
+{
+}
+```
+
+#### Currently Supported Boards by [**AsyncWebServer_STM32**](https://github.com/khoih-prog/AsyncWebServer_STM32)
+
+1. Nucleo-144 (F429ZI, F746ZG, F756ZG, F767ZI)
+2. Discovery STM32F746G-DISCOVERY
+3. Any STM32 boards with enough flash/memory and already configured to run LAN8742A Ethernet.
+
+---
+
+#### Why do we need the new Async [AsyncWebServer_STM32 library](https://github.com/khoih-prog/AsyncWebServer_STM32)
+
+- Using asynchronous network means that you can handle **more than one connection at the same time**
+- **You are called once the request is ready and parsed**
+- When you send the response, you are **immediately ready** to handle other connections while the server is taking care of sending the response in the background
+- **Speed is OMG**
+- **Easy to use API, HTTP Basic and Digest MD5 Authentication (default), ChunkedResponse**
+- Easily extensible to handle **any type of content**
+- Supports Continue 100
+- **Async WebSocket plugin offering different locations without extra servers or ports**
+- Async EventSource (Server-Sent Events) plugin to send events to the browser
+- URL Rewrite plugin for conditional and permanent url rewrites
+- ServeStatic plugin that supports cache, Last-Modified, default index and more
+- Simple template processing engine to handle templates
+
+---
+---
+
 
 #### New in v1.0.4
 
