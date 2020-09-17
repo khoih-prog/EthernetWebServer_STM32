@@ -7,7 +7,7 @@
    Based on and modified from ESP8266 https://github.com/esp8266/Arduino/releases
    Built by Khoi Hoang https://github.com/khoih-prog/EthernetWebServer_STM32
    Licensed under MIT license
-   Version: 1.0.4
+   Version: 1.0.5
 
    Original author:
    @file       Esp8266WebServer.h
@@ -20,6 +20,8 @@
     1.0.2   K Hoang      05/03/2020 Remove dependency on functional-vlpp
     1.0.3   K Hoang      22/07/2020 Fix bug not closing client and releasing socket. Add features.
     1.0.4   K Hoang      23/07/2020 Add support to all STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash.
+    1.0.5   K Hoang      16/09/2020 Add support to Ethernet2, Ethernet3, Ethernet Large for W5x00
+                                    Add support to new EthernetENC library for ENC28J60. Add debug feature.
  *****************************************************************************************************************************/
 
 #ifndef EthernetWebServer_STM32_impl_h
@@ -206,7 +208,8 @@ void EthernetWebServer::handleClient()
         }
       } 
       else 
-      { // !_currentClient.available()
+      { 
+        // !_currentClient.available()
         if (millis() - _statusChange <= HTTP_MAX_DATA_WAIT) 
         {
           keepCurrentClient = true;
@@ -394,8 +397,6 @@ void EthernetWebServer::_prepareHeader(String& response, int code, const char* c
  using namespace mime;
   if (!content_type)
       content_type = mimeTable[html].mimeType;
-  //if (!content_type)
-  //  content_type = "text/html";
 
   sendHeader("Content-Type", content_type, true);
   
@@ -408,7 +409,8 @@ void EthernetWebServer::_prepareHeader(String& response, int code, const char* c
     sendHeader("Content-Length", String(_contentLength));
   } 
   else if (_contentLength == CONTENT_LENGTH_UNKNOWN && _currentVersion) 
-  { //HTTP/1.1 or above client
+  { 
+    //HTTP/1.1 or above client
     //let's do chunked
     _chunked = true;
     sendHeader("Accept-Ranges", "none");

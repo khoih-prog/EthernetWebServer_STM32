@@ -7,7 +7,7 @@
    Based on and modified from ESP8266 https://github.com/esp8266/Arduino/releases
    Built by Khoi Hoang https://github.com/khoih-prog/EthernetWebServer_STM32
    Licensed under MIT license
-   Version: 1.0.4
+   Version: 1.0.5
 
    Original author:
    @file       Esp8266WebServer.h
@@ -20,6 +20,8 @@
     1.0.2   K Hoang      05/03/2020 Remove dependency on functional-vlpp
     1.0.3   K Hoang      22/07/2020 Fix bug not closing client and releasing socket. Add features.
     1.0.4   K Hoang      23/07/2020 Add support to all STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash.
+    1.0.5   K Hoang      16/09/2020 Add support to Ethernet2, Ethernet3, Ethernet Large for W5x00
+                                    Add support to new EthernetENC library for ENC28J60. Add debug feature.
  *****************************************************************************************************************************/
 
 #ifndef Parsing_STM32_impl_h
@@ -417,8 +419,9 @@ bool EthernetWebServer::_parseRequest(EthernetClient& client)
       req = client.readStringUntil('\r');
       client.readStringUntil('\n');
 
+      //no more headers
       if (req == "")
-        break;//no moar headers
+        break;
 
       int headerDiv = req.indexOf(':');
 
@@ -459,7 +462,6 @@ bool EthernetWebServer::_collectHeader(const char* headerName, const char* heade
   {
     //KH
     if (_currentHeaders[i].key.equalsIgnoreCase(headerName))
-      //if (_currentHeaders[i].key == headerName)
     {
       _currentHeaders[i].value = headerValue;
       return true;
@@ -770,6 +772,7 @@ bool EthernetWebServer::_parseForm(EthernetClient& client, const String& boundar
           if (line.length() > 12 && line.substring(0, 12).equalsIgnoreCase("Content-Type"))
           {
             argType = line.substring(line.indexOf(':') + 2);
+            
             //skip next line
             client.readStringUntil('\r');
             client.readStringUntil('\n');
