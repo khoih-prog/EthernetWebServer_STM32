@@ -99,6 +99,10 @@ enum HTTPAuthMethod
   #define HTTP_UPLOAD_BUFLEN 4096   //2048
 #endif
 
+#if !defined(PROGMEM_BUFFLEN)
+  #define PROGMEM_BUFFLEN 4096   //4096
+#endif
+
 #define HTTP_MAX_DATA_WAIT      3000 //ms to wait for the client to send the request
 #define HTTP_MAX_POST_WAIT      3000 //ms to wait for POST data to arrive
 #define HTTP_MAX_SEND_WAIT      5000 //ms to wait for data chunk to be ACKed
@@ -199,6 +203,9 @@ class EthernetWebServer
     void send(int code, const String& content_type, const String& content);
     //KH
     void send(int code, char*  content_type, const String& content, size_t contentLength);
+
+    void send_P(int code, char* content_type, PGM_P content)
+    void send_P(int code, char* content_type, PGM_P content, size_t contentLength)
 
     void setContentLength(size_t contentLength);
     void sendHeader(const String& name, const String& value, bool first = false);

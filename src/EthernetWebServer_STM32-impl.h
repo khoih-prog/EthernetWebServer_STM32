@@ -481,6 +481,39 @@ void EthernetWebServer::send(int code, const String& content_type, const String&
   send(code, (const char*)content_type.c_str(), content);
 }
 
+void EthernetWebServer::send_P(int code, char* content_type, PGM_P content)
+{
+  size_t contentLength = 0;
+
+  if (content != NULL) 
+  {
+    contentLength = strlen_P(content);
+  }
+
+  send_P(code, content_type, content, contentLength);
+}
+
+void EthernetWebServer::send_P(int code, char* content_type, PGM_P content, size_t contentLength)
+{
+  String header;
+  char type[64];
+
+  memccpy((void*)type, content_type, 0, sizeof(type));
+  _prepareHeader(header, code, (const char* )type, contentLength);
+  
+  ET_LOGDEBUG1(F("EthernetWebServer::send_P: len = "), contentLength);
+  ET_LOGDEBUG1(F("content = "), content);
+  ET_LOGDEBUG1(F("EthernetWebServer::send_P: hdrlen = "), header.length());
+  ET_LOGDEBUG1(F("header = "), header);
+
+  _currentClient.write((const uint8_t *) header.c_str(), header.length());
+  
+  if (contentLength)
+  {
+    sendContent_P(content, contentLength);
+  }
+}
+
 void EthernetWebServer::sendContent(const String& content) 
 {
   const char * footer = "\r\n";
@@ -527,6 +560,47 @@ void EthernetWebServer::sendContent(const String& content, size_t size)
   ET_LOGDEBUG1(F("EthernetWebServer::sendContent: Client.write content: "), content);
   
   _currentClient.write(content.c_str(), size);
+  
+  if (_chunked) 
+  {
+    _currentClient.write(footer, 2);
+  }
+}
+
+void EthernetWebServer::sendContent_P(PGM_P content)
+{
+  sendContent_P(content, strlen_P(content));
+}
+
+void EthernetWebServer::sendContent_P(PGM_P content, size_t size)
+{
+  const char * footer = "\r\n";
+  
+  if (_chunked) 
+  {
+    char * chunkSize = (char *) malloc(11);
+    
+    if (chunkSize) 
+    {
+      sprintf(chunkSize, "%x%s", size, footer);
+      _currentClient.write(chunkSize, strlen(chunkSize));
+      free(chunkSize);
+    }
+  }
+
+  uint8_t buffer[PROGMEM_BUFFLEN];
+  uint16_t count = size / PROGMEM_BUFFLEN;
+  uint16_t remainder = size % PROGMEM_BUFFLEN;
+  uint16_t i = 0;
+
+  for (i = 0; i < count; i++) {
+    /* code */
+    memcpy_P(buffer, &content[i*PROGMEM_BUFFLEN], PROGMEM_BUFFLEN);
+    _currentClient.write(buffer, PROGMEM_BUFFLEN);
+  }
+  
+  memcpy_P(buffer, &content[i*PROGMEM_BUFFLEN], remainder);
+  _currentClient.write(buffer, remainder);
   
   if (_chunked) 
   {
