@@ -95,7 +95,7 @@ void loop(void)
   - ***Nucleo-144 (F429ZI, F767ZI)***
   - ***Discovery (STM32F746G-DISCOVERY)***
   - ***All STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet***
-  - See [How To Use Built-in Ethernet](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
+  - See [EthernetWebServer_STM32 Support and Test Results](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
   
 2. ***STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running W5x00 or ENC28J60 shields)***
 
@@ -129,11 +129,11 @@ The library supports:
 2. HTTP Server and Client
 3. HTTP GET and POST requests, provides argument parsing, handles one client at a time.
 
-Library is based on and modified from [Ivan Grokhotkov's ESP8266WebServer](https://github.com/esp8266/Arduino/tree/master/libraries/ESP8266WebServer).
+Library is based on and modified from [`Ivan Grokhotkov's ESP8266WebServer`](https://github.com/esp8266/Arduino/tree/master/libraries/ESP8266WebServer).
 
 The EthernetWebServer class found in `EthernetWebServer_STM32.h` header, is a simple web server that knows how to handle HTTP requests such as GET and POST and can only support one simultaneous client.
 
-2. See [EthernetWebServer Library Issue 1](https://github.com/khoih-prog/EthernetWebServer/issues/1) for reason to create this separate library from [EthernetWebServer library](https://github.com/khoih-prog/EthernetWebServer)
+2. See [`EthernetWebServer Library Issue: Support for STM32F Series`](https://github.com/khoih-prog/EthernetWebServer/issues/1) for reason to create this separate library from [`EthernetWebServer library`](https://github.com/khoih-prog/EthernetWebServer)
 
 ---
 ---
@@ -158,12 +158,12 @@ The EthernetWebServer class found in `EthernetWebServer_STM32.h` header, is a si
 ## Installation
 
 ### Use Arduino Library Manager
-The best way is to use `Arduino Library Manager`. Search for `EthernetWebServer_STM32`, then select / install the latest version. 
+The best way is to use `Arduino Library Manager`. Search for **`EthernetWebServer_STM32`**, then select / install the latest version. 
 You can also use this link [![arduino-library-badge](https://www.ardu-badge.com/badge/EthernetWebServer_STM32.svg?)](https://www.ardu-badge.com/EthernetWebServer_STM32) for more detailed instructions.
 
 ### Manual Install
 
-1. Navigate to [EthernetWebServer_STM32](https://github.com/khoih-prog/EthernetWebServer_STM32) page.
+1. Navigate to [**EthernetWebServer_STM32**](https://github.com/khoih-prog/EthernetWebServer_STM32) page.
 2. Download the latest release `EthernetWebServer_STM32-master.zip`.
 3. Extract the zip file to `EthernetWebServer_STM32-master` directory 
 4. Copy whole 
@@ -319,7 +319,7 @@ Standard W5x00 using Ethernet library is used by default, in the sketch, just be
 
 ```cpp
 #define USE_BUILTIN_ETHERNET    false
-#define USE_UIP_ETHERNET        true
+#define USE_UIP_ETHERNET        false
 
 #if !(USE_BUILTIN_ETHERNET || USE_UIP_ETHERNET)
   // Only one of the following to be true
@@ -338,7 +338,7 @@ For example, Ethernet_XYZ library uses **Ethernet_XYZ.h***
 
 ```cpp
 #define USE_BUILTIN_ETHERNET    false
-#define USE_UIP_ETHERNET        true
+#define USE_UIP_ETHERNET        false
 
 #if !(USE_BUILTIN_ETHERNET || USE_UIP_ETHERNET)
   // Only one of the following to be true
@@ -382,14 +382,14 @@ For example, Ethernet_XYZ library uses **Ethernet_XYZ.h***
 
 **The default CS/SS pin is 10 for all boards, and is configurable in code.**
 
-If the default pin is not corect, select the CS/SS pin (e.g. 22) to use as follows:
+If the default pin is not corect, select another CS/SS pin (e.e. D22) to use as follows:
 
 ```cpp
 // To override the default CS/SS pin. Don't use unless you know exactly which pin to use
 // You can define here or customize for each board at same place with BOARD_TYPE
-//#define USE_THIS_SS_PIN   22  //21  //5 //4 //2 //15
+#define USE_THIS_SS_PIN   22  //21  //5 //4 //2 //15
 // Default pin 10 to SS/CS. To change according to your board, if necessary
-#define USE_THIS_SS_PIN       10
+//#define USE_THIS_SS_PIN       10
 ```
 
 The current SPI pin usage can be displayed by turn on the debug option. For example:
@@ -403,7 +403,7 @@ Increase debug level to 2 in `defines.h` of any example:
 #define _ETHERNET_WEBSERVER_LOGLEVEL_       2
 ```
 
-The Debug Terminal will then show that the current SPI pin usage of **NUCLEO_F767ZI uses SS/CS: D10, MOSI: D11, MISO: D12 and SCK: D13**
+The Debug Terminal will then show that the current SPI pin usage of **NUCLEO_F767ZI ==> SS/CS: D10, MOSI: D11, MISO: D12 and SCK: D13**
 
 ```
 [ETHERNET_WEBSERVER] Board : NUCLEO_F767ZI , setCsPin: 10
@@ -481,7 +481,7 @@ Both methods function the same
   void onFileUpload();	
 ```
 
-Example:*
+Example:
 
 ```cpp
   server.on("/", handlerFunction);
@@ -617,7 +617,7 @@ Also see examples:
       - Nucleo-144 (F429ZI, F767ZI)
       - Discovery (STM32F746G-DISCOVERY)
       - STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet, 
-      - See How To Use Built-in Ethernet at (https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
+      - See How To Use Built-in Ethernet at [EthernetWebServer_STM32 Support and Test Results](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
    2) STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running ENC28J60 shields (to use USE_BUILTIN_ETHERNET = false)
    3) STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running W5x00 shields
 */
@@ -1210,7 +1210,7 @@ This is simple yet complete WebServer library for `STM32` boards running built-i
   - ***Nucleo-144 (F429ZI, F767ZI)***
   - ***Discovery (STM32F746G-DISCOVERY)***
   - ***All STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet***
-  - See [How To Use Built-in Ethernet](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
+  - See [EthernetWebServer_STM32 Support and Test Results](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
   
 2. ***STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running W5x00 or ENC28J60 shields)***
 
