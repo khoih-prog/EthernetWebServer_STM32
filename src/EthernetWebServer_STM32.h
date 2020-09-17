@@ -204,8 +204,8 @@ class EthernetWebServer
     //KH
     void send(int code, char*  content_type, const String& content, size_t contentLength);
 
-    void send_P(int code, char* content_type, PGM_P content)
-    void send_P(int code, char* content_type, PGM_P content, size_t contentLength)
+    void send_P(int code, char* content_type, PGM_P content);
+    void send_P(int code, char* content_type, PGM_P content, size_t contentLength);
 
     void setContentLength(size_t contentLength);
     void sendHeader(const String& name, const String& value, bool first = false);
