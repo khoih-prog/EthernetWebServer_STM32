@@ -7,7 +7,7 @@
    Based on and modified from ESP8266 https://github.com/esp8266/Arduino/releases
    Built by Khoi Hoang https://github.com/khoih-prog/EthernetWebServer_STM32
    Licensed under MIT license
-   Version: 1.0.5
+   Version: 1.0.6
 
    Original author:
    @file       Esp8266WebServer.h
@@ -22,6 +22,7 @@
     1.0.4   K Hoang      23/07/2020 Add support to all STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash.
     1.0.5   K Hoang      16/09/2020 Add support to Ethernet2, Ethernet3, Ethernet Large for W5x00
                                     Add support to new EthernetENC library for ENC28J60. Add debug feature.
+    1.0.6   K Hoang      24/09/2020 Add support to PROGMEM-related commands, such as sendContent_P() and send_P()          
  *****************************************************************************************************************************/
 
 #ifndef EthernetWebServer_STM32_h
@@ -60,6 +61,27 @@
 
 #include "detail/mimetable.h"
 
+// For PROGMEM commands
+#include <pgmspace.h>
+
+// Permit redefinition of SENDCONTENT_P_BUFFER_SZ in sketch, default is 4K, minimum is 512  bytes
+#ifndef SENDCONTENT_P_BUFFER_SZ
+  #define SENDCONTENT_P_BUFFER_SZ     4096
+  #warning SENDCONTENT_P_BUFFER_SZ using default 4 Kbytes
+#else
+  #if (SENDCONTENT_P_BUFFER_SZ < 512)
+    #undef SENDCONTENT_P_BUFFER_SZ
+    #define SENDCONTENT_P_BUFFER_SZ   512
+    #warning SENDCONTENT_P_BUFFER_SZ reset to min 512 bytes
+  #endif
+#endif
+
+#define memccpy_P(dest, src, c, n) memccpy((dest), (src), (c), (n))
+
+#ifndef PGM_VOID_P
+  #define PGM_VOID_P const void *
+#endif
+
 enum HTTPMethod 
 { 
   HTTP_ANY, 
@@ -97,10 +119,6 @@ enum HTTPAuthMethod
 
 #if !defined(HTTP_UPLOAD_BUFLEN)
   #define HTTP_UPLOAD_BUFLEN 4096   //2048
-#endif
-
-#if !defined(PROGMEM_BUFFLEN)
-  #define PROGMEM_BUFFLEN 4096   //4096
 #endif
 
 #define HTTP_MAX_DATA_WAIT      3000 //ms to wait for the client to send the request
@@ -204,15 +222,18 @@ class EthernetWebServer
     //KH
     void send(int code, char*  content_type, const String& content, size_t contentLength);
 
-    void send_P(int code, char* content_type, PGM_P content);
-    void send_P(int code, char* content_type, PGM_P content, size_t contentLength);
-
     void setContentLength(size_t contentLength);
     void sendHeader(const String& name, const String& value, bool first = false);
     void sendContent(const String& content);
     void sendContent(const String& content, size_t size);
+    
+    // KH, Restore PROGMEM commands
+    void send_P(int code, PGM_P content_type, PGM_P content);
+    void send_P(int code, PGM_P content_type, PGM_P content, size_t contentLength);
+    
     void sendContent_P(PGM_P content);
     void sendContent_P(PGM_P content, size_t size);
+    //////
 
     static String urlDecode(const String& text);
 

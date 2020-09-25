@@ -54,6 +54,12 @@ void loop(void)
 ---
 ---
 
+### Release v1.0.6
+
+1. Add support to PROGMEM-related commands, such as sendContent_P() and send_P()
+2. Update Platform.ini to support PlatformIO 5.x owner-based dependency declaration.
+3. Clean up code. 
+
 ### Major Release v1.0.5
 
 1. Add support to new [**`EthernetENC library`**](https://github.com/jandrassy/EthernetENC) for ENC28J60.
@@ -198,8 +204,14 @@ You can also use this link [![arduino-library-badge](https://www.ardu-badge.com/
 - [w5100.cpp](LibraryPatches/EthernetLarge/src/utility/w5100.cpp)
 
 4. To fix [`Ethernet2 library`](https://github.com/khoih-prog/Ethernet2), just copy these following files into the [`Ethernet2 library`](https://github.com/khoih-prog/Ethernet2) directory to overwrite the old files:
+
 - [Ethernet2.h](LibraryPatches/Ethernet2/src/Ethernet2.h)
 - [Ethernet2.cpp](LibraryPatches/Ethernet2/src/Ethernet2.cpp)
+
+To add UDP Multicast support, necessary for this [**UPnP_Generic library**](https://github.com/khoih-prog/UPnP_Generic):
+
+- [EthernetUdp2.h](LibraryPatches/Ethernet2/src/EthernetUdp2.h)
+- [EthernetUdp2.cpp](LibraryPatches/Ethernet2/src/EthernetUdp2.cpp)
 
 5. To fix [`Ethernet3 library`](https://github.com/sstaub/Ethernet3), just copy these following files into the [`Ethernet3 library`](https://github.com/sstaub/Ethernet3) directory to overwrite the old files:
 - [Ethernet3.h](LibraryPatches/Ethernet3/src/Ethernet3.h)
@@ -432,6 +444,18 @@ Connect the wires according to the displayed information.
   Ethernet.init (ETHERNET3_MAX_SOCK_NUM);
 ```
 
+
+### 4. How to adjust sendContent_P() and send_P() buffer size
+
+sendContent_P() and send_P() buffer size is set default at 4 Kbytes, and minimum is 512 bytes. If you need to change, just add a definition, e.g.:
+
+```cpp
+#define SENDCONTENT_P_BUFFER_SZ     2048
+```
+
+Note that the buffer size must be larger than 512 bytes. See [Sending GZIP HTML ~ 120kb+ (suggested enhancement)](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/3).
+
+
 ---
 ---
 
@@ -494,6 +518,7 @@ Example:
 ```cpp
   void send();
   void send_P();
+  void sendContent_P();
 ```
 
 `Parameters:`
@@ -578,7 +603,7 @@ Example:
   void setContentLength(); // set content length
   void sendHeader(); // send HTTP header
   void sendContent(); // send content
-  void sendContent_P(); 
+  void sendContent_P();  // send content in PROGMEM
   void collectHeaders(); // set the request headers to collect
   void serveStatic();
   size_t streamFile();
@@ -1166,7 +1191,13 @@ The UTC time is 22:20:21
 
 ## Releases History
 
-### Major Release v1.0.5
+### Release v1.0.6
+
+1. Add support to PROGMEM-related commands, such as sendContent_P() and send_P()
+2. Update Platform.ini to support PlatformIO 5.x owner-based dependency declaration.
+3. Clean up code.
+
+#### Major Release v1.0.5
 
 1. Add support to new [**`EthernetENC library`**](https://github.com/jandrassy/EthernetENC) for ENC28J60.
 2. Add support to [`Ethernet2`](https://github.com/adafruit/Ethernet2), [`Ethernet3`](https://github.com/sstaub/Ethernet3) and [`EthernetLarge`](https://github.com/OPEnSLab-OSU/EthernetLarge) libraries on top of [`Ethernet`](https://www.arduino.cc/en/Reference/Ethernet).
@@ -1271,12 +1302,14 @@ These boards are not supported:
 1. Based on and modified from [Ivan Grokhotkov's ESP8266WebServer](https://github.com/esp8266/Arduino/tree/master/libraries/ESP8266WebServer)
 2. [Juraj Andrássy](https://github.com/jandrassy) for [`EthernetENC`](https://github.com/jandrassy/EthernetENC) and [UIPEthernet library](https://github.com/UIPEthernet/UIPEthernet)
 3. Thanks to [Miguel Alexandre Wisintainer](https://github.com/tcpipchip) to help debug and test.
+4. Thanks to [Aron N.](https://github.com/porkyneal) to initiate [Sending GZIP HTML ~ 120kb+ (suggested enhancement)](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/3), to help code and test the solution, to add support to PROGMEM-related commands, such as sendContent_P() and send_P(), leading to v1.0.6.
 
 <table>
   <tr>
     <td align="center"><a href="https://github.com/igrr"><img src="https://github.com/igrr.png" width="100px;" alt="igrr"/><br /><sub><b>⭐️ Ivan Grokhotkov</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/jandrassy"><img src="https://github.com/jandrassy.png" width="100px;" alt="jandrassy"/><br /><sub><b>⭐️ Juraj Andrássy</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/tcpipchip"><img src="https://github.com/tcpipchip.png" width="100px;" alt="tcpipchip"/><br /><sub><b>Miguel Wisintainer</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/tcpipchip"><img src="https://github.com/tcpipchip.png" width="100px;" alt="tcpipchip"/><br /><sub><b>⭐️ Miguel Wisintainer</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/porkyneal"><img src="https://github.com/porkyneal.png" width="100px;" alt="porkyneal"/><br /><sub><b>⭐️ Aron N.</b></sub></a><br /></td>
   </tr> 
 </table>
 

@@ -7,7 +7,7 @@
    Based on and modified from ESP8266 https://github.com/esp8266/Arduino/releases
    Built by Khoi Hoang https://github.com/khoih-prog/EthernetWebServer_STM32
    Licensed under MIT license
-   Version: 1.0.5
+   Version: 1.0.6
 
    Original author:
    @file       Esp8266WebServer.h
@@ -22,6 +22,7 @@
     1.0.4   K Hoang      23/07/2020 Add support to all STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash.
     1.0.5   K Hoang      16/09/2020 Add support to Ethernet2, Ethernet3, Ethernet Large for W5x00
                                     Add support to new EthernetENC library for ENC28J60. Add debug feature.
+    1.0.6   K Hoang      24/09/2020 Add support to PROGMEM-related commands, such as sendContent_P() and send_P()
  *****************************************************************************************************************************/
 
 #ifndef EthernetWebServer_STM32_impl_h
@@ -168,11 +169,11 @@ void EthernetWebServer::handleClient()
     EthernetClient client = _server.available();
     if (!client) 
     {
-      //ET_LOGDEBUG(F("EthernetWebServer::handleClient: No Client"));
+      //ET_LOGDEBUG(F("handleClient: No Client"));
       return;
     }
 
-    ET_LOGDEBUG(F("EthernetWebServer::handleClient: New Client"));
+    ET_LOGDEBUG(F("handleClient: New Client"));
 
     _currentClient = client;
     _currentStatus = HC_WAIT_READ;
@@ -229,7 +230,7 @@ void EthernetWebServer::handleClient()
 
   if (!keepCurrentClient) 
   {
-    ET_LOGDEBUG(F("EthernetWebServer::handleClient: Don't keepCurrentClient"));
+    ET_LOGDEBUG(F("handleClient: Don't keepCurrentClient"));
     _currentClient = EthernetClient();
     _currentStatus = HC_NONE;
     // KH
@@ -243,7 +244,7 @@ void EthernetWebServer::handleClient()
   
   // KH, fix bug. Have to close the connection
   _currentClient.stop();
-  ET_LOGDEBUG(F("EthernetWebServer::handleClient: Client disconnected"));
+  ET_LOGDEBUG(F("handleClient: Client disconnected"));
 }
  
 #else
@@ -260,7 +261,7 @@ void EthernetWebServer::handleClient()
       return;
     }
 
-    ET_LOGDEBUG(F("EthernetWebServer::handleClient: New Client"));
+    ET_LOGDEBUG(F("handleClient: New Client"));
 
     _currentClient = client;
     _currentStatus = HC_WAIT_READ;
@@ -269,7 +270,7 @@ void EthernetWebServer::handleClient()
 
   if (!_currentClient.connected())
   {
-    ET_LOGDEBUG(F("EthernetWebServer::handleClient: Client not connected"));
+    ET_LOGDEBUG(F("handleClient: Client not connected"));
     _currentClient = EthernetClient();    
     _currentStatus = HC_NONE;
     return;
@@ -278,15 +279,15 @@ void EthernetWebServer::handleClient()
   // Wait for data from client to become available
   if (_currentStatus == HC_WAIT_READ)
   {
-    ET_LOGDEBUG(F("EthernetWebServer::handleClient: _currentStatus = HC_WAIT_READ"));
+    ET_LOGDEBUG(F("handleClient: _currentStatus = HC_WAIT_READ"));
     
     if (!_currentClient.available())
     {
-      ET_LOGDEBUG(F("EthernetWebServer::handleClient: Client not available"));
+      ET_LOGDEBUG(F("handleClient: Client not available"));
       
       if (millis() - _statusChange > HTTP_MAX_DATA_WAIT)
       {
-        ET_LOGDEBUG(F("EthernetWebServer::handleClient: HTTP_MAX_DATA_WAIT Timeout"));
+        ET_LOGDEBUG(F("handleClient: HTTP_MAX_DATA_WAIT Timeout"));
         
         _currentClient = EthernetClient();
         _currentStatus = HC_NONE;
@@ -295,11 +296,11 @@ void EthernetWebServer::handleClient()
       return;
     }
 
-    ET_LOGDEBUG(F("EthernetWebServer::handleClient: Parsing Request"));
+    ET_LOGDEBUG(F("handleClient: Parsing Request"));
     
     if (!_parseRequest(_currentClient))
     {
-      ET_LOGDEBUG(F("EthernetWebServer::handleClient: Can't parse request"));
+      ET_LOGDEBUG(F("handleClient: Can't parse request"));
       
       _currentClient = EthernetClient();
       _currentStatus = HC_NONE;
@@ -309,12 +310,12 @@ void EthernetWebServer::handleClient()
     _currentClient.setTimeout(HTTP_MAX_SEND_WAIT);
     _contentLength = CONTENT_LENGTH_NOT_SET;
     
-    //ET_LOGDEBUG(F("EthernetWebServer::handleClient _handleRequest"));
+    //ET_LOGDEBUG(F("handleClient _handleRequest"));
     _handleRequest();
 
     if (!_currentClient.connected())
     {
-      ET_LOGDEBUG(F("EthernetWebServer::handleClient: Connection closed"));
+      ET_LOGDEBUG(F("handleClient: Connection closed"));
       
       _currentClient = EthernetClient();
       _currentStatus = HC_NONE;
@@ -335,7 +336,7 @@ void EthernetWebServer::handleClient()
       _currentClient = EthernetClient();
       _currentStatus = HC_NONE;
       
-      ET_LOGDEBUG(F("EthernetWebServer::handleClient: HTTP_MAX_CLOSE_WAIT Timeout"));
+      ET_LOGDEBUG(F("handleClient: HTTP_MAX_CLOSE_WAIT Timeout"));
       
       yield();
     }
@@ -348,7 +349,7 @@ void EthernetWebServer::handleClient()
   
   // KH, fix bug. Have to close the connection
   _currentClient.stop();
-  ET_LOGDEBUG(F("EthernetWebServer::handleClient: Client disconnected"));
+  ET_LOGDEBUG(F("handleClient: Client disconnected"));
 }
 
 #endif
@@ -417,7 +418,7 @@ void EthernetWebServer::_prepareHeader(String& response, int code, const char* c
     sendHeader("Transfer-Encoding", "chunked");
   }
   
-   ET_LOGDEBUG(F("EthernetWebServer::_prepareHeader sendHeader Conn close"));
+   ET_LOGDEBUG(F("_prepareHeader sendHeader Conn close"));
   
   sendHeader("Connection", "close");
 
@@ -434,7 +435,7 @@ void EthernetWebServer::send(int code, const char* content_type, const String& c
   //if(code == 200 && content.length() == 0 && _contentLength == CONTENT_LENGTH_NOT_SET)
   //  _contentLength = CONTENT_LENGTH_UNKNOWN;
 
-  ET_LOGDEBUG1(F("EthernetWebServer::send1: len = "), content.length());
+  ET_LOGDEBUG1(F("send1: len = "), content.length());
   ET_LOGDEBUG1(F("content = "), content);
 
   _prepareHeader(header, code, content_type, content.length());
@@ -443,7 +444,7 @@ void EthernetWebServer::send(int code, const char* content_type, const String& c
   
   if (content.length())
   {
-    ET_LOGDEBUG1(F("EthernetWebServer::send1: write header = "), header);
+    ET_LOGDEBUG1(F("send1: write header = "), header);
     //sendContent(content);
     sendContent(content, content.length());
   }
@@ -453,14 +454,14 @@ void EthernetWebServer::send(int code, char* content_type, const String& content
 {
   String header;
 
-  ET_LOGDEBUG1(F("EthernetWebServer::send2: len = "), contentLength);
+  ET_LOGDEBUG1(F("send2: len = "), contentLength);
   ET_LOGDEBUG1(F("content = "), content);
 
   char type[64];
   memccpy((void*)type, content_type, 0, sizeof(type));
   _prepareHeader(header, code, (const char* )type, contentLength);
 
-  ET_LOGDEBUG1(F("EthernetWebServer::send2: hdrlen = "), header.length());
+  ET_LOGDEBUG1(F("send2: hdrlen = "), header.length());
   ET_LOGDEBUG1(F("header = "), header);
 
   _currentClient.write((const uint8_t *) header.c_str(), header.length());
@@ -479,39 +480,6 @@ void EthernetWebServer::send(int code, char* content_type, const String& content
 void EthernetWebServer::send(int code, const String& content_type, const String& content) 
 {
   send(code, (const char*)content_type.c_str(), content);
-}
-
-void EthernetWebServer::send_P(int code, char* content_type, PGM_P content)
-{
-  size_t contentLength = 0;
-
-  if (content != NULL) 
-  {
-    contentLength = strlen_P(content);
-  }
-
-  send_P(code, content_type, content, contentLength);
-}
-
-void EthernetWebServer::send_P(int code, char* content_type, PGM_P content, size_t contentLength)
-{
-  String header;
-  char type[64];
-
-  memccpy((void*)type, content_type, 0, sizeof(type));
-  _prepareHeader(header, code, (const char* )type, contentLength);
-  
-  ET_LOGDEBUG1(F("EthernetWebServer::send_P: len = "), contentLength);
-  ET_LOGDEBUG1(F("content = "), content);
-  ET_LOGDEBUG1(F("EthernetWebServer::send_P: hdrlen = "), header.length());
-  ET_LOGDEBUG1(F("header = "), header);
-
-  _currentClient.write((const uint8_t *) header.c_str(), header.length());
-  
-  if (contentLength)
-  {
-    sendContent_P(content, contentLength);
-  }
 }
 
 void EthernetWebServer::sendContent(const String& content) 
@@ -549,7 +517,7 @@ void EthernetWebServer::sendContent(const String& content, size_t size)
     
     if (chunkSize) 
     {
-      ET_LOGDEBUG(F("EthernetWebServer::sendContent: _chunked"));
+      ET_LOGDEBUG(F("sendContent: _chunked"));
       
       sprintf(chunkSize, "%x%s", size, footer);
       _currentClient.write(chunkSize, strlen(chunkSize));
@@ -557,7 +525,7 @@ void EthernetWebServer::sendContent(const String& content, size_t size)
     }
   }
   
-  ET_LOGDEBUG1(F("EthernetWebServer::sendContent: Client.write content: "), content);
+  ET_LOGDEBUG1(F("sendContent: Client.write content: "), content);
   
   _currentClient.write(content.c_str(), size);
   
@@ -567,12 +535,62 @@ void EthernetWebServer::sendContent(const String& content, size_t size)
   }
 }
 
-void EthernetWebServer::sendContent_P(PGM_P content)
+void EthernetWebServer::send_P(int code, PGM_P content_type, PGM_P content) 
+{
+  size_t contentLength = 0;
+
+  if (content != NULL) 
+  {
+    contentLength = strlen_P(content);
+  }
+
+  String header;
+  char type[64];
+  
+  memccpy_P((void*)type, (PGM_VOID_P)content_type, 0, sizeof(type));
+  _prepareHeader(header, code, (const char* )type, contentLength);
+  
+  ET_LOGDEBUG1(F("send_P: len = "), contentLength);
+  ET_LOGDEBUG1(F("content = "), content);
+  ET_LOGDEBUG1(F("send_P: hdrlen = "), header.length());
+  ET_LOGDEBUG1(F("header = "), header);
+  
+  _currentClient.write(header.c_str(), header.length());
+  
+  if (contentLength)
+  {
+    sendContent_P(content);
+  }
+}
+
+void EthernetWebServer::send_P(int code, PGM_P content_type, PGM_P content, size_t contentLength) 
+{
+  String header;
+  char type[64];
+  
+  memccpy_P((void*)type, (PGM_VOID_P)content_type, 0, sizeof(type));
+  _prepareHeader(header, code, (const char* )type, contentLength);
+  
+  ET_LOGDEBUG1(F("send_P: len = "), contentLength);
+  ET_LOGDEBUG1(F("content = "), content);
+  ET_LOGDEBUG1(F("send_P: hdrlen = "), header.length());
+  ET_LOGDEBUG1(F("header = "), header);
+
+  _currentClient.write((const uint8_t *) header.c_str(), header.length());
+  
+  if (contentLength)
+  {
+    sendContent_P(content, contentLength);
+  }
+}
+
+
+void EthernetWebServer::sendContent_P(PGM_P content) 
 {
   sendContent_P(content, strlen_P(content));
 }
 
-void EthernetWebServer::sendContent_P(PGM_P content, size_t size)
+void EthernetWebServer::sendContent_P(PGM_P content, size_t size) 
 {
   const char * footer = "\r\n";
   
@@ -588,19 +606,31 @@ void EthernetWebServer::sendContent_P(PGM_P content, size_t size)
     }
   }
 
-  uint8_t buffer[PROGMEM_BUFFLEN];
-  uint16_t count = size / PROGMEM_BUFFLEN;
-  uint16_t remainder = size % PROGMEM_BUFFLEN;
-  uint16_t i = 0;
-
-  for (i = 0; i < count; i++) {
-    /* code */
-    memcpy_P(buffer, &content[i*PROGMEM_BUFFLEN], PROGMEM_BUFFLEN);
-    _currentClient.write(buffer, PROGMEM_BUFFLEN);
-  }
+  uint8_t* buffer = new uint8_t[SENDCONTENT_P_BUFFER_SZ];
   
-  memcpy_P(buffer, &content[i*PROGMEM_BUFFLEN], remainder);
-  _currentClient.write(buffer, remainder);
+  if (buffer)
+  {
+    uint16_t count = size / SENDCONTENT_P_BUFFER_SZ;
+    uint16_t remainder = size % SENDCONTENT_P_BUFFER_SZ;
+    uint16_t i = 0;
+
+    for (i = 0; i < count; i++) {
+      /* code */
+      memcpy_P(buffer, &content[i*SENDCONTENT_P_BUFFER_SZ], SENDCONTENT_P_BUFFER_SZ);
+      _currentClient.write(buffer, SENDCONTENT_P_BUFFER_SZ);
+    }
+    
+    memcpy_P(buffer, &content[i*SENDCONTENT_P_BUFFER_SZ], remainder);
+    _currentClient.write(buffer, remainder);
+    
+    delete [] buffer;
+    
+  }
+  else
+  {
+    ET_LOGERROR1(F("sendContent_P: Error, can't allocate buffer, Sz ="), SENDCONTENT_P_BUFFER_SZ);
+    return;
+  }
   
   if (_chunked) 
   {
@@ -732,21 +762,21 @@ void EthernetWebServer::_handleRequest()
   
   if (!_currentHandler)
   {
-    ET_LOGDEBUG(F("EthernetWebServer::_handleRequest: request handler not found"));
+    ET_LOGDEBUG(F("_handleRequest: request handler not found"));
   }
   else
   {
-    ET_LOGDEBUG(F("EthernetWebServer::_handleRequest handle"));
+    ET_LOGDEBUG(F("_handleRequest handle"));
     
     handled = _currentHandler->handle(*this, _currentMethod, _currentUri);
     
     if (!handled)
     {
-      ET_LOGDEBUG(F("EthernetWebServer::_handleRequest: _handleRequest failed"));
+      ET_LOGDEBUG(F("_handleRequest: _handleRequest failed"));
     }
     else
     {
-      ET_LOGDEBUG(F("EthernetWebServer::_handleRequest OK"));
+      ET_LOGDEBUG(F("_handleRequest OK"));
     }
   }
 

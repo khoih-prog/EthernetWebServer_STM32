@@ -44,6 +44,8 @@ send	KEYWORD2
 setContentLength  KEYWORD2
 sendHeader  KEYWORD2
 sendContent KEYWORD2
+send_P  KEYWORD2
+sendContent_P KEYWORD2
 urlDecode KEYWORD2
 streamFile  KEYWORD2
 
