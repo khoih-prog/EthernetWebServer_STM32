@@ -68,7 +68,7 @@ void loop(void)
   
 #### New in v1.0.4
 
-1. Add support to all STM32 boards (***STM32F/L/H/G/WB/MP1***) with 32K+ Flash.
+1. Add support to all STM32 boards (**STM32F/L/H/G/WB/MP1**) with 32K+ Flash.
 
   - STM32L0, STM32L1, STM32L4
   - STM32G0, STM32G4
@@ -90,20 +90,20 @@ void loop(void)
 
 ### New in Version v1.0.1
 
-1. Add support to ***W5x00*** Ethernet shields to all STM32 boards having 64+K bytes Flash.
+1. Add support to **W5x00** Ethernet shields to all STM32 boards having 64+K bytes Flash.
 
 ---
 
 #### Supporting Boards
 
-1. ***STM32 boards with built-in Ethernet LAN8742A*** such as :
+1. **STM32 boards with built-in Ethernet LAN8742A** such as :
 
-  - ***Nucleo-144 (F429ZI, F767ZI)***
-  - ***Discovery (STM32F746G-DISCOVERY)***
-  - ***All STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet***
+  - **Nucleo-144 (F429ZI, F767ZI)**
+  - **Discovery (STM32F746G-DISCOVERY)**
+  - **All STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet**
   - See [EthernetWebServer_STM32 Support and Test Results](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
   
-2. ***STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running W5x00 or ENC28J60 shields)***
+2. **STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running W5x00 or ENC28J60 shields)**
 
 - Nucleo-144
 - Nucleo-64
@@ -146,7 +146,7 @@ The EthernetWebServer class found in `EthernetWebServer_STM32.h` header, is a si
 
 ## Prerequisite
 
- 1. [`Arduino IDE 1.8.12+` for Arduino](https://www.arduino.cc/en/Main/Software)
+ 1. [`Arduino IDE 1.8.13+` for Arduino](https://www.arduino.cc/en/Main/Software)
  2. [`Arduino Core for STM32 1.9.0+`](https://github.com/stm32duino/Arduino_Core_STM32) for STM32 (Use Arduino Board Manager)
  3. [`Functional-VLPP library v1.0.1+`](https://github.com/khoih-prog/functional-vlpp) to use server's lambda function. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/Functional-Vlpp.svg?)](https://www.ardu-badge.com/Functional-Vlpp)
  4. Depending on which Ethernet card you're using:
@@ -156,7 +156,7 @@ The EthernetWebServer class found in `EthernetWebServer_STM32.h` header, is a si
    - [`Ethernet2 library v1.0.4+`](https://github.com/adafruit/Ethernet2) for W5500.
    - [`Ethernet3 library v1.5.3+`](https://github.com/sstaub/Ethernet3) for W5500/WIZ550io/WIZ850io/USR-ES1 with Wiznet W5500 chip.
    - [`EthernetENC library v2.0.0+`](https://github.com/jandrassy/EthernetENC) for ENC28J60. **New and Better**
-   - [`UIPEthernet library v2.0.8+`](https://github.com/UIPEthernet/UIPEthernet) for ENC28J60.
+   - [`UIPEthernet library v2.0.9+`](https://github.com/UIPEthernet/UIPEthernet) for ENC28J60.
  5. [`LwIP library v2.1.2+`](https://github.com/stm32duino/LwIP) for built-in Ethernet on (Nucleo-144, Discovery)
 
 ---
@@ -179,7 +179,7 @@ You can also use this link [![arduino-library-badge](https://www.ardu-badge.com/
 
 1. Install [VS Code](https://code.visualstudio.com/)
 2. Install [PlatformIO](https://platformio.org/platformio-ide)
-3. Install **EthernetWebServer_STM32** library by using [Library Manager](https://docs.platformio.org/en/latest/librarymanager/). Search for ***EthernetWebServer_STM32*** in [Platform.io Author's Libraries](https://platformio.org/lib/search?query=author:%22Khoi%20Hoang%22)
+3. Install **EthernetWebServer_STM32** library by using [Library Manager](https://docs.platformio.org/en/latest/librarymanager/). Search for **EthernetWebServer_STM32** in [Platform.io Author's Libraries](https://platformio.org/lib/search?query=author:%22Khoi%20Hoang%22)
 4. Use included [platformio.ini](platformio/platformio.ini) file from examples to ensure that all dependent libraries will installed automatically. Please visit documentation for the other options and examples at [Project Configuration File](https://docs.platformio.org/page/projectconf.html)
 
 ---
@@ -217,7 +217,7 @@ To add UDP Multicast support, necessary for this [**UPnP_Generic library**](http
 - [Ethernet3.h](LibraryPatches/Ethernet3/src/Ethernet3.h)
 - [Ethernet3.cpp](LibraryPatches/Ethernet3/src/Ethernet3.cpp)
 
-6. ***To be able to compile and run on nRF52 boards with ENC28J60 using UIPEthernet library***, you have to copy these following files into the UIPEthernet `utility` directory to overwrite the old files:
+6. **To be able to compile and run on nRF52 boards with ENC28J60 using UIPEthernet library**, you have to copy these following files into the UIPEthernet `utility` directory to overwrite the old files:
 
 - [UIPEthernet.h](LibraryPatches/UIPEthernet/UIPEthernet.h)
 - [UIPEthernet.cpp](LibraryPatches/UIPEthernet/UIPEthernet.cpp)
@@ -346,7 +346,7 @@ Standard W5x00 using Ethernet library is used by default, in the sketch, just be
 ```
 
 - To use another Ethernet library
-For example, Ethernet_XYZ library uses **Ethernet_XYZ.h***
+For example, Ethernet_XYZ library uses **Ethernet_XYZ.h**
 
 ```cpp
 #define USE_BUILTIN_ETHERNET    false
@@ -475,19 +475,19 @@ host port number: ``int port`` (default is the standard HTTP port 80)
 
 #### Basic Operations
 
-***Starting the server***
+**Starting the server**
 
 ```cpp
   void begin();
 ```
 
-***Handling incoming client requests***
+**Handling incoming client requests**
 
 ```cpp
   void handleClient();
 ```
 
-***Disabling the server***
+**Disabling the server**
 
 ```cpp
   void close();
@@ -496,7 +496,7 @@ host port number: ``int port`` (default is the standard HTTP port 80)
 
 Both methods function the same
 
-***Client request handlers***
+**Client request handlers**
 
 ```cpp
   void on();
@@ -513,7 +513,7 @@ Example:
   server.onFileUpload(handlerFunction); // handle file uploads
 ```
 
-***Sending responses to the client***
+**Sending responses to the client**
 
 ```cpp
   void send();
@@ -531,7 +531,7 @@ Example:
 
 #### Advanced Options
 
-***Getting information about request arguments***
+**Getting information about request arguments**
 
 ```cpp
   const String & arg();
@@ -550,7 +550,7 @@ Example:
 	
 `hasArg` - check if argument exist
 
-***Getting information about request headers***
+**Getting information about request headers**
 
 ```cpp
   const String & header();
@@ -571,7 +571,7 @@ Example:
 	
 `hasHeader` - check if header exist
 
-***Authentication***
+**Authentication**
 
 ```cpp
   bool authenticate();
@@ -798,6 +798,7 @@ void loop(void)
 ```
 
 #### 2. File [defines.h](examples/AdvancedWebServer/defines.h)
+
 ```cpp
 #ifndef defines_h
 #define defines_h
@@ -1230,20 +1231,20 @@ The UTC time is 22:20:21
 
 ### Version v1.0.0
 
-This is simple yet complete WebServer library for `STM32` boards running built-in Ethernet (Nucleo-144, Discovery) or EMC28J60 Ethernet shields. ***The functions are similar and compatible to ESP8266/ESP32 WebServer libraries*** to make life much easier to port sketches from ESP8266/ESP32.
+This is simple yet complete WebServer library for `STM32` boards running built-in Ethernet (Nucleo-144, Discovery) or EMC28J60 Ethernet shields. **The functions are similar and compatible to ESP8266/ESP32 WebServer libraries** to make life much easier to port sketches from ESP8266/ESP32.
 
 ---
 
 #### Supporting Boards
 
-1. ***STM32 boards with built-in Ethernet LAN8742A*** such as :
+1. **STM32 boards with built-in Ethernet LAN8742A** such as :
 
-  - ***Nucleo-144 (F429ZI, F767ZI)***
-  - ***Discovery (STM32F746G-DISCOVERY)***
-  - ***All STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet***
+  - **Nucleo-144 (F429ZI, F767ZI)**
+  - **Discovery (STM32F746G-DISCOVERY)**
+  - **All STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet**
   - See [EthernetWebServer_STM32 Support and Test Results](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
   
-2. ***STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running W5x00 or ENC28J60 shields)***
+2. **STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running W5x00 or ENC28J60 shields)**
 
 - Nucleo-144
 - Nucleo-64
@@ -1279,6 +1280,12 @@ These boards are not supported:
 ---
 ---
 
+### Issues ###
+
+Submit issues to: [EthernetWebServer_STM32 issues](https://github.com/khoih-prog/EthernetWebServer_STM32/issues)
+
+---
+
 ### TO DO
 
 1. Bug Searching and Killing
@@ -1289,11 +1296,11 @@ These boards are not supported:
 
 ### DONE
 
- 1. Add support to ***STM32F1,2,3,4,7 boards*** with 64K+ Flash.
- 2. Add support to ***built-in Ethernet LAN8742A*** using [STM32Ethernet library](https://github.com/stm32duino/STM32Ethernet), for boards such as Nucleo-144 NUCLEO_F767ZI.
- 3. Add support to ***Ethernet W5x00***, using either [`Ethernet`](https://www.arduino.cc/en/Reference/Ethernet), [`Ethernet2`](https://github.com/khoih-prog/Ethernet2), [`Ethernet3`](https://github.com/sstaub/Ethernet3) or [`EthernetLarge`](https://github.com/OPEnSLab-OSU/EthernetLarge) library
- 4. Add support to Ethernet ***ENC28J60***, using [`EthernetENC`](https://github.com/jandrassy/EthernetENC) or [`UIPEthernet`](https://github.com/UIPEthernet/UIPEthernet) library 
- 5. Add support to all STM32 boards (***STM32F/L/H/G/WB/MP1***) with 32K+ Flash.
+ 1. Add support to **STM32F1,2,3,4,7 boards** with 64K+ Flash.
+ 2. Add support to **built-in Ethernet LAN8742A** using [STM32Ethernet library](https://github.com/stm32duino/STM32Ethernet), for boards such as Nucleo-144 NUCLEO_F767ZI.
+ 3. Add support to **Ethernet W5x00**, using either [`Ethernet`](https://www.arduino.cc/en/Reference/Ethernet), [`Ethernet2`](https://github.com/khoih-prog/Ethernet2), [`Ethernet3`](https://github.com/sstaub/Ethernet3) or [`EthernetLarge`](https://github.com/OPEnSLab-OSU/EthernetLarge) library
+ 4. Add support to Ethernet **ENC28J60**, using [`EthernetENC`](https://github.com/jandrassy/EthernetENC) or [`UIPEthernet`](https://github.com/UIPEthernet/UIPEthernet) library 
+ 5. Add support to all STM32 boards (**STM32F/L/H/G/WB/MP1**) with 32K+ Flash.
  
 ---
 
@@ -1327,7 +1334,7 @@ If you want to contribute to this project:
 
 ### License
 
-- The library is licensed under [MIT](https://github.com/khoih-prog/EthernetWebServer/blob/master/LICENSE)
+- The library is licensed under [MIT](https://github.com/khoih-prog/EthernetWebServer_STM32/blob/master/LICENSE)
 
 ---
 
