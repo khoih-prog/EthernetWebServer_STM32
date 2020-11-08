@@ -54,6 +54,26 @@ void loop(void)
 ---
 ---
 
+### Why do we need this [EthernetWebServer_STM32 library](https://github.com/khoih-prog/EthernetWebServer_STM32)
+
+This [**EthernetWebServer_STM32 library**](https://github.com/khoih-prog/EthernetWebServer_STM32) is a simple yet complete WebServer library for **STM32F/L/H/G/WB/MP1** boards using built-in Ethernet (Nucleo-144, Discovery), W5x00 or ENC28J60 Ethernet shields. 
+
+The functions are similar and compatible to those of [`ESP32 WebServer`](https://github.com/espressif/arduino-esp32/tree/master/libraries/WebServer) and [`ESP8266WebServer`](https://github.com/esp8266/Arduino/tree/master/libraries/ESP8266WebServer) libraries to make life much easier to port sketches from ESP8266/ESP32.
+
+The [**EthernetWebServer_STM32 library**](https://github.com/khoih-prog/EthernetWebServer_STM32) supports:
+
+1. TCP/UDP Server and Client
+2. HTTP Server and Client
+3. HTTP GET and POST requests, provides argument parsing, handles one client at a time.
+
+[**EthernetWebServer_STM32 library**](https://github.com/khoih-prog/EthernetWebServer_STM32) is based on and modified from [`Ivan Grokhotkov's ESP8266WebServer`](https://github.com/esp8266/Arduino/tree/master/libraries/ESP8266WebServer).
+
+The `EthernetWebServer class` found in `EthernetWebServer_STM32.h` header, is a simple web server that knows how to handle HTTP requests such as GET and POST and can only support one simultaneous client.
+
+Check [`EthernetWebServer Library Issue: Support for STM32F Series`](https://github.com/khoih-prog/EthernetWebServer/issues/1) for reason to create this separate library from [`EthernetWebServer library`](https://github.com/khoih-prog/EthernetWebServer)
+
+---
+
 ### Release v1.0.6
 
 1. Add support to PROGMEM-related commands, such as sendContent_P() and send_P()
@@ -81,7 +101,7 @@ void loop(void)
 1. Fix bug not closing client and releasing socket.
 2. Merge new features from latest ESP8266WebServer
 3. Add and enhance examples.
-4. Add back dependency to [`Functional-VLPP library`](https://github.com/khoih-prog/functional-vlpp).
+4. Restore dependency to [`Functional-VLPP library`](https://github.com/khoih-prog/functional-vlpp).
 
 ### New in Version v1.0.2
 
@@ -125,21 +145,6 @@ void loop(void)
 
 2. ENC28J60 using new [`EthernetENC`](https://github.com/jandrassy/EthernetENC) or [`UIPEthernet`](https://github.com/UIPEthernet/UIPEthernet) library
 
----
-
-This is simple yet complete WebServer library for `STM32F/L/H/G/WB/MP1` boards running built-in Ethernet (Nucleo-144, Discovery) or EMC28J60 Ethernet shields. The functions are similar and compatible to ESP8266/ESP32 WebServer libraries to make life much easier to port sketches from ESP8266/ESP32.
-
-The library supports:
-
-1. TCP/UDP Server and Client
-2. HTTP Server and Client
-3. HTTP GET and POST requests, provides argument parsing, handles one client at a time.
-
-Library is based on and modified from [`Ivan Grokhotkov's ESP8266WebServer`](https://github.com/esp8266/Arduino/tree/master/libraries/ESP8266WebServer).
-
-The EthernetWebServer class found in `EthernetWebServer_STM32.h` header, is a simple web server that knows how to handle HTTP requests such as GET and POST and can only support one simultaneous client.
-
-2. See [`EthernetWebServer Library Issue: Support for STM32F Series`](https://github.com/khoih-prog/EthernetWebServer/issues/1) for reason to create this separate library from [`EthernetWebServer library`](https://github.com/khoih-prog/EthernetWebServer)
 
 ---
 ---
@@ -179,7 +184,7 @@ You can also use this link [![arduino-library-badge](https://www.ardu-badge.com/
 
 1. Install [VS Code](https://code.visualstudio.com/)
 2. Install [PlatformIO](https://platformio.org/platformio-ide)
-3. Install **EthernetWebServer_STM32** library by using [Library Manager](https://docs.platformio.org/en/latest/librarymanager/). Search for **EthernetWebServer_STM32** in [Platform.io Author's Libraries](https://platformio.org/lib/search?query=author:%22Khoi%20Hoang%22)
+3. Install [**EthernetWebServer_STM32** library](https://platformio.org/lib/show/7077/EthernetWebServer_STM32) by using [Library Manager](https://platformio.org/lib/show/7077/EthernetWebServer_STM32/installation). Search for **EthernetWebServer_STM32** in [Platform.io Author's Libraries](https://platformio.org/lib/search?query=author:%22Khoi%20Hoang%22)
 4. Use included [platformio.ini](platformio/platformio.ini) file from examples to ensure that all dependent libraries will installed automatically. Please visit documentation for the other options and examples at [Project Configuration File](https://docs.platformio.org/page/projectconf.html)
 
 ---
@@ -219,10 +224,19 @@ To add UDP Multicast support, necessary for this [**UPnP_Generic library**](http
 
 6. **To be able to compile and run on nRF52 boards with ENC28J60 using UIPEthernet library**, you have to copy these following files into the UIPEthernet `utility` directory to overwrite the old files:
 
-- [UIPEthernet.h](LibraryPatches/UIPEthernet/UIPEthernet.h)
-- [UIPEthernet.cpp](LibraryPatches/UIPEthernet/UIPEthernet.cpp)
-- [Enc28J60Network.h](LibraryPatches/UIPEthernet/utility/Enc28J60Network.h)
-- [Enc28J60Network.cpp](LibraryPatches/UIPEthernet/utility/Enc28J60Network.cpp)
+- For [UIPEthernet v2.0.8](https://github.com/UIPEthernet/UIPEthernet)
+
+  - [UIPEthernet.h](LibraryPatches/UIPEthernet/UIPEthernet.h)
+  - [UIPEthernet.cpp](LibraryPatches/UIPEthernet/UIPEthernet.cpp)
+  - [Enc28J60Network.h](LibraryPatches/UIPEthernet/utility/Enc28J60Network.h)
+  - [Enc28J60Network.cpp](LibraryPatches/UIPEthernet/utility/Enc28J60Network.cpp)
+
+- For [UIPEthernet v2.0.9](https://github.com/UIPEthernet/UIPEthernet)
+
+  - [UIPEthernet.h](LibraryPatches/UIPEthernet-2.0.9/UIPEthernet.h)
+  - [UIPEthernet.cpp](LibraryPatches/UIPEthernet-2.0.9/UIPEthernet.cpp)
+  - [Enc28J60Network.h](LibraryPatches/UIPEthernet-2.0.9/utility/Enc28J60Network.h)
+  - [Enc28J60Network.cpp](LibraryPatches/UIPEthernet-2.0.9/utility/Enc28J60Network.cpp)
 
 7. Check if you need to install the UIPthernet patch [new STM32 core F3/F4 compatibility](https://github.com/UIPEthernet/UIPEthernet/commit/c6d6519a260166b722b9cee5dd1f0fb2682e6782) to avoid errors `#include HardwareSPI.h` on some STM32 boards (Nucleo-32 F303K8, etc.)
 
@@ -588,7 +602,8 @@ Example:
 
 ```cpp
 
-  if(!server.authenticate(username, password)){
+  if(!server.authenticate(username, password))
+  {
     server.requestAuthentication();
   }
 ```
@@ -1206,7 +1221,7 @@ The UTC time is 22:20:21
 
 #### New in v1.0.4
 
-1. Add support to all STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash.
+1. Add support to all STM32 boards (**STM32F/L/H/G/WB/MP1**) with 32K+ Flash.
   - STM32L0, STM32L1, STM32L4
   - STM32G0, STM32G4
   - STM32H7
@@ -1218,7 +1233,7 @@ The UTC time is 22:20:21
 1. Fix bug not closing client and releasing socket.
 2. Merge new features from latest ESP8266WebServer
 3. Add and enhance examples.
-4. Add back dependency to [`Functional-VLPP library`](https://github.com/khoih-prog/functional-vlpp).
+4. Restore dependency to [`Functional-VLPP library`](https://github.com/khoih-prog/functional-vlpp).
 
 ### Version v1.0.2
 
@@ -1242,7 +1257,7 @@ This is simple yet complete WebServer library for `STM32` boards running built-i
   - **Nucleo-144 (F429ZI, F767ZI)**
   - **Discovery (STM32F746G-DISCOVERY)**
   - **All STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet**
-  - See [EthernetWebServer_STM32 Support and Test Results](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
+  - Check [EthernetWebServer_STM32 Support and Test Results](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
   
 2. **STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running W5x00 or ENC28J60 shields)**
 
