@@ -60,19 +60,68 @@ This [**EthernetWebServer_STM32 library**](https://github.com/khoih-prog/Etherne
 
 The functions are similar and compatible to those of [`ESP32 WebServer`](https://github.com/espressif/arduino-esp32/tree/master/libraries/WebServer) and [`ESP8266WebServer`](https://github.com/esp8266/Arduino/tree/master/libraries/ESP8266WebServer) libraries to make life much easier to port sketches from ESP8266/ESP32.
 
+This [**EthernetWebServer_STM32 library**](https://github.com/khoih-prog/EthernetWebServer_STM32), from v1.1.0, also provides high-level **HTTP and WebSocket Client** with the functions are similar and compatible to those of [**ArduinoHttpClient Library**](https://github.com/arduino-libraries/ArduinoHttpClient)
+
+---
+
+#### Supporting Boards
+
+1. **STM32 boards with built-in Ethernet LAN8742A** such as :
+
+  - **Nucleo-144 (F429ZI, F767ZI)**
+  - **Discovery (STM32F746G-DISCOVERY)**
+  - **All STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet**
+  - See [EthernetWebServer_STM32 Support and Test Results](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
+  
+2. **STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running W5x00 or ENC28J60 shields)**
+
+- Nucleo-144
+- Nucleo-64
+- Discovery
+- Generic STM32F0, STM32F1, STM32F2, STM32F3, STM32F4, STM32F7 (with 64+K Flash): x8 and up
+- STM32L0, STM32L1, STM32L4
+- STM32G0, STM32G4
+- STM32H7
+- STM32WB
+- STM32MP1
+- LoRa boards
+- 3-D printer boards
+- Generic Flight Controllers
+- Midatronics boards
+
+#### Supporting Ethernet shields/modules:
+
+1. W5x00 using [`Ethernet`](https://www.arduino.cc/en/Reference/Ethernet), [`EthernetLarge`](https://github.com/OPEnSLab-OSU/EthernetLarge), [`Ethernet2`](https://github.com/adafruit/Ethernet2) or [`Ethernet3`](https://github.com/sstaub/Ethernet3) library
+
+2. ENC28J60 using new [`EthernetENC`](https://github.com/jandrassy/EthernetENC) or [`UIPEthernet`](https://github.com/UIPEthernet/UIPEthernet) library
+
+---
+
 The [**EthernetWebServer_STM32 library**](https://github.com/khoih-prog/EthernetWebServer_STM32) supports:
 
-1. TCP/UDP Server and Client
-2. HTTP Server and Client
-3. HTTP GET and POST requests, provides argument parsing, handles one client at a time.
+1. TCP Server and Client
+2. UDP Server and Client
+3. HTTP Server and Client
+4. HTTP GET and POST requests, provides argument parsing, handles one client at a time.
+5. **High-level HTTP (GET, POST, PUT, PATCH, DELETE) and WebSocket Client**. From v1.1.0.
 
-[**EthernetWebServer_STM32 library**](https://github.com/khoih-prog/EthernetWebServer_STM32) is based on and modified from [`Ivan Grokhotkov's ESP8266WebServer`](https://github.com/esp8266/Arduino/tree/master/libraries/ESP8266WebServer).
+Library is based on and modified from:
+
+1. [Ivan Grokhotkov's ESP8266WebServer](https://github.com/esp8266/Arduino/tree/master/libraries/ESP8266WebServer)
+2. [Ivan Grokhotkov's ESP32 WebServer](https://github.com/espressif/arduino-esp32/tree/master/libraries/WebServer)
+3. [ArduinoHttpClient Library](https://github.com/arduino-libraries/ArduinoHttpClient)
 
 The `EthernetWebServer class` found in `EthernetWebServer_STM32.h` header, is a simple web server that knows how to handle HTTP requests such as GET and POST and can only support one simultaneous client.
 
 Check [`EthernetWebServer Library Issue: Support for STM32F Series`](https://github.com/khoih-prog/EthernetWebServer/issues/1) for reason to create this separate library from [`EthernetWebServer library`](https://github.com/khoih-prog/EthernetWebServer)
 
 ---
+---
+
+### Major Release v1.1.0
+
+1. Add high-level **HTTP and WebSockets Client** by merging [ArduinoHttpClient Library](https://github.com/arduino-libraries/ArduinoHttpClient)
+2. Add many more examples for HTTP and WebSockets Client.
 
 ### Release v1.0.6
 
@@ -112,38 +161,6 @@ Check [`EthernetWebServer Library Issue: Support for STM32F Series`](https://git
 
 1. Add support to **W5x00** Ethernet shields to all STM32 boards having 64+K bytes Flash.
 
----
-
-#### Supporting Boards
-
-1. **STM32 boards with built-in Ethernet LAN8742A** such as :
-
-  - **Nucleo-144 (F429ZI, F767ZI)**
-  - **Discovery (STM32F746G-DISCOVERY)**
-  - **All STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet**
-  - See [EthernetWebServer_STM32 Support and Test Results](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
-  
-2. **STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running W5x00 or ENC28J60 shields)**
-
-- Nucleo-144
-- Nucleo-64
-- Discovery
-- Generic STM32F0, STM32F1, STM32F2, STM32F3, STM32F4, STM32F7 (with 64+K Flash): x8 and up
-- STM32L0, STM32L1, STM32L4
-- STM32G0, STM32G4
-- STM32H7
-- STM32WB
-- STM32MP1
-- LoRa boards
-- 3-D printer boards
-- Generic Flight Controllers
-- Midatronics boards
-
-#### Supporting Ethernet shields/modules:
-
-1. W5x00 using [`Ethernet`](https://www.arduino.cc/en/Reference/Ethernet), [`EthernetLarge`](https://github.com/OPEnSLab-OSU/EthernetLarge), [`Ethernet2`](https://github.com/adafruit/Ethernet2) or [`Ethernet3`](https://github.com/sstaub/Ethernet3) library
-
-2. ENC28J60 using new [`EthernetENC`](https://github.com/jandrassy/EthernetENC) or [`UIPEthernet`](https://github.com/UIPEthernet/UIPEthernet) library
 
 
 ---
@@ -627,12 +644,13 @@ Example:
 ---
 ---
 
-## Examples
+### Examples:
 
-Also see examples: 
- 1. [HelloServer](examples/HelloServer)
- 2. [HelloServer2](examples/HelloServer2)
- 3. [AdvancedWebServer](examples/AdvancedWebServer)
+#### Original Examples
+
+ 1. [AdvancedWebServer](examples/AdvancedWebServer)
+ 2. [HelloServer](examples/HelloServer)
+ 3. [HelloServer2](examples/HelloServer2)
  4. [HttpBasicAuth](examples/HttpBasicAuth)
  5. [PostServer](examples/PostServer)
  6. [SimpleAuthentication](examples/SimpleAuthentication)
@@ -641,6 +659,23 @@ Also see examples:
  9. [WebClient](examples/WebClient)
 10. [WebClientRepeating](examples/WebClientRepeating)
 11. [WebServer](examples/WebServer)
+
+#### HTTP and WebSocket Client New Examples
+
+ 1. [BasicAuthGet](examples/HTTPClient/BasicAuthGet)
+ 2. [CustomHeader](examples/HTTPClient/CustomHeader)
+ 3. [DweetGet](examples/HTTPClient/DweetGet)
+ 4. [DweetPost](examples/HTTPClient/DweetPost)
+ 5. [HueBlink](examples/HTTPClient/HueBlink)
+ 6. [node_test_server](examples/HTTPClient/node_test_server)
+ 7. [PostWithHeaders](examples/HTTPClient/PostWithHeaders)
+ 8. [SimpleDelete](examples/HTTPClient/SimpleDelete)
+ 9. [SimpleGet](examples/HTTPClient/SimpleGet)
+10. [SimpleHTTPExample](examples/HTTPClient/SimpleHTTPExample)
+11. [SimplePost](examples/HTTPClient/SimplePost)
+12. [SimplePut](examples/HTTPClient/SimplePut)
+13. [SimpleWebSocket](examples/HTTPClient/SimpleWebSocket)
+
 
 ---
 ---
@@ -1203,9 +1238,176 @@ The UTC time is 22:20:21
 ```
 
 ---
+
+4. The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library** running [SimpleWebSocket example](examples/HTTPClient/SimpleWebSocket) to demonstrate newly-added WebSocket Client feature.
+
+```
+Starting SimpleWebSocket on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
+[ETHERNET_WEBSERVER] =========================
+[ETHERNET_WEBSERVER] Default SPI pinout:
+[ETHERNET_WEBSERVER] MOSI: 11
+[ETHERNET_WEBSERVER] MISO: 12
+[ETHERNET_WEBSERVER] SCK: 13
+[ETHERNET_WEBSERVER] SS: 10
+[ETHERNET_WEBSERVER] =========================
+[ETHERNET_WEBSERVER] Board : NUCLEO_F767ZI , setCsPin: 10
+=========================
+Currently Used SPI pinout:
+MOSI:11
+MISO:12
+SCK:13
+SS:10
+=========================
+Using mac index = 10
+Connected! IP address: 192.168.2.139
+starting WebSocket client
+Sending Hello 0
+Sending Hello 1
+Received a message:
+0 => Hello from SimpleWebSocket on NUCLEO_F767ZI, millis = 7297
+Sending Hello 2
+Received a message:
+1 => Hello from SimpleWebSocket on NUCLEO_F767ZI, millis = 12297
+Sending Hello 3
+Received a message:
+2 => Hello from SimpleWebSocket on NUCLEO_F767ZI, millis = 17300
+Sending Hello 4
+Received a message:
+3 => Hello from SimpleWebSocket on NUCLEO_F767ZI, millis = 22303
+Sending Hello 5
+Received a message:
+4 => Hello from SimpleWebSocket on NUCLEO_F767ZI, millis = 27306
+```
+
+---
+
+5. The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with W5x00 & Ethernet3 Library** running [SimpleWebSocket example](examples/HTTPClient/SimpleWebSocket) to demonstrate newly-added WebSocket Client feature.
+
+```
+Starting SimpleWebSocket on NUCLEO_F767ZI with W5x00 & Ethernet3 Library
+[ETHERNET_WEBSERVER] =========== USE_ETHERNET3 ===========
+[ETHERNET_WEBSERVER] Default SPI pinout:
+[ETHERNET_WEBSERVER] MOSI: 11
+[ETHERNET_WEBSERVER] MISO: 12
+[ETHERNET_WEBSERVER] SCK: 13
+[ETHERNET_WEBSERVER] SS: 10
+[ETHERNET_WEBSERVER] =========================
+[ETHERNET_WEBSERVER] Board : NUCLEO_F767ZI , setCsPin: 10
+
+Ethernet3 W5500 init, using SPI_CS = 10, number of sockets = 10
+=========================
+Currently Used SPI pinout:
+MOSI:11
+MISO:12
+SCK:13
+SS:10
+SPI_CS:10
+=========================
+Using mac index = 10
+Connected! IP address: 192.168.2.139
+starting WebSocket client
+Sending Hello 0
+Sending Hello 1
+Received a message:
+0 => Hello from SimpleWebSocket on NUCLEO_F767ZI, millis = 2390
+Sending Hello 2
+Received a message:
+1 => Hello from SimpleWebSocket on NUCLEO_F767ZI, millis = 7391
+Sending Hello 3
+Received a message:
+2 => Hello from SimpleWebSocket on NUCLEO_F767ZI, millis = 12399
+Sending Hello 4
+Received a message:
+3 => Hello from SimpleWebSocket on NUCLEO_F767ZI, millis = 17407
+Sending Hello 5
+Received a message:
+4 => Hello from SimpleWebSocket on NUCLEO_F767ZI, millis = 22416
+Sending Hello 6
+Received a message:
+5 => Hello from SimpleWebSocket on NUCLEO_F767ZI, millis = 27425
+```
+
+---
+
+6. The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library** running [SimpleHTTPExample example](examples/HTTPClient/SimpleHTTPExample) to demonstrate newly-added HTTP Client feature.
+
+
+```
+Starting SimpleHTTPExample on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
+[ETHERNET_WEBSERVER] =========================
+[ETHERNET_WEBSERVER] Default SPI pinout:
+[ETHERNET_WEBSERVER] MOSI: 11
+[ETHERNET_WEBSERVER] MISO: 12
+[ETHERNET_WEBSERVER] SCK: 13
+[ETHERNET_WEBSERVER] SS: 10
+[ETHERNET_WEBSERVER] =========================
+[ETHERNET_WEBSERVER] Board : NUCLEO_F767ZI , setCsPin: 10
+=========================
+Currently Used SPI pinout:
+MOSI:11
+MISO:12
+SCK:13
+SS:10
+=========================
+Using mac index = 10
+Connected! IP address: 192.168.2.139
+startedRequest ok
+Got status code: 200
+Content length is: 2263
+
+Body returned follows:
+
+           `:;;;,`                      .:;;:.           
+        .;;;;;;;;;;;`                :;;;;;;;;;;:     TM 
+      `;;;;;;;;;;;;;;;`            :;;;;;;;;;;;;;;;      
+     :;;;;;;;;;;;;;;;;;;         `;;;;;;;;;;;;;;;;;;     
+    ;;;;;;;;;;;;;;;;;;;;;       .;;;;;;;;;;;;;;;;;;;;    
+   ;;;;;;;;:`   `;;;;;;;;;     ,;;;;;;;;.`   .;;;;;;;;   
+  .;;;;;;,         :;;;;;;;   .;;;;;;;          ;;;;;;;  
+  ;;;;;;             ;;;;;;;  ;;;;;;,            ;;;;;;. 
+ ,;;;;;               ;;;;;;.;;;;;;`              ;;;;;; 
+ ;;;;;.                ;;;;;;;;;;;`      ```       ;;;;;`
+ ;;;;;                  ;;;;;;;;;,       ;;;       .;;;;;
+`;;;;:                  `;;;;;;;;        ;;;        ;;;;;
+,;;;;`    `,,,,,,,,      ;;;;;;;      .,,;;;,,,     ;;;;;
+:;;;;`    .;;;;;;;;       ;;;;;,      :;;;;;;;;     ;;;;;
+:;;;;`    .;;;;;;;;      `;;;;;;      :;;;;;;;;     ;;;;;
+.;;;;.                   ;;;;;;;.        ;;;        ;;;;;
+ ;;;;;                  ;;;;;;;;;        ;;;        ;;;;;
+ ;;;;;                 .;;;;;;;;;;       ;;;       ;;;;;,
+ ;;;;;;               `;;;;;;;;;;;;                ;;;;; 
+ `;;;;;,             .;;;;;; ;;;;;;;              ;;;;;; 
+  ;;;;;;:           :;;;;;;.  ;;;;;;;            ;;;;;;  
+   ;;;;;;;`       .;;;;;;;,    ;;;;;;;;        ;;;;;;;:  
+    ;;;;;;;;;:,:;;;;;;;;;:      ;;;;;;;;;;:,;;;;;;;;;;   
+    `;;;;;;;;;;;;;;;;;;;.        ;;;;;;;;;;;;;;;;;;;;    
+      ;;;;;;;;;;;;;;;;;           :;;;;;;;;;;;;;;;;:     
+       ,;;;;;;;;;;;;;,              ;;;;;;;;;;;;;;       
+         .;;;;;;;;;`                  ,;;;;;;;;:         
+                                                         
+                                                         
+                                                         
+                                                         
+    ;;;   ;;;;;`  ;;;;:  .;;  ;; ,;;;;;, ;;. `;,  ;;;;   
+    ;;;   ;;:;;;  ;;;;;; .;;  ;; ,;;;;;: ;;; `;, ;;;:;;  
+   ,;:;   ;;  ;;  ;;  ;; .;;  ;;   ,;,   ;;;,`;, ;;  ;;  
+   ;; ;:  ;;  ;;  ;;  ;; .;;  ;;   ,;,   ;;;;`;, ;;  ;;. 
+   ;: ;;  ;;;;;:  ;;  ;; .;;  ;;   ,;,   ;;`;;;, ;;  ;;` 
+  ,;;;;;  ;;`;;   ;;  ;; .;;  ;;   ,;,   ;; ;;;, ;;  ;;  
+  ;;  ,;, ;; .;;  ;;;;;:  ;;;;;: ,;;;;;: ;;  ;;, ;;;;;;  
+  ;;   ;; ;;  ;;` ;;;;.   `;;;:  ,;;;;;, ;;  ;;,  ;;;;   
+```
+
+---
 ---
 
 ## Releases History
+
+### Major Release v1.1.0
+
+1. Add high-level **HTTP and WebSockets Client** by merging [ArduinoHttpClient Library](https://github.com/arduino-libraries/ArduinoHttpClient)
+2. Add many more examples for HTTP and WebSockets Client.
+
 
 ### Release v1.0.6
 
@@ -1304,7 +1506,7 @@ Submit issues to: [EthernetWebServer_STM32 issues](https://github.com/khoih-prog
 ### TO DO
 
 1. Bug Searching and Killing
-2. Add SSL/TLS Client and Server support
+2. Add SSL/TLS Server support
 3. Support more non-compatible Ethernet Libraries such as Ethernet_Shield_W5200, EtherCard, EtherSia
 4. Add mDNS features.
 5. Use AsyncTCP features from [Phil Bowles' STM32AsyncTCP](https://github.com/philbowles/STM32AsyncTCP).
@@ -1316,6 +1518,7 @@ Submit issues to: [EthernetWebServer_STM32 issues](https://github.com/khoih-prog
  3. Add support to **Ethernet W5x00**, using either [`Ethernet`](https://www.arduino.cc/en/Reference/Ethernet), [`Ethernet2`](https://github.com/khoih-prog/Ethernet2), [`Ethernet3`](https://github.com/sstaub/Ethernet3) or [`EthernetLarge`](https://github.com/OPEnSLab-OSU/EthernetLarge) library
  4. Add support to Ethernet **ENC28J60**, using [`EthernetENC`](https://github.com/jandrassy/EthernetENC) or [`UIPEthernet`](https://github.com/UIPEthernet/UIPEthernet) library 
  5. Add support to all STM32 boards (**STM32F/L/H/G/WB/MP1**) with 32K+ Flash.
+ 6. Add **High-level HTTP (GET, POST, PUT, PATCH, DELETE) and WebSocket Client**
  
 ---
 
@@ -1325,10 +1528,13 @@ Submit issues to: [EthernetWebServer_STM32 issues](https://github.com/khoih-prog
 2. [Juraj Andrássy](https://github.com/jandrassy) for [`EthernetENC`](https://github.com/jandrassy/EthernetENC) and [UIPEthernet library](https://github.com/UIPEthernet/UIPEthernet)
 3. Thanks to [Miguel Alexandre Wisintainer](https://github.com/tcpipchip) to help debug and test.
 4. Thanks to [Aron N.](https://github.com/porkyneal) to initiate [Sending GZIP HTML ~ 120kb+ (suggested enhancement)](https://github.com/khoih-prog/EthernetWebServer_STM32/issues/3), to help code and test the solution, to add support to PROGMEM-related commands, such as sendContent_P() and send_P(), leading to v1.0.6.
+5. [Adrian McEwen](https://github.com/amcewen) for [HttpClient Library](https://github.com/amcewen/HttpClient) on which the [ArduinoHttpClient Library](https://github.com/arduino-libraries/ArduinoHttpClient) and this [EthernetWebServer library](https://github.com/khoih-prog/EthernetWebServer) are relied.
+
 
 <table>
   <tr>
     <td align="center"><a href="https://github.com/igrr"><img src="https://github.com/igrr.png" width="100px;" alt="igrr"/><br /><sub><b>⭐️ Ivan Grokhotkov</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/amcewen"><img src="https://github.com/amcewen.png" width="100px;" alt="amcewen"/><br /><sub><b>⭐️ Adrian McEwen</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/jandrassy"><img src="https://github.com/jandrassy.png" width="100px;" alt="jandrassy"/><br /><sub><b>⭐️ Juraj Andrássy</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/tcpipchip"><img src="https://github.com/tcpipchip.png" width="100px;" alt="tcpipchip"/><br /><sub><b>⭐️ Miguel Wisintainer</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/porkyneal"><img src="https://github.com/porkyneal.png" width="100px;" alt="porkyneal"/><br /><sub><b>⭐️ Aron N.</b></sub></a><br /></td>

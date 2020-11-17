@@ -8,18 +8,6 @@
   Based on and modified from ESP8266 https://github.com/esp8266/Arduino/releases
   Built by Khoi Hoang https://github.com/khoih-prog/EthernetWebServer_STM32
   Licensed under MIT license
-  Version: 1.0.6
-
-  Version Modified By   Date      Comments
-  ------- -----------  ---------- -----------
-  1.0.0   K Hoang      26/02/2020 Initial coding for STM32 with built-in Ethernet (Nucleo-144, DISCOVERY, etc) and ENC28J60
-  1.0.1   K Hoang      28/02/2020 Add W5x00 Ethernet shields using Ethernet library
-  1.0.2   K Hoang      05/03/2020 Remove dependency on functional-vlpp
-  1.0.3   K Hoang      22/07/2020 Fix bug not closing client and releasing socket. Add features.
-  1.0.4   K Hoang      23/07/2020 Add support to all STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash.
-  1.0.5   K Hoang      16/09/2020 Add support to Ethernet2, Ethernet3, Ethernet Large for W5x00
-                                  Add support to new EthernetENC library for ENC28J60. Add debug feature.
-  1.0.6   K Hoang      24/09/2020 Add support to PROGMEM-related commands, such as sendContent_P() and send_P()
  ***************************************************************************************************************************************/
 
 #ifndef defines_h
@@ -39,8 +27,8 @@
 // If USE_BUILTIN_ETHERNET == false and USE_UIP_ETHERNET == false => 
 // either use W5x00 with EthernetXYZ library
 // or ENC28J60 with EthernetENC library
-//#define USE_BUILTIN_ETHERNET    true
-#define USE_BUILTIN_ETHERNET    false
+#define USE_BUILTIN_ETHERNET    true
+//#define USE_BUILTIN_ETHERNET    false
 
 //#define USE_UIP_ETHERNET        true
 #define USE_UIP_ETHERNET        false
@@ -56,9 +44,9 @@
   #define USE_ETHERNET          false //true
   #define USE_ETHERNET2         false //true
   #define USE_ETHERNET3         false //true
-  #define USE_ETHERNET_LARGE    true
+  #define USE_ETHERNET_LARGE    false
   #define USE_ETHERNET_ESP8266  false //true
-  #define USE_ETHERNET_ENC      false
+  #define USE_ETHERNET_ENC      true
   #define USE_CUSTOM_ETHERNET   false
 #endif
 

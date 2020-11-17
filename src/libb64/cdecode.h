@@ -4,12 +4,14 @@
    This is part of the libb64 project, and has been placed in the public domain.
    For details, see http://sourceforge.net/projects/libb64
 
+   For STM32 with built-in Ethernet LAN8742A (Nucleo-144, DISCOVERY, etc) or W5x00/ENC28J60 shield/module
+
    EthernetWebServer_STM32 is a library for the STM32 running Ethernet WebServer
 
    Based on and modified from ESP8266 https://github.com/esp8266/Arduino/releases
    Built by Khoi Hoang https://github.com/khoih-prog/EthernetWebServer_STM32
    Licensed under MIT license
-   Version: 1.0.6
+   Version: 1.1.0
 
    Original author:
    @file       Esp8266WebServer.h
@@ -25,10 +27,10 @@
     1.0.5   K Hoang      16/09/2020 Add support to Ethernet2, Ethernet3, Ethernet Large for W5x00
                                     Add support to new EthernetENC library for ENC28J60. Add debug feature.
     1.0.6   K Hoang      24/09/2020 Add support to PROGMEM-related commands, such as sendContent_P() and send_P()
+    1.1.0   K Hoang      17/11/2020 Add basic HTTP and WebSockets Client by merging ArduinoHttpClient
  *****************************************************************************************************************************/
 
-#ifndef BASE64_CDECODE_H
-#define BASE64_CDECODE_H
+#pragma once
 
 #define base64_decode_expected_len(n) ((n * 3) / 4)
 
@@ -57,4 +59,3 @@ int base64_decode_chars(const char* code_in, const int length_in, char* plaintex
 } // extern "C"
 #endif
 
-#endif /* BASE64_CDECODE_H */
