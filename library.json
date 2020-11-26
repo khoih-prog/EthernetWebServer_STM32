@@ -21,7 +21,27 @@
       "extras",
       "tests"
     ]
-  },  
+  },
+  "dependencies": 
+  [
+    {
+      "owner": "stm32duino",
+      "name": "STM32duino LwIP",
+      "version": "^2.1.2",
+      "platforms": "ststm32"
+    },
+    {
+      "owner": "stm32duino",
+      "name": "STM32Ethernet",
+      "version": "^1.2.0",
+      "platforms": "ststm32"
+    },
+    {
+      "owner": "khoih-prog",
+      "name": "Functional-Vlpp",
+      "version": "^1.0.1"
+    }
+  ],
   "frameworks": "arduino",
   "platforms": "ststm32",
   "examples": "examples/*/*/*.ino"
