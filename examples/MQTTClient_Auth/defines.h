@@ -1,6 +1,6 @@
 /****************************************************************************************************************************
   defines.h
-  
+
   For STM32 with built-in Ethernet LAN8742A (Nucleo-144, DISCOVERY, etc) or W5x00/ENC28J60 shield/module
 
   EthernetWebServer_STM32 is a library for the STM32 running Ethernet WebServer
@@ -43,10 +43,10 @@
   // Only one if the following to be true
   #define USE_ETHERNET          false //true
   #define USE_ETHERNET2         false //true
-  #define USE_ETHERNET3         false //true
+  #define USE_ETHERNET3         true //true
   #define USE_ETHERNET_LARGE    false
   #define USE_ETHERNET_ESP8266  false //true
-  #define USE_ETHERNET_ENC      true
+  #define USE_ETHERNET_ENC      false
   #define USE_CUSTOM_ETHERNET   false
 #endif
 

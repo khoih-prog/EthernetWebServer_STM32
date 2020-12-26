@@ -32,6 +32,7 @@ void setup()
   while (!Serial);
 
   Serial.println("\nStart HTTPBasicAuth on " + String(BOARD_NAME) + ", using " + String(SHIELD_TYPE));
+  Serial.println(ETHERNET_WEBSERVER_STM32_VERSION);
 
   ET_LOGWARN3(F("Board :"), BOARD_NAME, F(", setCsPin:"), USE_THIS_SS_PIN);
 

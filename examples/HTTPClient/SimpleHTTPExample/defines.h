@@ -27,8 +27,8 @@
 // If USE_BUILTIN_ETHERNET == false and USE_UIP_ETHERNET == false => 
 // either use W5x00 with EthernetXYZ library
 // or ENC28J60 with EthernetENC library
-//#define USE_BUILTIN_ETHERNET    true
-#define USE_BUILTIN_ETHERNET    false
+#define USE_BUILTIN_ETHERNET    true
+//#define USE_BUILTIN_ETHERNET    false
 
 //#define USE_UIP_ETHERNET        true
 #define USE_UIP_ETHERNET        false

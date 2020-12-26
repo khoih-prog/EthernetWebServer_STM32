@@ -35,6 +35,7 @@ void setup()
 
   Serial.print("\nStarting SimpleWebSocket on " + String(BOARD_NAME));
   Serial.println(" with " + String(SHIELD_TYPE));
+  Serial.println(ETHERNET_WEBSERVER_STM32_VERSION);
 
 #if USE_ETHERNET_WRAPPER
 
