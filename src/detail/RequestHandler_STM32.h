@@ -7,7 +7,7 @@
    Based on and modified from ESP8266 https://github.com/esp8266/Arduino/releases
    Built by Khoi Hoang https://github.com/khoih-prog/EthernetWebServer_STM32
    Licensed under MIT license
-   Version: 1.1.0
+   Version: 1.1.1
 
    Original author:
    @file       Esp8266WebServer.h
@@ -24,9 +24,15 @@
                                     Add support to new EthernetENC library for ENC28J60. Add debug feature.
     1.0.6   K Hoang      24/09/2020 Add support to PROGMEM-related commands, such as sendContent_P() and send_P()
     1.1.0   K Hoang      17/11/2020 Add basic HTTP and WebSockets Client by merging ArduinoHttpClient
+    1.1.1   K Hoang      26/12/2020 Suppress all possible compiler warnings. Add Version String
  *****************************************************************************************************************************/
 
 #pragma once
+
+#ifndef ETW_UNUSED
+  #define ETW_UNUSED(x) (void)(x)
+#endif
+
 
 class RequestHandler
 {
@@ -36,20 +42,34 @@ class RequestHandler
 
     virtual bool canHandle(HTTPMethod method, String uri)
     {
+      ETW_UNUSED(method);
+      ETW_UNUSED(uri);
+      
       return false;
     }
 
     virtual bool canUpload(String uri)
     {
+      ETW_UNUSED(uri);
+      
       return false;
     }
 
     virtual bool handle(EthernetWebServer& server, HTTPMethod requestMethod, String requestUri)
     {
+      ETW_UNUSED(server);
+      ETW_UNUSED(requestMethod);
+      ETW_UNUSED(requestUri);
+      
       return false;
     }
 
-    virtual void upload(EthernetWebServer& server, String requestUri, HTTPUpload& upload) {}
+    virtual void upload(EthernetWebServer& server, String requestUri, HTTPUpload& upload) 
+    {
+      ETW_UNUSED(server);
+      ETW_UNUSED(requestUri);
+      ETW_UNUSED(upload);
+    }
 
     RequestHandler* next()
     {

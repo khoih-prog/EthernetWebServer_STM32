@@ -11,7 +11,7 @@
    Based on and modified from ESP8266 https://github.com/esp8266/Arduino/releases
    Built by Khoi Hoang https://github.com/khoih-prog/EthernetWebServer_STM32
    Licensed under MIT license
-   Version: 1.1.0
+   Version: 1.1.1
 
    Original author:
    @file       Esp8266WebServer.h
@@ -28,9 +28,15 @@
                                     Add support to new EthernetENC library for ENC28J60. Add debug feature.
     1.0.6   K Hoang      24/09/2020 Add support to PROGMEM-related commands, such as sendContent_P() and send_P()
     1.1.0   K Hoang      17/11/2020 Add basic HTTP and WebSockets Client by merging ArduinoHttpClient
+    1.1.1   K Hoang      26/12/2020 Suppress all possible compiler warnings. Add Version String
  *****************************************************************************************************************************/
 
 #pragma once
+
+// Reintroduce to prevent duplication compile error if other lib/core already has LIB64
+// pragma once can't prevent that
+#ifndef BASE64_CDECODE_H
+#define BASE64_CDECODE_H
 
 #define base64_decode_expected_len(n) ((n * 3) / 4)
 
@@ -38,11 +44,13 @@
 extern "C" {
 #endif
 
-typedef enum {
+typedef enum 
+{
   step_a, step_b, step_c, step_d
 } base64_decodestep;
 
-typedef struct {
+typedef struct 
+{
   base64_decodestep step;
   char plainchar;
 } base64_decodestate;
@@ -58,4 +66,6 @@ int base64_decode_chars(const char* code_in, const int length_in, char* plaintex
 #ifdef __cplusplus
 } // extern "C"
 #endif
+
+#endif /* BASE64_CDECODE_H */
 
