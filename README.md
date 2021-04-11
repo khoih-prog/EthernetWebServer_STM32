@@ -951,13 +951,16 @@ Connect FDTI (USB to Serial) as follows:
  2. [HelloServer](examples/HelloServer)
  3. [HelloServer2](examples/HelloServer2)
  4. [HttpBasicAuth](examples/HttpBasicAuth)
- 5. [PostServer](examples/PostServer)
- 6. [SimpleAuthentication](examples/SimpleAuthentication)
- 7. [UdpNTPClient](examples/UdpNTPClient)
- 8. [UdpSendReceive](examples/UdpSendReceive)
- 9. [WebClient](examples/WebClient)
-10. [WebClientRepeating](examples/WebClientRepeating)
-11. [WebServer](examples/WebServer)
+ 5. [**MQTTClient_Auth**](examples/MQTTClient_Auth)
+ 6. [**MQTTClient_Basic**](examples/MQTTClient_Basic)
+ 7. [**MQTT_ThingStream**](examples/MQTT_ThingStream)
+ 8. [PostServer](examples/PostServer)
+ 9. [SimpleAuthentication](examples/SimpleAuthentication)
+10. [UdpNTPClient](examples/UdpNTPClient)
+11. [UdpSendReceive](examples/UdpSendReceive)
+12. [WebClient](examples/WebClient)
+13. [WebClientRepeating](examples/WebClientRepeating)
+14. [WebServer](examples/WebServer)
 
 #### HTTP and WebSocket Client New Examples
 
