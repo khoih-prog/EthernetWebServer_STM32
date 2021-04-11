@@ -8,6 +8,19 @@
   Built by Khoi Hoang https://github.com/khoih-prog/EthernetWebServer_STM32
   Licensed under MIT license
  *****************************************************************************************************************************/
+/*
+   Currently support
+   1) STM32 boards with built-in LAN8742A Ethernet (to use USE_BUILTIN_ETHERNET = true) such as :
+      - Nucleo-144 (F429ZI, F767ZI)
+      - Discovery (STM32F746G-DISCOVERY)
+      - STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet, 
+      - See How To Use Built-in Ethernet at (https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
+   2) STM32 boards with LAN8720 Ethernet (to use USE_BUILTIN_ETHERNET and USING_LAN8720 = true) such as :
+      - BLACK_F407XX (BLACK_F407VE, BLACK_F407VG, BLACK_F407ZE, BLACK_F407ZG, BLACK_F407VE-mini), NUCLEO_F429ZI, DISCO_F746NG,
+        NUCLEO_F7x6ZG
+   3) STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running ENC28J60 shields (to use USE_BUILTIN_ETHERNET = false)
+   4) STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running W5x00 shields
+*/
 
 #include "defines.h"
 
@@ -19,43 +32,12 @@ void setup()
 {
   // Open serial communications and wait for port to open:
   Serial.begin(115200);
-  while (!Serial);
+  
+  delay(2000);
 
   Serial.println("\nStart WebServer_LAN8720 on " + String(BOARD_NAME) + ", using " + String(SHIELD_TYPE));
   Serial.println(ETHERNET_WEBSERVER_STM32_VERSION);
 
-  ET_LOGWARN3(F("Board :"), BOARD_NAME, F(", setCsPin:"), USE_THIS_SS_PIN);
-
-  ET_LOGWARN(F("Default SPI pinout:"));
-  ET_LOGWARN1(F("MOSI:"), MOSI);
-  ET_LOGWARN1(F("MISO:"), MISO);
-  ET_LOGWARN1(F("SCK:"),  SCK);
-  ET_LOGWARN1(F("SS:"),   SS);
-  ET_LOGWARN(F("========================="));
-
-  #if !(USE_BUILTIN_ETHERNET || USE_UIP_ETHERNET)
-    // For other boards, to change if necessary
-    #if ( USE_ETHERNET || USE_ETHERNET_LARGE || USE_ETHERNET2  || USE_ETHERNET_ENC )
-      // Must use library patch for Ethernet, Ethernet2, EthernetLarge libraries
-      Ethernet.init (USE_THIS_SS_PIN);
-    
-    #elif USE_ETHERNET3
-      // Use  MAX_SOCK_NUM = 4 for 4K, 2 for 8K, 1 for 16K RX/TX buffer
-      #ifndef ETHERNET3_MAX_SOCK_NUM
-        #define ETHERNET3_MAX_SOCK_NUM      4
-      #endif
-    
-      Ethernet.setCsPin (USE_THIS_SS_PIN);
-      Ethernet.init (ETHERNET3_MAX_SOCK_NUM);
-  
-    #elif USE_CUSTOM_ETHERNET
-      // You have to add initialization for your Custom Ethernet here
-      // This is just an example to setCSPin to USE_THIS_SS_PIN, and can be not correct and enough
-      //Ethernet.init(USE_THIS_SS_PIN);
-      
-    #endif  //( ( USE_ETHERNET || USE_ETHERNET_LARGE || USE_ETHERNET2  || USE_ETHERNET_ENC )
-  #endif
-  
   // start the ethernet connection and the server:
   // Use DHCP dynamic IP and random mac
   uint16_t index = millis() % NUMBER_OF_MAC;
@@ -106,7 +88,7 @@ void loop()
             "\r\n");
           client.print("<!DOCTYPE HTML>\r\n");
           client.print("<html>\r\n");
-          client.print(String("<h1>Hello World from ") + BOARD_NAME + "!</h1>\r\n");
+          client.print(String("<h1>Hello World from ") + BOARD_NAME + " and LAN8720!</h1>\r\n");
           client.print("Requests received: ");
           client.print(++reqCount);
           client.print("<br>\r\n");

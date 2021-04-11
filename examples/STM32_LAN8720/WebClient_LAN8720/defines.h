@@ -1,6 +1,6 @@
 /****************************************************************************************************************************
   defines.h
-  
+
   For STM32 with built-in Ethernet LAN8742A (Nucleo-144, DISCOVERY, etc) or W5x00/ENC28J60 shield/module
 
   EthernetWebServer_STM32 is a library for the STM32 running Ethernet WebServer
@@ -13,8 +13,10 @@
 #ifndef defines_h
 #define defines_h
 
-#if !( defined(STM32F4) || defined(STM32F7) )
-  #error This code is designed to run on STM32F4 and STM32F7 platform! Please check your Tools->Board setting.
+#if !( defined(ARDUINO_BLACK_F407VE) || defined(ARDUINO_BLACK_F407VG) || defined(ARDUINO_BLACK_F407ZE) || defined(ARDUINO_BLACK_F407ZG)  || \
+       defined(ARDUINO_BLUE_F407VE_Mini) || defined(ARDUINO_DIYMORE_F407VGT) || defined(ARDUINO_FK407M1) || defined(ARDUINO_NUCLEO_F429ZI) || \
+       defined(ARDUINO_DISCO_F746NG) || defined(ARDUINO_NUCLEO_F746ZG) || defined(ARDUINO_NUCLEO_F756ZG) || defined(ARDUINO_NUCLEO_H743ZI) )
+  #error This code is designed to run on some STM32F407XX NUCLEO-F429ZI, STM32F746 and STM32F756 platform! Please check your Tools->Board setting.
 #endif
 
 #define DEBUG_ETHERNET_WEBSERVER_PORT       Serial
@@ -58,8 +60,13 @@
 #endif
 
 #if (USE_BUILTIN_ETHERNET)
-  #warning Using LAN8742A Ethernet & STM32Ethernet lib
-  #define SHIELD_TYPE           "LAN8742A Ethernet & STM32Ethernet Library"
+  #if USING_LAN8720
+    #warning Using LAN8720A Ethernet & STM32Ethernet lib
+    #define SHIELD_TYPE           "LAN8720 Ethernet & STM32Ethernet Library"
+  #else
+    #warning Using LAN8742A Ethernet & STM32Ethernet lib
+    #define SHIELD_TYPE           "LAN8742A Ethernet & STM32Ethernet Library"
+  #endif
 #elif (USE_UIP_ETHERNET)
   #warning Using ENC28J60 & UIPEthernet lib
   #define SHIELD_TYPE           "ENC28J60 & UIPEthernet Library"
@@ -175,6 +182,6 @@ byte mac[][NUMBER_OF_MAC] =
   { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x14 },
 };
 // Select the IP address according to your local network
-IPAddress ip(192, 168, 2, 232);
+IPAddress ip(192, 168, 2, 220);
 
 #endif    //defines_h
