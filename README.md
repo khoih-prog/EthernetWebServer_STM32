@@ -277,7 +277,7 @@ Check [`EthernetWebServer Library Issue: Support for STM32F Series`](https://git
 
 ### Releases v1.2.0
 
-1. Add support to LAN8720 Ethernet for many STM32F4 (F407xx, NUCLEO_F429ZI) and STM32F7 (DISCO_F746NG, NUCLEO_F746ZG, UCLEO_F756ZG) boards.
+1. Add support to **LAN8720** Ethernet for many **STM32F4** (F407xx, NUCLEO_F429ZI) and **STM32F7** (DISCO_F746NG, NUCLEO_F746ZG, NUCLEO_F756ZG) boards.
 2. Add LAN8720 examples
 3. Add Packages' Patches for STM32 to use LAN8720 with STM32Ethernet and LwIP libraries
 
@@ -2000,9 +2000,10 @@ If you get compilation errors, more often than not, you may need to install a ne
 
 ### Releases v1.2.0
 
-1. Add support to LAN8720 Ethernet for many STM32F4 (F407xx, NUCLEO_F429ZI) and STM32F7 (DISCO_F746NG, NUCLEO_F746ZG, UCLEO_F756ZG) boards.
+1. Add support to **LAN8720** Ethernet for many **STM32F4** (F407xx, NUCLEO_F429ZI) and **STM32F7** (DISCO_F746NG, NUCLEO_F746ZG, NUCLEO_F756ZG) boards.
 2. Add LAN8720 examples
 3. Add Packages' Patches for STM32 to use LAN8720 with STM32Ethernet and LwIP libraries
+
 
 ### Releases v1.1.1
 
