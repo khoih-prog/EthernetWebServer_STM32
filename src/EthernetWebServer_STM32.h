@@ -7,7 +7,7 @@
    Based on and modified from ESP8266 https://github.com/esp8266/Arduino/releases
    Built by Khoi Hoang https://github.com/khoih-prog/EthernetWebServer_STM32
    Licensed under MIT license
-   Version: 1.1.1
+   Version: 1.2.0
 
    Original author:
    @file       Esp8266WebServer.h
@@ -25,6 +25,7 @@
     1.0.6   K Hoang      24/09/2020 Add support to PROGMEM-related commands, such as sendContent_P() and send_P()
     1.1.0   K Hoang      17/11/2020 Add basic HTTP and WebSockets Client by merging ArduinoHttpClient
     1.1.1   K Hoang      26/12/2020 Suppress all possible compiler warnings. Add Version String
+    1.2.0   K Hoang      11/04/2021 Add support to LAN8720 using STM32F4 or STM32F7
  *****************************************************************************************************************************/
 
 #pragma once
@@ -35,7 +36,7 @@
  #error This code is designed to run on STM32F/L/H/G/WB/MP1 platform! Please check your Tools->Board setting.
 #endif
 
-#define ETHERNET_WEBSERVER_STM32_VERSION      "EthernetWebServer_STM32 v1.1.1"
+#define ETHERNET_WEBSERVER_STM32_VERSION      "EthernetWebServer_STM32 v1.2.0"
 
 #define USE_NEW_WEBSERVER_VERSION     true
 
@@ -50,7 +51,12 @@
 #if USE_BUILTIN_ETHERNET
   #include <LwIP.h>
   #include <STM32Ethernet.h>
-  #warning Using built-in LAN8742A Ethernet with STM32Ethernet library from EthernetWebServer_STM32
+  
+  #if USING_LAN8720
+    #warning Using built-in LAN8720 Ethernet with STM32Ethernet library from EthernetWebServer_STM32
+  #else
+    #warning Using built-in LAN8742A Ethernet with STM32Ethernet library from EthernetWebServer_STM32
+  #endif
 #elif USE_UIP_ETHERNET
   #include <UIPEthernet.h>
   #include <utility/logging.h>
