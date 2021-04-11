@@ -15,7 +15,7 @@ If you don't find anything, please [open a new issue](https://github.com/khoih-p
 Please ensure to specify the following:
 
 * Arduino IDE version (e.g. 1.8.13) or Platform.io version
-* Board Core Version (e.g. STM32F7 Nucleo-144 NUCLEO_F767ZI core v1.9.0, etc.)
+* Board Core Version (e.g. STM32F7 Nucleo-144 NUCLEO_F767ZI, STM32 core v1.9.0, etc.)
 * Contextual information (e.g. what you were trying to achieve)
 * Simplest possible steps to reproduce
 * Anything that might be relevant in your opinion, such as:
@@ -27,9 +27,9 @@ Please ensure to specify the following:
 
 ```
 Arduino IDE version: 1.8.13
-STM32F7 Nucleo-144 NUCLEO_F767ZI core v1.9.0
+STM32F7 Nucleo-144 NUCLEO_F767ZI, STM32 core v1.9.0
 OS: Ubuntu 20.04 LTS
-Linux xy-Inspiron-3593 5.4.0-51-generic #56-Ubuntu SMP Mon Oct 5 14:28:49 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+Linux xy-Inspiron-3593 5.4.0-70-generic #78-Ubuntu SMP Fri Mar 19 13:29:52 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
 
 Context:
 I encountered a crash while trying to use the Timer Interrupt.
