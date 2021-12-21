@@ -14,7 +14,7 @@ If you don't find anything, please [open a new issue](https://github.com/khoih-p
 
 Please ensure to specify the following:
 
-* Arduino IDE version (e.g. 1.8.16) or Platform.io version
+* Arduino IDE version (e.g. 1.8.18) or Platform.io version
 * Board Core Version (e.g. STM32F7 Nucleo-144 NUCLEO_F767ZI, STM32 core v2.1.0, etc.)
 * Contextual information (e.g. what you were trying to achieve)
 * Simplest possible steps to reproduce
@@ -26,10 +26,10 @@ Please ensure to specify the following:
 ### Example
 
 ```
-Arduino IDE version: 1.8.16
+Arduino IDE version: 1.8.18
 STM32F7 Nucleo-144 NUCLEO_F767ZI, STM32 core v2.1.0
 OS: Ubuntu 20.04 LTS
-Linux xy-Inspiron-3593 5.4.0-88-generic #99-Ubuntu SMP Thu Sep 23 17:29:00 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+Linux xy-Inspiron-3593 5.4.0-91-generic #102-Ubuntu SMP Fri Nov 5 16:31:28 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
 
 Context:
 I encountered a crash while trying to use the Timer Interrupt.
