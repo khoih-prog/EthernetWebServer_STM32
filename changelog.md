@@ -12,7 +12,7 @@
 ## Table of Contents
 
 * [Changelog](#changelog)
-  * [Releases v1.3.0](#releases-v130)
+  * [Major Releases v1.3.0](#major-releases-v130)
   * [Releases v1.2.1](#releases-v121)
   * [Releases v1.2.0](#releases-v120)
   * [Releases v1.1.1](#releases-v111)
