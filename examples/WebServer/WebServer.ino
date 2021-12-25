@@ -106,7 +106,9 @@ void loop()
             "\r\n");
           client.print("<!DOCTYPE HTML>\r\n");
           client.print("<html>\r\n");
-          client.print(String("<h1>Hello World from ") + BOARD_NAME + "!</h1>\r\n");
+          client.print("<h1>Hello World from ");
+          client.print(BOARD_NAME);
+          client.print("!</h1>\r\n");
           client.print("Requests received: ");
           client.print(++reqCount);
           client.print("<br>\r\n");
