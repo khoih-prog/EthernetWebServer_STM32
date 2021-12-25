@@ -89,6 +89,9 @@ void loop()
           client.print("<!DOCTYPE HTML>\r\n");
           client.print("<html>\r\n");
           client.print(String("<h1>Hello World from ") + BOARD_NAME + " and LAN8720!</h1>\r\n");
+          client.print("<h1>Hello World from ");
+          client.print(BOARD_NAME);
+          client.print(" and LAN8720!</h1>\r\n");
           client.print("Requests received: ");
           client.print(++reqCount);
           client.print("<br>\r\n");
