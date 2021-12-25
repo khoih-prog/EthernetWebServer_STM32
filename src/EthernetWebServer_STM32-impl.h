@@ -12,7 +12,7 @@
   @file       Esp8266WebServer.h
   @author     Ivan Grokhotkov
 
-  Version: 1.3.0
+  Version: 1.3.1
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -29,6 +29,7 @@
   1.2.0   K Hoang      11/04/2021 Add support to LAN8720 using STM32F4 or STM32F7
   1.2.1   K Hoang      04/10/2021 Change option for PIO `lib_compat_mode` from default `soft` to `strict`. Update Packages Patches
   1.3.0   K Hoang      20/12/2021 Reduce usage of Arduino String with std::string. Use reference passing instead of value-passing
+  1.3.1   K Hoang      25/12/2021 Fix bug
  *************************************************************************************************************************************/
 
 #pragma once
@@ -460,9 +461,6 @@ void EthernetWebServer::_prepareHeader(String& response, int code, const char* c
   response = fromEWString(aResponse);
   
   _responseHeaders = String();
-  
-  //MR & KH fix
-  //_responseHeaders = *(new String());
 }
 
 void EthernetWebServer::_prepareHeader(EWString& response, int code, const char* content_type, size_t contentLength) 
@@ -505,9 +503,6 @@ void EthernetWebServer::_prepareHeader(EWString& response, int code, const char*
   response += RETURN_NEWLINE;
   
   _responseHeaders = String();
-  
-  //MR & KH fix
-  //_responseHeaders = *(new String());
 }
 
 void EthernetWebServer::send(int code, const char* content_type, const String& content)
@@ -885,9 +880,6 @@ void EthernetWebServer::_handleRequest()
   }
   
   _currentUri = String();
-  
-  //MR & KH fix
-  //_currentUri = *(new String());
 }
 
 void EthernetWebServer::_finalizeResponse() 
