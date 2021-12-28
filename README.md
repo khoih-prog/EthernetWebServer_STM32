@@ -1367,7 +1367,7 @@ Following is debug terminal output and screen shot when running example [Advance
 
 ```
 Start AdvancedWebServer on NUCLEO_F767ZI, using LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.1
+EthernetWebServer_STM32 v1.3.2
 HTTP EthernetWebServer is @ IP : 192.168.2.117
 EthernetWebServer::handleClient: New Client
 method:  GET
@@ -1491,7 +1491,7 @@ The following is debug terminal output when running example [WebClientRepeating]
 
 ```
 Start WebClientRepeating on NUCLEO_F767ZI, using ENC28J60 & EthernetENC Library
-EthernetWebServer_STM32 v1.3.1
+EthernetWebServer_STM32 v1.3.2
 [ETHERNET_WEBSERVER] Board : NUCLEO_F767ZI , setCsPin: 10
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1566,7 +1566,7 @@ The following is debug terminal output when running example [UdpNTPClient](examp
 
 ```
 Start UdpNTPClient on NUCLEO_F767ZI, using W5x00 & Ethernet2 Library
-EthernetWebServer_STM32 v1.3.1
+EthernetWebServer_STM32 v1.3.2
 [ETHERNET_WEBSERVER] Board : NUCLEO_F767ZI , setCsPin: 10
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1590,7 +1590,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with LAN8742A Ethernet
 
 ```
 Starting SimpleWebSocket on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.1
+EthernetWebServer_STM32 v1.3.2
 [ETHERNET_WEBSERVER] =========================
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1635,7 +1635,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with W5x00 & Ethernet3
 
 ```
 Starting SimpleWebSocket on NUCLEO_F767ZI with W5x00 & Ethernet3 Library
-EthernetWebServer_STM32 v1.3.1
+EthernetWebServer_STM32 v1.3.2
 [ETHERNET_WEBSERVER] =========== USE_ETHERNET3 ===========
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1687,7 +1687,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with LAN8742A Ethernet
 
 ```
 Starting SimpleHTTPExample on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.1
+EthernetWebServer_STM32 v1.3.2
 [ETHERNET_WEBSERVER] =========================
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1760,7 +1760,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with LAN8742A Ethernet
 
 ```
 Start MQTTClient_Auth on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.1
+EthernetWebServer_STM32 v1.3.2
 [ETHERNET_WEBSERVER] =========================
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1799,7 +1799,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with ENC28J60 & Ethern
 
 ```
 Start MQTTClient_Auth on NUCLEO_F767ZI with ENC28J60 & EthernetENC Library
-EthernetWebServer_STM32 v1.3.1
+EthernetWebServer_STM32 v1.3.2
 [ETHERNET_WEBSERVER] =========== USE_ETHERNET_ENC ===========
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1838,7 +1838,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with W5x00 & Ethernet2
 
 ```
 Start MQTTClient_Auth on NUCLEO_F767ZI with W5x00 & Ethernet2 Library
-EthernetWebServer_STM32 v1.3.1
+EthernetWebServer_STM32 v1.3.2
 [ETHERNET_WEBSERVER] =========== USE_ETHERNET2 ===========
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1872,7 +1872,7 @@ The terminal output of **STM32F4 BLACK_F407VE with LAN8720 Ethernet and STM32Eth
 
 ```
 Starting SimpleWebSocket_LAN8720 on BLACK_F407VE with LAN8720 Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.1
+EthernetWebServer_STM32 v1.3.2
 Using mac index = 6
 Connected! IP address: 192.168.2.138
 starting WebSocket client
@@ -1897,7 +1897,7 @@ The terminal output of **BLACK_F407VE using LAN8720 Ethernet and STM32Ethernet L
 
 ```
 Start WebClient_LAN8720 on BLACK_F407VE, using LAN8720 Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.1
+EthernetWebServer_STM32 v1.3.2
 You're connected to the network, IP = 192.168.2.139
 
 Starting connection to server...
@@ -1970,7 +1970,7 @@ Following is debug terminal output and screen shot when running example [Advance
 
 ```
 Start AdvancedWebServer_LAN8720 on BLACK_F407VE, using LAN8720 Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.1
+EthernetWebServer_STM32 v1.3.2
 .[EWS] String Len = 0, extend to 2048
 ......... .......... .......... .......... .......... .......... .......... ..........
 ```

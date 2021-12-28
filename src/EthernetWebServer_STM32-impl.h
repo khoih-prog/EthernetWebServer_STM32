@@ -12,7 +12,7 @@
   @file       Esp8266WebServer.h
   @author     Ivan Grokhotkov
 
-  Version: 1.3.1
+  Version: 1.3.2
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -30,6 +30,7 @@
   1.2.1   K Hoang      04/10/2021 Change option for PIO `lib_compat_mode` from default `soft` to `strict`. Update Packages Patches
   1.3.0   K Hoang      20/12/2021 Reduce usage of Arduino String with std::string. Use reference passing instead of value-passing
   1.3.1   K Hoang      25/12/2021 Fix bug
+  1.3.2   K Hoang      28/12/2021 Fix wrong http status header bug and authenticate issue caused by libb64
  *************************************************************************************************************************************/
 
 #pragma once
@@ -422,7 +423,7 @@ void EthernetWebServer::_prepareHeader(String& response, int code, const char* c
   EWString aResponse = fromString(response);
   
   aResponse = "HTTP/1." + fromString(String(_currentVersion)) + " ";
-  aResponse += code;
+  aResponse += fromString(String(code));
   aResponse += " ";
   aResponse += fromString(_responseCodeToString(code));
   aResponse += RETURN_NEWLINE;
@@ -466,7 +467,7 @@ void EthernetWebServer::_prepareHeader(String& response, int code, const char* c
 void EthernetWebServer::_prepareHeader(EWString& response, int code, const char* content_type, size_t contentLength) 
 {
   response = "HTTP/1." + fromString(String(_currentVersion)) + " ";
-  response += code;
+  response += fromString(String(code));
   response += " ";
   response += fromString(_responseCodeToString(code));
   response += RETURN_NEWLINE;

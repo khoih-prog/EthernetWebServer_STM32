@@ -1,9 +1,5 @@
 /****************************************************************************************************************************
-  cencode.h - c header for a base64 encoding algorithm
-
-  This is part of the libb64 project, and has been placed in the public domain.
-  For details, see http://sourceforge.net/projects/libb64
-
+  cencoder.h - c source to a base64 decoding algorithm implementation
   For STM32 with built-in Ethernet LAN8742A (Nucleo-144, DISCOVERY, etc) or W5x00/ENC28J60 shield/module
 
   EthernetWebServer_STM32 is a library for the STM32 running Ethernet WebServer
@@ -16,7 +12,7 @@
   @file       Esp8266WebServer.h
   @author     Ivan Grokhotkov
 
-  Version: 1.3.1
+  Version: 1.3.2
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -34,7 +30,8 @@
   1.2.1   K Hoang      04/10/2021 Change option for PIO `lib_compat_mode` from default `soft` to `strict`. Update Packages Patches
   1.3.0   K Hoang      20/12/2021 Reduce usage of Arduino String with std::string. Use reference passing instead of value-passing
   1.3.1   K Hoang      25/12/2021 Fix bug
- *************************************************************************************************************************************/
+  1.3.2   K Hoang      28/12/2021 Fix wrong http status header bug and authenticate issue caused by libb64
+ *****************************************************************************************************************************/
 
 #pragma once
 
