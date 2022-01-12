@@ -12,7 +12,7 @@
   @file       Esp8266WebServer.h
   @author     Ivan Grokhotkov
 
-  Version: 1.3.2
+  Version: 1.3.3
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -31,6 +31,7 @@
   1.3.0   K Hoang      20/12/2021 Reduce usage of Arduino String with std::string. Use reference passing instead of value-passing
   1.3.1   K Hoang      25/12/2021 Fix bug
   1.3.2   K Hoang      28/12/2021 Fix wrong http status header bug and authenticate issue caused by libb64
+  1.3.3   K Hoang      11/01/2022 Fix libb64 fallthrough compile warning
  *************************************************************************************************************************************/
 
 // Library to simplify HTTP fetching on Arduino

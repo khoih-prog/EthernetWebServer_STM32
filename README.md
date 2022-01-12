@@ -279,8 +279,8 @@ Check [`EthernetWebServer Library Issue: Support for STM32F Series`](https://git
    - [`Ethernet2 library v1.0.4+`](https://github.com/khoih-prog/Ethernet2) for W5500. [![GitHub release](https://img.shields.io/github/release/adafruit/Ethernet2.svg)](https://github.com/adafruit/Ethernet2/releases/latest)
    - [`Ethernet3 library v1.5.5+`](https://github.com/sstaub/Ethernet3) for W5500/WIZ550io/WIZ850io/USR-ES1 with Wiznet W5500 chip. [![GitHub release](https://img.shields.io/github/release/sstaub/Ethernet3.svg)](https://github.com/sstaub/Ethernet3/releases/latest)
  6. For ENC28J60 Ethernet:
-   - [`EthernetENC library v2.0.1+`](https://github.com/jandrassy/EthernetENC) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/jandrassy/EthernetENC.svg)](https://github.com/jandrassy/EthernetENC/releases/latest). **New and Better**
-   - [`UIPEthernet library v2.0.10+`](https://github.com/UIPEthernet/UIPEthernet) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/UIPEthernet/UIPEthernet.svg)](https://github.com/UIPEthernet/UIPEthernet/releases/latest)
+   - [`EthernetENC library v2.0.2+`](https://github.com/jandrassy/EthernetENC) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/jandrassy/EthernetENC.svg)](https://github.com/jandrassy/EthernetENC/releases/latest). **New and Better**
+   - [`UIPEthernet library v2.0.11+`](https://github.com/UIPEthernet/UIPEthernet) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/UIPEthernet/UIPEthernet.svg)](https://github.com/UIPEthernet/UIPEthernet/releases/latest)
 
 
 ---
@@ -1367,7 +1367,7 @@ Following is debug terminal output and screen shot when running example [Advance
 
 ```
 Start AdvancedWebServer on NUCLEO_F767ZI, using LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.2
+EthernetWebServer_STM32 v1.3.3
 HTTP EthernetWebServer is @ IP : 192.168.2.117
 EthernetWebServer::handleClient: New Client
 method:  GET
@@ -1491,7 +1491,7 @@ The following is debug terminal output when running example [WebClientRepeating]
 
 ```
 Start WebClientRepeating on NUCLEO_F767ZI, using ENC28J60 & EthernetENC Library
-EthernetWebServer_STM32 v1.3.2
+EthernetWebServer_STM32 v1.3.3
 [ETHERNET_WEBSERVER] Board : NUCLEO_F767ZI , setCsPin: 10
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1566,7 +1566,7 @@ The following is debug terminal output when running example [UdpNTPClient](examp
 
 ```
 Start UdpNTPClient on NUCLEO_F767ZI, using W5x00 & Ethernet2 Library
-EthernetWebServer_STM32 v1.3.2
+EthernetWebServer_STM32 v1.3.3
 [ETHERNET_WEBSERVER] Board : NUCLEO_F767ZI , setCsPin: 10
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1590,7 +1590,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with LAN8742A Ethernet
 
 ```
 Starting SimpleWebSocket on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.2
+EthernetWebServer_STM32 v1.3.3
 [ETHERNET_WEBSERVER] =========================
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1635,7 +1635,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with W5x00 & Ethernet3
 
 ```
 Starting SimpleWebSocket on NUCLEO_F767ZI with W5x00 & Ethernet3 Library
-EthernetWebServer_STM32 v1.3.2
+EthernetWebServer_STM32 v1.3.3
 [ETHERNET_WEBSERVER] =========== USE_ETHERNET3 ===========
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1687,7 +1687,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with LAN8742A Ethernet
 
 ```
 Starting SimpleHTTPExample on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.2
+EthernetWebServer_STM32 v1.3.3
 [ETHERNET_WEBSERVER] =========================
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1760,7 +1760,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with LAN8742A Ethernet
 
 ```
 Start MQTTClient_Auth on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.2
+EthernetWebServer_STM32 v1.3.3
 [ETHERNET_WEBSERVER] =========================
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1799,7 +1799,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with ENC28J60 & Ethern
 
 ```
 Start MQTTClient_Auth on NUCLEO_F767ZI with ENC28J60 & EthernetENC Library
-EthernetWebServer_STM32 v1.3.2
+EthernetWebServer_STM32 v1.3.3
 [ETHERNET_WEBSERVER] =========== USE_ETHERNET_ENC ===========
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1838,7 +1838,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with W5x00 & Ethernet2
 
 ```
 Start MQTTClient_Auth on NUCLEO_F767ZI with W5x00 & Ethernet2 Library
-EthernetWebServer_STM32 v1.3.2
+EthernetWebServer_STM32 v1.3.3
 [ETHERNET_WEBSERVER] =========== USE_ETHERNET2 ===========
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1872,7 +1872,7 @@ The terminal output of **STM32F4 BLACK_F407VE with LAN8720 Ethernet and STM32Eth
 
 ```
 Starting SimpleWebSocket_LAN8720 on BLACK_F407VE with LAN8720 Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.2
+EthernetWebServer_STM32 v1.3.3
 Using mac index = 6
 Connected! IP address: 192.168.2.138
 starting WebSocket client
@@ -1897,7 +1897,7 @@ The terminal output of **BLACK_F407VE using LAN8720 Ethernet and STM32Ethernet L
 
 ```
 Start WebClient_LAN8720 on BLACK_F407VE, using LAN8720 Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.2
+EthernetWebServer_STM32 v1.3.3
 You're connected to the network, IP = 192.168.2.139
 
 Starting connection to server...
@@ -1970,7 +1970,7 @@ Following is debug terminal output and screen shot when running example [Advance
 
 ```
 Start AdvancedWebServer_LAN8720 on BLACK_F407VE, using LAN8720 Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.2
+EthernetWebServer_STM32 v1.3.3
 .[EWS] String Len = 0, extend to 2048
 ......... .......... .......... .......... .......... .......... .......... ..........
 ```
@@ -2038,7 +2038,7 @@ Submit issues to: [EthernetWebServer_STM32 issues](https://github.com/khoih-prog
  8. Add support to **Ethernet LAN8720** using [STM32Ethernet library](https://github.com/stm32duino/STM32Ethernet), for boards such as **Nucleo-144 (F429ZI, NUCLEO_F746NG, NUCLEO_F746ZG, NUCLEO_F756ZG), Discovery (DISCO_F746NG)** and **STM32F4 boards (BLACK_F407VE, BLACK_F407VG, BLACK_F407ZE, BLACK_F407ZG, BLACK_F407VE_Mini, DIYMORE_F407VGT, FK407M1)**
  9. Reduce usage of Arduino String with std::string
 10. Optimize library code and examples by using **reference-passing instead of value-passing**
-
+11. Fix authenticate issue and compiler warmings caused by libb64
 
 ---
 

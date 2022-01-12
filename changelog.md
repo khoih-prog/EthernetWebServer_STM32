@@ -12,6 +12,7 @@
 ## Table of Contents
 
 * [Changelog](#changelog)
+  * [Releases v1.3.3](#releases-v133)
   * [Releases v1.3.2](#releases-v132)
   * [Releases v1.3.1](#releases-v131)
   * [Major Releases v1.3.0](#major-releases-v130)
@@ -30,6 +31,10 @@
 ---
 
 ## Changelog
+
+### Releases v1.3.3
+
+1. Fix libb64 `fallthrough` compile warning
 
 ### Releases v1.3.2
 
