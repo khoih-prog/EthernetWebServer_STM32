@@ -6,7 +6,8 @@
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](#Contributing)
 [![GitHub issues](https://img.shields.io/github/issues/khoih-prog/EthernetWebServer_STM32.svg)](http://github.com/khoih-prog/EthernetWebServer_STM32/issues)
 
-<a href="https://www.buymeacoffee.com/khoihprog6" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/khoihprog6" title="Donate to my libraries using BuyMeACoffee"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Donate to my libraries using BuyMeACoffee" style="height: 50px !important;width: 181px !important;" ></a>
+<a href="https://www.buymeacoffee.com/khoihprog6" title="Donate to my libraries using BuyMeACoffee"><img src="https://img.shields.io/badge/buy%20me%20a%20coffee-donate-orange.svg?logo=buy-me-a-coffee&logoColor=FFDD00" style="height: 20px !important;width: 200px !important;" ></a>
 
 ---
 ---
@@ -306,7 +307,7 @@ You can also use this link [![arduino-library-badge](https://www.ardu-badge.com/
 
 1. Install [VS Code](https://code.visualstudio.com/)
 2. Install [PlatformIO](https://platformio.org/platformio-ide)
-3. Install [**EthernetWebServer_STM32** library](https://platformio.org/lib/show/7077/EthernetWebServer_STM32) by using [Library Manager](https://platformio.org/lib/show/7077/EthernetWebServer_STM32/installation). Search for **EthernetWebServer_STM32** in [Platform.io Author's Libraries](https://platformio.org/lib/search?query=author:%22Khoi%20Hoang%22)
+3. Install [**EthernetWebServer_STM32** library](https://registry.platformio.org/libraries/khoih-prog/EthernetWebServer_STM32) by using [Library Manager](https://registry.platformio.org/libraries/khoih-prog/EthernetWebServer_STM32/installation). Search for **EthernetWebServer_STM32** in [Platform.io Author's Libraries](https://platformio.org/lib/search?query=author:%22Khoi%20Hoang%22)
 4. Use included [platformio.ini](platformio/platformio.ini) file from examples to ensure that all dependent libraries will installed automatically. Please visit documentation for the other options and examples at [Project Configuration File](https://docs.platformio.org/page/projectconf.html)
 
 ---
@@ -958,401 +959,13 @@ Connect FDTI (USB to Serial) as follows:
 
 #### 1. File [AdvancedWebServer.ino](examples/AdvancedWebServer/AdvancedWebServer.ino)
 
+https://github.com/khoih-prog/EthernetWebServer_STM32/blob/e3751674bfc7059542e4379c862c590bc1d3404f/examples/AdvancedWebServer/AdvancedWebServer.ino#L51-L258
 
-```cpp
-/*
-   Currently support
-   1) STM32 boards with built-in Ethernet (to use USE_BUILTIN_ETHERNET = true) such as :
-      - Nucleo-144 (F429ZI, F767ZI)
-      - Discovery (STM32F746G-DISCOVERY)
-      - STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet, 
-      - See How To Use Built-in Ethernet at (https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
-   2) STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running ENC28J60 shields (to use USE_BUILTIN_ETHERNET = false)
-   3) STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running W5x00 shields
-*/
-
-#include "defines.h"
-
-EthernetWebServer server(80);
-
-const int led = 13;
-
-void handleRoot()
-{
-  digitalWrite(led, 1);
-
-#define BUFFER_SIZE     512
-
-  char temp[BUFFER_SIZE];
-  int sec = millis() / 1000;
-  int min = sec / 60;
-  int hr = min / 60;
-  int day = hr / 24;
-
-  hr = hr % 24;
-
-  snprintf(temp, BUFFER_SIZE - 1,
-           "<html>\
-<head>\
-<meta http-equiv='refresh' content='5'/>\
-<title>AdvancedWebServer %s</title>\
-<style>\
-body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }\
-</style>\
-</head>\
-<body>\
-<h2>Hi from EthernetWebServer!</h2>\
-<h3>on %s</h3>\
-<p>Uptime: %d d %02d:%02d:%02d</p>\
-<img src=\"/test.svg\" />\
-</body>\
-</html>", BOARD_NAME, BOARD_NAME, day, hr % 24, min % 60, sec % 60);
-
-  server.send(200, "text/html", temp);
-
-  digitalWrite(led, 0);
-}
-
-void handleNotFound()
-{
-  digitalWrite(led, 1);
-  String message = "File Not Found\n\n";
-  message += "URI: ";
-  message += server.uri();
-  message += "\nMethod: ";
-  message += (server.method() == HTTP_GET) ? "GET" : "POST";
-  message += "\nArguments: ";
-  message += server.args();
-  message += "\n";
-
-  for (uint8_t i = 0; i < server.args(); i++)
-  {
-    message += " " + server.argName(i) + ": " + server.arg(i) + "\n";
-  }
-
-  server.send(404, "text/plain", message);
-  digitalWrite(led, 0);
-}
-
-#define ORIGINAL_STR_LEN        2048
-
-void drawGraph()
-{
-  static String out;
-  static uint16_t previousStrLen = ORIGINAL_STR_LEN;
-
-  if (out.length() == 0)
-  {
-    ET_LOGWARN1(F("String Len = 0, extend to"), ORIGINAL_STR_LEN);
-    out.reserve(ORIGINAL_STR_LEN);
-  }
-
-  out = F( "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"310\" height=\"150\">\n" \
-           "<rect width=\"310\" height=\"150\" fill=\"rgb(250, 230, 210)\" stroke-width=\"3\" stroke=\"rgb(0, 0, 0)\" />\n" \
-           "<g stroke=\"blue\">\n");
-
-  char temp[70];
-  
-  int y = rand() % 130;
-
-  for (int x = 10; x < 300; x += 10)
-  {
-    int y2 = rand() % 130;
-    sprintf(temp, "<line x1=\"%d\" y1=\"%d\" x2=\"%d\" y2=\"%d\" stroke-width=\"2\" />\n", x, 140 - y, x + 10, 140 - y2);
-    out += temp;
-    y = y2;
-  }
-  
-  out += F("</g>\n</svg>\n");
-
-  ET_LOGDEBUG1(F("String Len = "), out.length());
-
-  if (out.length() > previousStrLen)
-  {
-    ET_LOGERROR3(F("String Len > "), previousStrLen, F(", extend to"), out.length() + 48);
-
-    previousStrLen = out.length() + 48;
-    
-    out.reserve(previousStrLen);
-  }
-  else
-  {
-    server.send(200, "image/svg+xml", out);
-  }
-}
-
-void setup()
-{
-  pinMode(led, OUTPUT);
-  digitalWrite(led, 0);
-
-  Serial.begin(115200);
-  Serial.println("\nStart AdvancedWebServer on " + String(BOARD_NAME) + ", using " + String(SHIELD_TYPE));
-  Serial.println(ETHERNET_WEBSERVER_STM32_VERSION);
-
-  ET_LOGWARN3(F("Board :"), BOARD_NAME, F(", setCsPin:"), USE_THIS_SS_PIN);
-
-  ET_LOGWARN(F("Default SPI pinout:"));
-  ET_LOGWARN1(F("MOSI:"), MOSI);
-  ET_LOGWARN1(F("MISO:"), MISO);
-  ET_LOGWARN1(F("SCK:"),  SCK);
-  ET_LOGWARN1(F("SS:"),   SS);
-  ET_LOGWARN(F("========================="));
-
-  #if !(USE_BUILTIN_ETHERNET || USE_UIP_ETHERNET)
-    // For other boards, to change if necessary
-    #if ( USE_ETHERNET || USE_ETHERNET_LARGE || USE_ETHERNET2  || USE_ETHERNET_ENC )
-      // Must use library patch for Ethernet, Ethernet2, EthernetLarge libraries
-      Ethernet.init (USE_THIS_SS_PIN);
-    
-    #elif USE_ETHERNET3
-      // Use  MAX_SOCK_NUM = 4 for 4K, 2 for 8K, 1 for 16K RX/TX buffer
-      #ifndef ETHERNET3_MAX_SOCK_NUM
-        #define ETHERNET3_MAX_SOCK_NUM      4
-      #endif
-    
-      Ethernet.setCsPin (USE_THIS_SS_PIN);
-      Ethernet.init (ETHERNET3_MAX_SOCK_NUM);
-  
-    #elif USE_CUSTOM_ETHERNET
-      // You have to add initialization for your Custom Ethernet here
-      // This is just an example to setCSPin to USE_THIS_SS_PIN, and can be not correct and enough
-      //Ethernet.init(USE_THIS_SS_PIN);
-      
-    #endif  //( ( USE_ETHERNET || USE_ETHERNET_LARGE || USE_ETHERNET2  || USE_ETHERNET_ENC )
-  #endif
-  
-  // start the ethernet connection and the server:
-  // Use DHCP dynamic IP and random mac
-  uint16_t index = millis() % NUMBER_OF_MAC;
-  // Use Static IP
-  //Ethernet.begin(mac[index], ip);
-  Ethernet.begin(mac[index]);
-
-  server.on("/", handleRoot);
-  server.on("/test.svg", drawGraph);
-  server.on("/inline", []()
-  {
-    server.send(200, "text/plain", "This works as well");
-  });
-
-  server.onNotFound(handleNotFound);
-  server.begin();
-
-  Serial.print(F("HTTP EthernetWebServer is @ IP : "));
-  Serial.println(Ethernet.localIP());
-}
-
-void heartBeatPrint()
-{
-  static int num = 1;
-
-  Serial.print(F("."));
-
-  if (num == 80)
-  {
-    Serial.println();
-    num = 1;
-  }
-  else if (num++ % 10 == 0)
-  {
-    Serial.print(F(" "));
-  }
-}
-
-void check_status()
-{
-  static unsigned long checkstatus_timeout = 0;
-
-#define STATUS_CHECK_INTERVAL     10000L
-
-  // Send status report every STATUS_REPORT_INTERVAL (60) seconds: we don't need to send updates frequently if there is no status change.
-  if ((millis() > checkstatus_timeout) || (checkstatus_timeout == 0))
-  {
-    heartBeatPrint();
-    checkstatus_timeout = millis() + STATUS_CHECK_INTERVAL;
-  }
-}
-
-void loop()
-{
-  server.handleClient();
-  check_status();
-}
-```
 
 #### 2. File [defines.h](examples/AdvancedWebServer/defines.h)
 
-```cpp
-#ifndef defines_h
-#define defines_h
+https://github.com/khoih-prog/EthernetWebServer_STM32/blob/e3751674bfc7059542e4379c862c590bc1d3404f/examples/AdvancedWebServer/defines.h#L13-L180
 
-#if !( defined(STM32F0) || defined(STM32F1) || defined(STM32F2) || defined(STM32F3)  ||defined(STM32F4) || defined(STM32F7) || \
-       defined(STM32L0) || defined(STM32L1) || defined(STM32L4) || defined(STM32H7)  ||defined(STM32G0) || defined(STM32G4) || \
-       defined(STM32WB) || defined(STM32MP1) )
-  #error This code is designed to run on STM32F/L/H/G/WB/MP1 platform! Please check your Tools->Board setting.
-#endif
-
-#define DEBUG_ETHERNET_WEBSERVER_PORT       Serial
-
-// Debug Level from 0 to 4
-#define _ETHERNET_WEBSERVER_LOGLEVEL_       2
-
-// If USE_BUILTIN_ETHERNET == false and USE_UIP_ETHERNET == false => 
-// either use W5x00 with EthernetXYZ library
-// or ENC28J60 with EthernetENC library
-#define USE_BUILTIN_ETHERNET    true
-//#define USE_BUILTIN_ETHERNET    false
-
-//#define USE_UIP_ETHERNET        true
-#define USE_UIP_ETHERNET        false
-
-// To override the default CS/SS pin. Don't use unless you know exactly which pin to use
-// You can define here or customize for each board at same place with BOARD_TYPE
-//#define USE_THIS_SS_PIN   22  //21  //5 //4 //2 //15
-// Default pin 10 to SS/CS. To change according to your board, if necessary
-#define USE_THIS_SS_PIN       10
-
-#if !(USE_BUILTIN_ETHERNET || USE_UIP_ETHERNET)
-  // Only one if the following to be true
-  #define USE_ETHERNET          false //true
-  #define USE_ETHERNET2         false //true
-  #define USE_ETHERNET3         false //true
-  #define USE_ETHERNET_LARGE    false
-  #define USE_ETHERNET_ESP8266  false //true
-  #define USE_ETHERNET_ENC      true
-  #define USE_CUSTOM_ETHERNET   false
-#endif
-
-#if ( USE_ETHERNET2 || USE_ETHERNET3 || USE_ETHERNET_LARGE || USE_ETHERNET_ESP8266 || USE_ETHERNET_ENC )
-  #ifdef USE_CUSTOM_ETHERNET
-    #undef USE_CUSTOM_ETHERNET
-  #endif
-  #define USE_CUSTOM_ETHERNET   false //true
-#endif
-
-#if (USE_BUILTIN_ETHERNET)
-  #warning Using LAN8742A Ethernet & STM32Ethernet lib
-  #define SHIELD_TYPE           "LAN8742A Ethernet & STM32Ethernet Library"
-#elif (USE_UIP_ETHERNET)
-  #warning Using ENC28J60 & UIPEthernet lib
-  #define SHIELD_TYPE           "ENC28J60 & UIPEthernet Library"
-#elif USE_ETHERNET3
-  #include "Ethernet3.h"
-  #warning Using W5x00 & Ethernet3 lib
-  #define SHIELD_TYPE           "W5x00 & Ethernet3 Library"
-#elif USE_ETHERNET2
-  #include "Ethernet2.h"
-  #warning Using W5x00 & Ethernet2 lib
-  #define SHIELD_TYPE           "W5x00 & Ethernet2 Library"
-#elif USE_ETHERNET_LARGE
-  #include "EthernetLarge.h"
-  #warning Using W5x00 & EthernetLarge lib
-  #define SHIELD_TYPE           "W5x00 & EthernetLarge Library"
-#elif USE_ETHERNET_ESP8266
-  #include "Ethernet_ESP8266.h"
-  #warning Using W5x00 & Ethernet_ESP8266 lib 
-  #define SHIELD_TYPE           "W5x00 & Ethernet_ESP8266 Library" 
-#elif USE_ETHERNET_ENC
-  #include "EthernetENC.h"
-  #warning Using ENC28J60 & EthernetENC lib
-  #define SHIELD_TYPE           "ENC28J60 & EthernetENC Library"
-#elif USE_CUSTOM_ETHERNET
-  //#include "Ethernet_XYZ.h"
-  #include "EthernetENC.h"
-  #warning Using Custom Ethernet library. You must include a library and initialize.
-  #define SHIELD_TYPE           "Custom Ethernet & Ethernet_XYZ Library"
-#else
-  #define USE_ETHERNET          true
-  #include "Ethernet.h"
-  #warning Using Ethernet lib
-  #define SHIELD_TYPE           "W5x00 & Ethernet Library"
-#endif
-
-#if defined(STM32F0)
-  #warning STM32F0 board selected
-  #define BOARD_TYPE  "STM32F0"
-#elif defined(STM32F1)
-  #warning STM32F1 board selected
-  #define BOARD_TYPE  "STM32F1"
-#elif defined(STM32F2)
-  #warning STM32F2 board selected
-  #define BOARD_TYPE  "STM32F2"
-#elif defined(STM32F3)
-  #warning STM32F3 board selected
-  #define BOARD_TYPE  "STM32F3"
-#elif defined(STM32F4)
-  #warning STM32F4 board selected
-  #define BOARD_TYPE  "STM32F4"
-#elif defined(STM32F7)
-  #warning STM32F7 board selected
-  #define BOARD_TYPE  "STM32F7"
-#elif defined(STM32L0)
-  #warning STM32L0 board selected
-  #define BOARD_TYPE  "STM32L0"
-#elif defined(STM32L1)
-  #warning STM32L1 board selected
-  #define BOARD_TYPE  "STM32L1"
-#elif defined(STM32L4)
-  #warning STM32L4 board selected
-  #define BOARD_TYPE  "STM32L4"
-#elif defined(STM32H7)
-  #warning STM32H7 board selected
-  #define BOARD_TYPE  "STM32H7"
-#elif defined(STM32G0)
-  #warning STM32G0 board selected
-  #define BOARD_TYPE  "STM32G0"
-#elif defined(STM32G4)
-  #warning STM32G4 board selected
-  #define BOARD_TYPE  "STM32G4"
-#elif defined(STM32WB)
-  #warning STM32WB board selected
-  #define BOARD_TYPE  "STM32WB"
-#elif defined(STM32MP1)
-  #warning STM32MP1 board selected
-  #define BOARD_TYPE  "STM32MP1"
-#else
-  #warning STM32 unknown board selected
-  #define BOARD_TYPE  "STM32 Unknown"
-#endif
-
-#ifndef BOARD_NAME
-  #define BOARD_NAME    BOARD_TYPE
-#endif
-
-#include <EthernetWebServer_STM32.h>
-
-// Enter a MAC address and IP address for your controller below.
-#define NUMBER_OF_MAC      20
-
-byte mac[][NUMBER_OF_MAC] =
-{
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x01 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x02 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x03 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x04 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x05 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x06 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x07 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x08 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x09 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x0A },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x0B },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x0C },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x0D },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x0E },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x0F },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x10 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x11 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x12 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x13 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0x32, 0x14 },
-};
-// Select the IP address according to your local network
-IPAddress ip(192, 168, 2, 232);
-
-#endif    //defines_h
-```
 
 ---
 ---
@@ -1369,7 +982,7 @@ Following is debug terminal output and screen shot when running example [Advance
 
 ```
 Start AdvancedWebServer on NUCLEO_F767ZI, using LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.3
+EthernetWebServer_STM32 v1.3.4
 HTTP EthernetWebServer is @ IP : 192.168.2.117
 EthernetWebServer::handleClient: New Client
 method:  GET
@@ -1493,7 +1106,7 @@ The following is debug terminal output when running example [WebClientRepeating]
 
 ```
 Start WebClientRepeating on NUCLEO_F767ZI, using ENC28J60 & EthernetENC Library
-EthernetWebServer_STM32 v1.3.3
+EthernetWebServer_STM32 v1.3.4
 [ETHERNET_WEBSERVER] Board : NUCLEO_F767ZI , setCsPin: 10
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1568,7 +1181,7 @@ The following is debug terminal output when running example [UdpNTPClient](examp
 
 ```
 Start UdpNTPClient on NUCLEO_F767ZI, using W5x00 & Ethernet2 Library
-EthernetWebServer_STM32 v1.3.3
+EthernetWebServer_STM32 v1.3.4
 [ETHERNET_WEBSERVER] Board : NUCLEO_F767ZI , setCsPin: 10
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1592,7 +1205,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with LAN8742A Ethernet
 
 ```
 Starting SimpleWebSocket on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.3
+EthernetWebServer_STM32 v1.3.4
 [ETHERNET_WEBSERVER] =========================
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1637,7 +1250,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with W5x00 & Ethernet3
 
 ```
 Starting SimpleWebSocket on NUCLEO_F767ZI with W5x00 & Ethernet3 Library
-EthernetWebServer_STM32 v1.3.3
+EthernetWebServer_STM32 v1.3.4
 [ETHERNET_WEBSERVER] =========== USE_ETHERNET3 ===========
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1689,7 +1302,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with LAN8742A Ethernet
 
 ```
 Starting SimpleHTTPExample on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.3
+EthernetWebServer_STM32 v1.3.4
 [ETHERNET_WEBSERVER] =========================
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1762,7 +1375,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with LAN8742A Ethernet
 
 ```
 Start MQTTClient_Auth on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.3
+EthernetWebServer_STM32 v1.3.4
 [ETHERNET_WEBSERVER] =========================
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1801,7 +1414,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with ENC28J60 & Ethern
 
 ```
 Start MQTTClient_Auth on NUCLEO_F767ZI with ENC28J60 & EthernetENC Library
-EthernetWebServer_STM32 v1.3.3
+EthernetWebServer_STM32 v1.3.4
 [ETHERNET_WEBSERVER] =========== USE_ETHERNET_ENC ===========
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1840,7 +1453,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with W5x00 & Ethernet2
 
 ```
 Start MQTTClient_Auth on NUCLEO_F767ZI with W5x00 & Ethernet2 Library
-EthernetWebServer_STM32 v1.3.3
+EthernetWebServer_STM32 v1.3.4
 [ETHERNET_WEBSERVER] =========== USE_ETHERNET2 ===========
 [ETHERNET_WEBSERVER] Default SPI pinout:
 [ETHERNET_WEBSERVER] MOSI: 11
@@ -1874,7 +1487,7 @@ The terminal output of **STM32F4 BLACK_F407VE with LAN8720 Ethernet and STM32Eth
 
 ```
 Starting SimpleWebSocket_LAN8720 on BLACK_F407VE with LAN8720 Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.3
+EthernetWebServer_STM32 v1.3.4
 Using mac index = 6
 Connected! IP address: 192.168.2.138
 starting WebSocket client
@@ -1899,7 +1512,7 @@ The terminal output of **BLACK_F407VE using LAN8720 Ethernet and STM32Ethernet L
 
 ```
 Start WebClient_LAN8720 on BLACK_F407VE, using LAN8720 Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.3
+EthernetWebServer_STM32 v1.3.4
 You're connected to the network, IP = 192.168.2.139
 
 Starting connection to server...
@@ -1972,7 +1585,7 @@ Following is debug terminal output and screen shot when running example [Advance
 
 ```
 Start AdvancedWebServer_LAN8720 on BLACK_F407VE, using LAN8720 Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.3.3
+EthernetWebServer_STM32 v1.3.4
 .[EWS] String Len = 0, extend to 2048
 ......... .......... .......... .......... .......... .......... .......... ..........
 ```

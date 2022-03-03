@@ -12,6 +12,7 @@
 ## Table of Contents
 
 * [Changelog](#changelog)
+  * [Releases v1.3.4](#releases-v134)
   * [Releases v1.3.3](#releases-v133)
   * [Releases v1.3.2](#releases-v132)
   * [Releases v1.3.1](#releases-v131)
@@ -31,6 +32,10 @@
 ---
 
 ## Changelog
+
+### Releases v1.3.4
+
+1. Fix decoding error bug when using special `&` in data fields. Check [Decoding Error. two times called urlDecode in Parsing-impl.h. #17](https://github.com/khoih-prog/WiFiWebServer/issues/17)
 
 ### Releases v1.3.3
 
@@ -102,11 +107,11 @@
 1. Fix bug not closing client and releasing socket.
 2. Merge new features from latest ESP8266WebServer
 3. Add and enhance examples.
-4. Restore dependency to [`Functional-VLPP library`](https://github.com/khoih-prog/functional-vlpp).
+4. Restore dependency to [`Functional-Vlpp library`](https://github.com/khoih-prog/functional-vlpp).
 
 ### Releases v1.0.2
 
-1. Remove dependency on [`Functional-VLPP library`](https://github.com/khoih-prog/functional-vlpp).
+1. Remove dependency on [`Functional-Vlpp library`](https://github.com/khoih-prog/functional-vlpp).
 2. Enhance examples and update README.md
 
 ### Releases v1.0.1
