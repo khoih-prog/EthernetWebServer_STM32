@@ -12,7 +12,7 @@
   @file       Esp8266WebServer.h
   @author     Ivan Grokhotkov
 
-  Version: 1.3.4
+  Version: 1.4.0
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -23,9 +23,13 @@
   1.3.2   K Hoang      28/12/2021 Fix wrong http status header bug and authenticate issue caused by libb64
   1.3.3   K Hoang      11/01/2022 Fix libb64 fallthrough compile warning
   1.3.4   K Hoang      02/03/2022 Fix decoding error bug
+  1.4.0   K Hoang      04/04/2022 Use Ethernet_Generic library as default for W5x00 Ethernet.
  *************************************************************************************************************************************/
 
 #pragma once
+
+#ifndef REQUEST_HANDLER_STM32_H
+#define REQUEST_HANDLER_STM32_H
 
 #ifndef ETW_UNUSED
   #define ETW_UNUSED(x) (void)(x)
@@ -84,3 +88,4 @@ class RequestHandler
     RequestHandler* _next = nullptr;
 };
 
+#endif		// REQUEST_HANDLER_STM32_H
