@@ -75,6 +75,7 @@
     * [12. WebClient](examples/WebClient)
     * [13. WebClientRepeating](examples/WebClientRepeating)
     * [14. WebServer](examples/WebServer)
+    * [15. multiFileProject](examples/multiFileProject) **New**
   * [HTTP and WebSocket Client New Examples](#http-and-websocket-client-new-examples)
     * [ 1. BasicAuthGet](examples/HTTPClient/BasicAuthGet)
     * [ 2. CustomHeader](examples/HTTPClient/CustomHeader)
@@ -1555,7 +1556,7 @@ Submit issues to: [EthernetWebServer_STM32 issues](https://github.com/khoih-prog
 10. Optimize library code and examples by using **reference-passing instead of value-passing**
 11. Fix authenticate issue and compiler warnings caused by libb64
 12. Use new [**Ethernet_Generic** library](https://github.com/khoih-prog/Ethernet_Generic) as default for W5x00.
-13. Rewrite and add example [multiFileProject](examples/multiFileProject) to demo for multiple-file project to fix `multiple-definitions` linker error
+13. Rewrite library and add example [multiFileProject](examples/multiFileProject) to demo for multiple-file project to fix `multiple-definitions` linker error
 
 
 ---
