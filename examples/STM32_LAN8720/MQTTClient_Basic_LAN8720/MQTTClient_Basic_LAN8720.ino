@@ -113,27 +113,7 @@ void setup()
   // Use Static IP
   //Ethernet.begin(mac[index], ip);
   Ethernet.begin(mac[index]);
-
-  // Just info to know how to connect correctly
-  Serial.println("=========================");
-  Serial.println("Currently Used SPI pinout:");
-  Serial.print("MOSI:");
-  Serial.println(MOSI);
-  Serial.print("MISO:");
-  Serial.println(MISO);
-  Serial.print("SCK:");
-  Serial.println(SCK);
-  Serial.print("SS:");
-  Serial.println(SS);
-#if USE_ETHERNET3
-  Serial.print("SPI_CS:");
-  Serial.println(SPI_CS);
-#endif
-  Serial.println(F("========================="));
-
-  Serial.print(F("Using mac index = "));
-  Serial.println(index);
-
+  
   Serial.print(F("Connected! IP address: "));
   Serial.println(Ethernet.localIP());
 

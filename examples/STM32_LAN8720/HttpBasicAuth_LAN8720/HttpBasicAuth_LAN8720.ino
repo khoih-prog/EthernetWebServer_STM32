@@ -43,6 +43,9 @@ void setup()
   // Use Static IP
   //Ethernet.begin(mac[index], ip);
   Ethernet.begin(mac[index]);
+  
+  Serial.print(F("Connected! IP address: "));
+  Serial.println(Ethernet.localIP());
 
   server.on("/", []()
   {
