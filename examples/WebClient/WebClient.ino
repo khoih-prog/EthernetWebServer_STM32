@@ -11,7 +11,7 @@
 
 #include "defines.h"
 
-char server[] = "arduino.cc";
+char server[] = "arduino.tips";
 
 // Initialize the Web client object
 EthernetClient client;
@@ -68,7 +68,7 @@ void setup()
     Serial.println(F("Connected to server"));
     // Make a HTTP request
     client.println(F("GET /asciilogo.txt HTTP/1.1"));
-    client.println(F("Host: arduino.cc"));
+    client.println(F("Host: arduino.tips"));
     client.println(F("Connection: close"));
     client.println();
   }
