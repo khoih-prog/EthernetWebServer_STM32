@@ -277,10 +277,10 @@ Check [`EthernetWebServer Library Issue: Support for STM32F Series`](https://git
  2. [`Arduino Core for STM32 v2.2.0+`](https://github.com/stm32duino/Arduino_Core_STM32) for STM32 boards. [![GitHub release](https://img.shields.io/github/release/stm32duino/Arduino_Core_STM32.svg)](https://github.com/stm32duino/Arduino_Core_STM32/releases/latest)
  3.  [`Functional-Vlpp library v1.0.2+`](https://github.com/khoih-prog/functional-vlpp) to use server's lambda function. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/Functional-Vlpp.svg?)](https://www.ardu-badge.com/Functional-Vlpp)
  4. For built-in LAN8742A or LAN8720 Ethernet:
-   - [`STM32Ethernet library v1.2.0+`](https://github.com/stm32duino/STM32Ethernet) for built-in LAN8742A Ethernet on (Nucleo-144, Discovery). [![GitHub release](https://img.shields.io/github/release/stm32duino/STM32Ethernet.svg)](https://github.com/stm32duino/STM32Ethernet/releases/latest)
+   - [`STM32Ethernet library v1.3.0+`](https://github.com/stm32duino/STM32Ethernet) for built-in LAN8742A Ethernet on (Nucleo-144, Discovery). [![GitHub release](https://img.shields.io/github/release/stm32duino/STM32Ethernet.svg)](https://github.com/stm32duino/STM32Ethernet/releases/latest)
    - [`LwIP library v2.1.2+`](https://github.com/stm32duino/LwIP) for built-in LAN8742A Ethernet on (Nucleo-144, Discovery). [![GitHub release](https://img.shields.io/github/release/stm32duino/LwIP.svg)](https://github.com/stm32duino/LwIP/releases/latest)
  5. For W5x00 Ethernet:
-   - [`Ethernet_Generic library v2.0.0+`](https://github.com/khoih-prog/Ethernet_Generic) for W5100, W5200 and W5500/WIZ550io/WIZ850io/USR-ES1 with Wiznet W5500 chip.  [![GitHub release](https://img.shields.io/github/release/khoih-prog/Ethernet_Generic.svg)](https://github.com/khoih-prog/Ethernet_Generic/releases/latest)
+   - [`Ethernet_Generic library v2.1.0+`](https://github.com/khoih-prog/Ethernet_Generic) for W5100, W5200 and W5500/WIZ550io/WIZ850io/USR-ES1 with Wiznet W5500 chip.  [![GitHub release](https://img.shields.io/github/release/khoih-prog/Ethernet_Generic.svg)](https://github.com/khoih-prog/Ethernet_Generic/releases/latest)
  6. For ENC28J60 Ethernet:
    - [`EthernetENC library v2.0.2+`](https://github.com/jandrassy/EthernetENC) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/jandrassy/EthernetENC.svg)](https://github.com/jandrassy/EthernetENC/releases/latest). **New and Better**
    - [`UIPEthernet library v2.0.11+`](https://github.com/UIPEthernet/UIPEthernet) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/UIPEthernet/UIPEthernet.svg)](https://github.com/UIPEthernet/UIPEthernet/releases/latest)
@@ -592,7 +592,7 @@ The Debug Terminal will then show that the current SPI pin usage of **NUCLEO_F76
 ```
 
 Start AdvancedWebServer on NUCLEO_F767ZI, using W5x00 using Ethernet_Generic Library
-EthernetWebServer_STM32 v1.4.0
+EthernetWebServer_STM32 v1.4.1
 [EWS] Board : NUCLEO_F767ZI , setCsPin: 10
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -601,7 +601,6 @@ EthernetWebServer_STM32 v1.4.0
 [EWS] SS: 10
 [EWS] =========================
 Connected! IP address: 192.168.2.89
-
 ```
 
 Connect the wires according to the displayed information.
@@ -954,7 +953,7 @@ Following is debug terminal output and screen shot when running example [Advance
 
 ```
 Start AdvancedWebServer on NUCLEO_F767ZI, using LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.4.0
+EthernetWebServer_STM32 v1.4.1
 HTTP EthernetWebServer is @ IP : 192.168.2.117
 EthernetWebServer::handleClient: New Client
 method:  GET
@@ -1078,7 +1077,7 @@ The following is debug terminal output when running example [WebClientRepeating]
 
 ```
 Start WebClientRepeating on NUCLEO_F767ZI, using ENC28J60 & EthernetENC Library
-EthernetWebServer_STM32 v1.4.0
+EthernetWebServer_STM32 v1.4.1
 [EWS] Board : NUCLEO_F767ZI , setCsPin: 10
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1087,26 +1086,32 @@ EthernetWebServer_STM32 v1.4.0
 [EWS] SS: 10
 [EWS] =========================
 You're connected to the network, IP = 192.168.2.123
+
 Connecting...
 HTTP/1.1 200 OK
-Server: nginx/1.4.2
-Date: Wed, 16 Sep 2020 22:17:04 GMT
+Date: Wed, 27 Apr 2022 17:12:43 GMT
 Content-Type: text/plain
 Content-Length: 2263
-Last-Modified: Wed, 02 Oct 2013 13:46:47 GMT
 Connection: close
-Vary: Accept-Encoding
-ETag: "524c23c7-8d7"
-Accept-Ranges: bytes
+x-amz-id-2: Y0KDwqmE5CUvFMSLnxWUV4XoqEDCUL1h9GN+vWHRz7vpjDK77h8fqAbuEqBXVEZRm3Ybv7bCZtE=
+x-amz-request-id: EFJSRB21CQFZQDRX
+Last-Modified: Wed, 23 Feb 2022 14:56:42 GMT
+ETag: "667cf48afcc12c38c8c1637947a04224"
+CF-Cache-Status: DYNAMIC
+Report-To: {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=T2F7koaxDm8y3draFWHzKSKtqF3brIseyVbvIpy%2FDp4RGAh7d6Lc%2F7rw%2B96w7hYckhvRgN1l9sMJJuNuQCxG8JZeCIelNLNXDBKH5BJajxjC7kMiQ3PwdUm8jFr%2B0aA%3D"}],"group":"cf-nel","max_age":604800}
+NEL: {"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server: cloudflare
+CF-RAY: 70292f44ceb3a253-YYZ
+alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400
 
 
            `:;;;,`                      .:;;:.           
         .;;;;;;;;;;;`                :;;;;;;;;;;:     TM 
-      `;;;;;;;;;;;;;;;`            :;;;;;;;;;;;;;;;
-     :;;;;;;;;;;;;;;;;;;         `;;;;;;;;;;;;;;;;;;
-    ;;;;;;;;;;;;;;;;;;;;;       .;;;;;;;;;;;;;;;;;;;;
-   ;;;;;;;;:`   `;;;;;;;;;     ,;;;;;;;;.`   .;;;;;;;;
-  .;;;;;;,         :;;;;;;;   .;;;;;;;          ;;;;;;;
+      `;;;;;;;;;;;;;;;`            :;;;;;;;;;;;;;;;      
+     :;;;;;;;;;;;;;;;;;;         `;;;;;;;;;;;;;;;;;;     
+    ;;;;;;;;;;;;;;;;;;;;;       .;;;;;;;;;;;;;;;;;;;;    
+   ;;;;;;;;:`   `;;;;;;;;;     ,;;;;;;;;.`   .;;;;;;;;   
+  .;;;;;;,         :;;;;;;;   .;;;;;;;          ;;;;;;;  
   ;;;;;;             ;;;;;;;  ;;;;;;,            ;;;;;;. 
  ,;;;;;               ;;;;;;.;;;;;;`              ;;;;;; 
  ;;;;;.                ;;;;;;;;;;;`      ```       ;;;;;`
@@ -1120,25 +1125,25 @@ Accept-Ranges: bytes
  ;;;;;                 .;;;;;;;;;;       ;;;       ;;;;;,
  ;;;;;;               `;;;;;;;;;;;;                ;;;;; 
  `;;;;;,             .;;;;;; ;;;;;;;              ;;;;;; 
-  ;;;;;;:           :;;;;;;.  ;;;;;;;            ;;;;;;
-   ;;;;;;;`       .;;;;;;;,    ;;;;;;;;        ;;;;;;;:
-    ;;;;;;;;;:,:;;;;;;;;;:      ;;;;;;;;;;:,;;;;;;;;;;
-    `;;;;;;;;;;;;;;;;;;;.        ;;;;;;;;;;;;;;;;;;;;
-      ;;;;;;;;;;;;;;;;;           :;;;;;;;;;;;;;;;;:
-       ,;;;;;;;;;;;;;,              ;;;;;;;;;;;;;; 
+  ;;;;;;:           :;;;;;;.  ;;;;;;;            ;;;;;;  
+   ;;;;;;;`       .;;;;;;;,    ;;;;;;;;        ;;;;;;;:  
+    ;;;;;;;;;:,:;;;;;;;;;:      ;;;;;;;;;;:,;;;;;;;;;;   
+    `;;;;;;;;;;;;;;;;;;;.        ;;;;;;;;;;;;;;;;;;;;    
+      ;;;;;;;;;;;;;;;;;           :;;;;;;;;;;;;;;;;:     
+       ,;;;;;;;;;;;;;,              ;;;;;;;;;;;;;;       
          .;;;;;;;;;`                  ,;;;;;;;;:         
                                                          
                                                          
                                                          
                                                          
-    ;;;   ;;;;;`  ;;;;:  .;;  ;; ,;;;;;, ;;. `;,  ;;;;
-    ;;;   ;;:;;;  ;;;;;; .;;  ;; ,;;;;;: ;;; `;, ;;;:;;
-   ,;:;   ;;  ;;  ;;  ;; .;;  ;;   ,;,   ;;;,`;, ;;  ;;
+    ;;;   ;;;;;`  ;;;;:  .;;  ;; ,;;;;;, ;;. `;,  ;;;;   
+    ;;;   ;;:;;;  ;;;;;; .;;  ;; ,;;;;;: ;;; `;, ;;;:;;  
+   ,;:;   ;;  ;;  ;;  ;; .;;  ;;   ,;,   ;;;,`;, ;;  ;;  
    ;; ;:  ;;  ;;  ;;  ;; .;;  ;;   ,;,   ;;;;`;, ;;  ;;. 
    ;: ;;  ;;;;;:  ;;  ;; .;;  ;;   ,;,   ;;`;;;, ;;  ;;` 
-  ,;;;;;  ;;`;;   ;;  ;; .;;  ;;   ,;,   ;; ;;;, ;;  ;;
-  ;;  ,;, ;; .;;  ;;;;;:  ;;;;;: ,;;;;;: ;;  ;;, ;;;;;;
-  ;;   ;; ;;  ;;` ;;;;.   `;;;:  ,;;;;;, ;;  ;;,  ;;;;
+  ,;;;;;  ;;`;;   ;;  ;; .;;  ;;   ,;,   ;; ;;;, ;;  ;;  
+  ;;  ,;, ;; .;;  ;;;;;:  ;;;;;: ,;;;;;: ;;  ;;, ;;;;;;  
+  ;;   ;; ;;  ;;` ;;;;.   `;;;:  ,;;;;;, ;;  ;;,  ;;;; 
 
 Disconnecting from server...
 
@@ -1152,7 +1157,7 @@ The following is debug terminal output when running example [UdpNTPClient](examp
 
 ```
 Start UdpNTPClient on NUCLEO_F767ZI, using W5x00 & Ethernet_Generic Library
-EthernetWebServer_STM32 v1.4.0
+EthernetWebServer_STM32 v1.4.1
 [EWS] Board : NUCLEO_F767ZI , setCsPin: 10
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1176,7 +1181,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with LAN8742A Ethernet
 
 ```
 Starting SimpleWebSocket on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.4.0
+EthernetWebServer_STM32 v1.4.1
 Using mac index = 10
 Connected! IP address: 192.168.2.139
 starting WebSocket client
@@ -1206,7 +1211,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with W5x00 & Ethernet_
 
 ```
 Starting SimpleWebSocket on NUCLEO_F767ZI with W5x00 & Ethernet_Generic Library
-EthernetWebServer_STM32 v1.4.0
+EthernetWebServer_STM32 v1.4.1
 [EWS] =========== USE_Ethernet_Generic ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1246,7 +1251,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with LAN8742A Ethernet
 
 ```
 Starting SimpleHTTPExample on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.4.0
+EthernetWebServer_STM32 v1.4.1
 Connected! IP address: 192.168.2.139
 startedRequest ok
 Got status code: 200
@@ -1293,6 +1298,7 @@ Body returned follows:
   ,;;;;;  ;;`;;   ;;  ;; .;;  ;;   ,;,   ;; ;;;, ;;  ;;  
   ;;  ,;, ;; .;;  ;;;;;:  ;;;;;: ,;;;;;: ;;  ;;, ;;;;;;  
   ;;   ;; ;;  ;;` ;;;;.   `;;;:  ,;;;;;, ;;  ;;,  ;;;;   
+
 ```
 
 ---
@@ -1303,7 +1309,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with LAN8742A Ethernet
 
 ```
 Start MQTTClient_Auth on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.4.0
+EthernetWebServer_STM32 v1.4.1
 Connected! IP address: 192.168.2.152
 Attempting MQTT connection to broker.emqx.io...connected
 Message Send : MQTT_Pub => Hello from MQTTClient_Auth on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
@@ -1326,7 +1332,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with ENC28J60 & Ethern
 
 ```
 Start MQTTClient_Auth on NUCLEO_F767ZI with ENC28J60 & EthernetENC Library
-EthernetWebServer_STM32 v1.4.0
+EthernetWebServer_STM32 v1.4.1
 [EWS] =========== USE_ETHERNET_ENC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1365,7 +1371,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with W5x00 & Ethernet_
 
 ```
 Start MQTTClient_Auth on NUCLEO_F767ZI with W5x00 & Ethernet_Generic Library
-EthernetWebServer_STM32 v1.4.0
+EthernetWebServer_STM32 v1.4.1
 [EWS] =========== USE_Ethernet_Generic ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1390,7 +1396,7 @@ The terminal output of **STM32F4 BLACK_F407VE with LAN8720 Ethernet and STM32Eth
 
 ```
 Starting SimpleWebSocket_LAN8720 on BLACK_F407VE with LAN8720 Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.4.0
+EthernetWebServer_STM32 v1.4.1
 Using mac index = 6
 Connected! IP address: 192.168.2.138
 starting WebSocket client
@@ -1415,20 +1421,24 @@ The terminal output of **BLACK_F407VE using LAN8720 Ethernet and STM32Ethernet L
 
 ```
 Start WebClient_LAN8720 on BLACK_F407VE, using LAN8720 Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.4.0
+EthernetWebServer_STM32 v1.4.1
 You're connected to the network, IP = 192.168.2.139
-Starting connection to server...
-Connected to server
+Connecting...
 HTTP/1.1 200 OK
-Server: nginx/1.4.2
-Date: Sun, 11 Apr 2021 04:37:16 GMT
+Date: Wed, 27 Apr 2022 17:12:43 GMT
 Content-Type: text/plain
 Content-Length: 2263
-Last-Modified: Wed, 02 Oct 2013 13:46:47 GMT
 Connection: close
-Vary: Accept-Encoding
-ETag: "524c23c7-8d7"
-Accept-Ranges: bytes
+x-amz-id-2: Y0KDwqmE5CUvFMSLnxWUV4XoqEDCUL1h9GN+vWHRz7vpjDK77h8fqAbuEqBXVEZRm3Ybv7bCZtE=
+x-amz-request-id: EFJSRB21CQFZQDRX
+Last-Modified: Wed, 23 Feb 2022 14:56:42 GMT
+ETag: "667cf48afcc12c38c8c1637947a04224"
+CF-Cache-Status: DYNAMIC
+Report-To: {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=T2F7koaxDm8y3draFWHzKSKtqF3brIseyVbvIpy%2FDp4RGAh7d6Lc%2F7rw%2B96w7hYckhvRgN1l9sMJJuNuQCxG8JZeCIelNLNXDBKH5BJajxjC7kMiQ3PwdUm8jFr%2B0aA%3D"}],"group":"cf-nel","max_age":604800}
+NEL: {"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server: cloudflare
+CF-RAY: 70292f44ceb3a253-YYZ
+alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400
 
 
            `:;;;,`                      .:;;:.           
@@ -1469,7 +1479,7 @@ Accept-Ranges: bytes
    ;: ;;  ;;;;;:  ;;  ;; .;;  ;;   ,;,   ;;`;;;, ;;  ;;` 
   ,;;;;;  ;;`;;   ;;  ;; .;;  ;;   ,;,   ;; ;;;, ;;  ;;  
   ;;  ,;, ;; .;;  ;;;;;:  ;;;;;: ,;;;;;: ;;  ;;, ;;;;;;  
-  ;;   ;; ;;  ;;` ;;;;.   `;;;:  ,;;;;;, ;;  ;;,  ;;;;   
+  ;;   ;; ;;  ;;` ;;;;.   `;;;:  ,;;;;;, ;;  ;;,  ;;;; 
 
 Disconnecting from server... 
 ```
@@ -1487,7 +1497,7 @@ Following is debug terminal output and screen shot when running example [Advance
 
 ```
 Start AdvancedWebServer_LAN8720 on BLACK_F407VE, using LAN8720 Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.4.0
+EthernetWebServer_STM32 v1.4.1
 .[EWS] String Len = 0, extend to 2048
 ......... .......... .......... .......... .......... .......... .......... ..........
 ```
@@ -1557,6 +1567,7 @@ Submit issues to: [EthernetWebServer_STM32 issues](https://github.com/khoih-prog
 11. Fix authenticate issue and compiler warnings caused by libb64
 12. Use new [**Ethernet_Generic** library](https://github.com/khoih-prog/Ethernet_Generic) as default for W5x00.
 13. Rewrite library and add example [multiFileProject](examples/multiFileProject) to demo for multiple-file project to fix `multiple-definitions` linker error
+14. Change from `arduino.cc` to `arduino.tips` in examples
 
 
 ---
