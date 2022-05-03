@@ -136,7 +136,7 @@
   * [10. SimpleWebSocket_LAN8720 on BLACK_F407VE using LAN8720 Ethernet and STM32Ethernet Library](#10-simplewebsocket_lan8720-on-black_f407ve-using-lan8720-ethernet-and-stm32ethernet-library)
   * [11. WebClient_LAN8720 on BLACK_F407VE using LAN8720 Ethernet and STM32Ethernet Library](#11-webclient_lan8720-on-black_f407ve-using-lan8720-ethernet-and-stm32ethernet-library)
   * [12. AdvancedWebServer_LAN8720 on BLACK_F407VE using LAN8720 Ethernet and STM32Ethernet Library](#12-advancedwebserver_lan8720-on-black_f407ve-using-lan8720-ethernet-and-stm32ethernet-library)
-  * [13. AdvancedWebServer on NUCLEO_L552ZE_Q with W5x00 using Ethernet_Generic Library and custom SPI](#12-AdvancedWebServer-on-NUCLEO_L552ZE_Q-with-W5x00-using-Ethernet_Generic-Library-and-custom- SPI)
+  * [13. AdvancedWebServer on NUCLEO_L552ZE_Q with W5x00 using Ethernet_Generic Library and custom SPI](#13-AdvancedWebServer-on-NUCLEO_L552ZE_Q-with-W5x00-using-Ethernet_Generic-Library-and-custom-SPI)
 * [Debug](#debug)
 * [Troubleshooting](#troubleshooting)
 * [Not supported boards](#Not-supported-boards)
@@ -982,12 +982,12 @@ Connect FDTI (USB to Serial) as follows:
 
 #### 1. File [AdvancedWebServer.ino](examples/AdvancedWebServer/AdvancedWebServer.ino)
 
-https://github.com/khoih-prog/EthernetWebServer_STM32/blob/f078993aa52d30ee6f68e554fc511c539a3d6bb4/examples/AdvancedWebServer/AdvancedWebServer.ino#L51-L253
+https://github.com/khoih-prog/EthernetWebServer_STM32/blob/7b79d4dc38f194ba00d51de8cfb7389e68af4360/examples/AdvancedWebServer/AdvancedWebServer.ino#L40-L269
 
 
 #### 2. File [defines.h](examples/AdvancedWebServer/defines.h)
 
-https://github.com/khoih-prog/EthernetWebServer_STM32/blob/f078993aa52d30ee6f68e554fc511c539a3d6bb4/examples/AdvancedWebServer/defines.h#L13-L174
+https://github.com/khoih-prog/EthernetWebServer_STM32/blob/7b79d4dc38f194ba00d51de8cfb7389e68af4360/examples/AdvancedWebServer/defines.h#L13-L224
 
 
 ---
