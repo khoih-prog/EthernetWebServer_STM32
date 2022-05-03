@@ -1,6 +1,6 @@
 {
   "name": "EthernetWebServer_STM32",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "keywords": "WebServer, built-in-Ethernet, STM32F, STM32L, STM32H, STM32G, STM32WB, STM32MP1, Ethernet-shield, Nucleo-144, Nucleo-64, Nucleo-32, LAN8742A, LAN8720, ENC28J60, W5x00, W5500, W5100, Ethernet, Ethernet2, Ethernet3, EthernetLarge, EtnernetENC, UIPEthernet, HTTP-Client, WebSocket-Client, server, client, websocket",
   "description": "Simple Ethernet WebServer, HTTP Client and WebSocket Client library for STM32F/L/H/G/WB/MP1 boards running built-in Ethernet LAN8742A, LAN8720 or Ethernet W5x00, ENC28J60 shields.  Ethernet_Generic library is used as default for W5x00, Now W5x00 can use any custom hardware / software SPI",
   "authors":
