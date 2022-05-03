@@ -12,7 +12,7 @@
   @file       Esp8266WebServer.h
   @author     Ivan Grokhotkov
 
-  Version: 1.4.1
+  Version: 1.5.0
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -25,6 +25,7 @@
   1.3.4   K Hoang      02/03/2022 Fix decoding error bug
   1.4.0   K Hoang      04/04/2022 Use Ethernet_Generic library as default for W5x00 Ethernet
   1.4.1   K Hoang      27/04/2022 Change from `arduino.cc` to `arduino.tips` in examples
+  1.5.0   K Hoang      04/04/2022 Add support to custom SPI, such as SPI2, SPI3, SPI_New, etc.
  *************************************************************************************************************************************/
 
 #pragma once
@@ -58,13 +59,13 @@
 
 /////////////////////////////////////////////////////////////////////////
 
-#define ETHERNET_WEBSERVER_STM32_VERSION            "EthernetWebServer_STM32 v1.4.1"
+#define ETHERNET_WEBSERVER_STM32_VERSION            "EthernetWebServer_STM32 v1.5.0"
 
 #define ETHERNET_WEBSERVER_STM32_VERSION_MAJOR      1
-#define ETHERNET_WEBSERVER_STM32_VERSION_MINOR      4
-#define ETHERNET_WEBSERVER_STM32_VERSION_PATCH      1
+#define ETHERNET_WEBSERVER_STM32_VERSION_MINOR      5
+#define ETHERNET_WEBSERVER_STM32_VERSION_PATCH      0
 
-#define ETHERNET_WEBSERVER_STM32_VERSION_INT        1004001
+#define ETHERNET_WEBSERVER_STM32_VERSION_INT        1005000
 
 /////////////////////////////////////////////////////////////////////////
 

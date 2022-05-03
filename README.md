@@ -46,10 +46,11 @@
     * [To use W5x00 Ethernet, for example using Ethernet_Generic library](#to-use-w5x00-ethernet-for-example-using-Ethernet_Generic-library)
     * [To use ENC28J60 Ethernet, using EthernetENC library (**NEW and Better**)](#to-use-enc28j60-ethernet-using-ethernetenc-library-new-and-better)
     * [To use ENC28J60 Ethernet, using UIPEthernet library](#to-use-enc28j60-ethernet-using-uipethernet-library)
+  * [2. How to select which SPI to use](#2-How-to-select-which-SPI-to-use)
   * [Important](#important)
-  * [2. How to connect or select another CS/SS pin to use](#2-how-to-connect-or-select-another-csss-pin-to-use)
-  * [3. How to increase W5x00 TX/RX buffer](#3-how-to-increase-w5x00-txrx-buffer)
-  * [4. How to adjust sendContent_P() and send_P() buffer size](#4-how-to-adjust-sendcontent_p-and-send_p-buffer-size)
+  * [3. How to connect or select another CS/SS pin to use](#3-how-to-connect-or-select-another-csss-pin-to-use)
+  * [4. How to increase W5x00 TX/RX buffer](#4-how-to-increase-w5x00-txrx-buffer)
+  * [5. How to adjust sendContent_P() and send_P() buffer size](#5-how-to-adjust-sendcontent_p-and-send_p-buffer-size)
 * [Usage](#usage)
   * [Class Constructor](#class-constructor)
   * [Basic Operation](#basic-operations)
@@ -135,6 +136,7 @@
   * [10. SimpleWebSocket_LAN8720 on BLACK_F407VE using LAN8720 Ethernet and STM32Ethernet Library](#10-simplewebsocket_lan8720-on-black_f407ve-using-lan8720-ethernet-and-stm32ethernet-library)
   * [11. WebClient_LAN8720 on BLACK_F407VE using LAN8720 Ethernet and STM32Ethernet Library](#11-webclient_lan8720-on-black_f407ve-using-lan8720-ethernet-and-stm32ethernet-library)
   * [12. AdvancedWebServer_LAN8720 on BLACK_F407VE using LAN8720 Ethernet and STM32Ethernet Library](#12-advancedwebserver_lan8720-on-black_f407ve-using-lan8720-ethernet-and-stm32ethernet-library)
+  * [13. AdvancedWebServer on NUCLEO_L552ZE_Q with W5x00 using Ethernet_Generic Library and custom SPI](#12-AdvancedWebServer-on-NUCLEO_L552ZE_Q-with-W5x00-using-Ethernet_Generic-Library-and-custom- SPI)
 * [Debug](#debug)
 * [Troubleshooting](#troubleshooting)
 * [Not supported boards](#Not-supported-boards)
@@ -241,7 +243,7 @@ Check [`EthernetWebServer Library Issue: Support for STM32F Series`](https://git
 - Nucleo-64
 - Discovery
 - Generic STM32F0, STM32F1, STM32F2, STM32F3, STM32F4, STM32F7 (with 64+K Flash): x8 and up
-- STM32L0, STM32L1, STM32L4
+- STM32L0, STM32L1, STM32L4, STM32L5
 - STM32G0, STM32G4
 - STM32H7
 - STM32WB
@@ -280,7 +282,7 @@ Check [`EthernetWebServer Library Issue: Support for STM32F Series`](https://git
    - [`STM32Ethernet library v1.3.0+`](https://github.com/stm32duino/STM32Ethernet) for built-in LAN8742A Ethernet on (Nucleo-144, Discovery). [![GitHub release](https://img.shields.io/github/release/stm32duino/STM32Ethernet.svg)](https://github.com/stm32duino/STM32Ethernet/releases/latest)
    - [`LwIP library v2.1.2+`](https://github.com/stm32duino/LwIP) for built-in LAN8742A Ethernet on (Nucleo-144, Discovery). [![GitHub release](https://img.shields.io/github/release/stm32duino/LwIP.svg)](https://github.com/stm32duino/LwIP/releases/latest)
  5. For W5x00 Ethernet:
-   - [`Ethernet_Generic library v2.1.0+`](https://github.com/khoih-prog/Ethernet_Generic) for W5100, W5200 and W5500/WIZ550io/WIZ850io/USR-ES1 with Wiznet W5500 chip.  [![GitHub release](https://img.shields.io/github/release/khoih-prog/Ethernet_Generic.svg)](https://github.com/khoih-prog/Ethernet_Generic/releases/latest)
+   - [`Ethernet_Generic library v2.2.0+`](https://github.com/khoih-prog/Ethernet_Generic) for W5100, W5200 and W5500/WIZ550io/WIZ850io/USR-ES1 with Wiznet W5500 chip.  [![GitHub release](https://img.shields.io/github/release/khoih-prog/Ethernet_Generic.svg)](https://github.com/khoih-prog/Ethernet_Generic/releases/latest)
  6. For ENC28J60 Ethernet:
    - [`EthernetENC library v2.0.2+`](https://github.com/jandrassy/EthernetENC) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/jandrassy/EthernetENC.svg)](https://github.com/jandrassy/EthernetENC/releases/latest). **New and Better**
    - [`UIPEthernet library v2.0.11+`](https://github.com/UIPEthernet/UIPEthernet) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/UIPEthernet/UIPEthernet.svg)](https://github.com/UIPEthernet/UIPEthernet/releases/latest)
@@ -553,6 +555,56 @@ For example, EthernetLarge library
 #include <EthernetWebServer.h>
 ```
 
+#### 2. How to select which SPI to use
+
+
+To use standard SPI, check if 
+
+```cpp
+#define USING_CUSTOM_SPI        false
+#define USING_SPI2              false
+```
+
+
+To use SPI2 or any custom SPI
+
+
+```cpp
+// Be sure to use true only if necessary for your board, or compile error
+#define USING_CUSTOM_SPI            true
+
+#if ( USING_CUSTOM_SPI )
+  // Currently test OK for F767ZI and L552ZE_Q
+  #define USING_SPI2                  true
+
+  #if (USING_SPI2)
+    //#include <SPI.h>
+    // For L552ZE-Q, F767ZI, but you can change the pins for any other boards
+    // SCK: 23,  MOSI: 22, MISO: 25, SS/CS: 24 for SPI1
+    #define CUR_PIN_MISO              25
+    #define CUR_PIN_MOSI              22
+    #define CUR_PIN_SCK               23
+    #define CUR_PIN_SS                24
+
+    #define SPI_NEW_INITIALIZED       true
+
+    // Don't create the instance with CUR_PIN_SS, or Ethernet not working
+    // To change for other boards' SPI libraries
+    SPIClass SPI_New(CUR_PIN_MOSI, CUR_PIN_MISO, CUR_PIN_SCK);
+    
+    //#warning Using USE_THIS_SS_PIN = CUR_PIN_SS = 24
+
+    #if defined(USE_THIS_SS_PIN)
+      #undef USE_THIS_SS_PIN
+    #endif   
+    #define USE_THIS_SS_PIN       CUR_PIN_SS    //24
+    
+  #endif
+  
+#endif
+```
+
+
 ---
 
 ### Important:
@@ -562,7 +614,7 @@ For example, EthernetLarge library
 
 ---
 
-### 2. How to connect or select another CS/SS pin to use
+### 3. How to connect or select another CS/SS pin to use
 
 **The default CS/SS pin is 10 for all boards, and is configurable in code.**
 
@@ -592,7 +644,7 @@ The Debug Terminal will then show that the current SPI pin usage of **NUCLEO_F76
 ```
 
 Start AdvancedWebServer on NUCLEO_F767ZI, using W5x00 using Ethernet_Generic Library
-EthernetWebServer_STM32 v1.4.1
+EthernetWebServer_STM32 v1.5.0
 [EWS] Board : NUCLEO_F767ZI , setCsPin: 10
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -606,7 +658,7 @@ Connected! IP address: 192.168.2.89
 Connect the wires according to the displayed information.
 
 
-### 3. How to increase W5x00 TX/RX buffer
+### 4. How to increase W5x00 TX/RX buffer
 
 - For **Ethernet_Generic** library only,  simply use as follows to have large buffer similar to EthernetLarge library
 ```
@@ -626,7 +678,7 @@ Connect the wires according to the displayed information.
 ```
 
 
-### 4. How to adjust sendContent_P() and send_P() buffer size
+### 5. How to adjust sendContent_P() and send_P() buffer size
 
 sendContent_P() and send_P() buffer size is set default at 4 Kbytes, and minimum is 512 bytes. If you need to change, just add a definition, e.g.:
 
@@ -953,7 +1005,7 @@ Following is debug terminal output and screen shot when running example [Advance
 
 ```
 Start AdvancedWebServer on NUCLEO_F767ZI, using LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.4.1
+EthernetWebServer_STM32 v1.5.0
 HTTP EthernetWebServer is @ IP : 192.168.2.117
 EthernetWebServer::handleClient: New Client
 method:  GET
@@ -1077,7 +1129,7 @@ The following is debug terminal output when running example [WebClientRepeating]
 
 ```
 Start WebClientRepeating on NUCLEO_F767ZI, using ENC28J60 & EthernetENC Library
-EthernetWebServer_STM32 v1.4.1
+EthernetWebServer_STM32 v1.5.0
 [EWS] Board : NUCLEO_F767ZI , setCsPin: 10
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1157,7 +1209,8 @@ The following is debug terminal output when running example [UdpNTPClient](examp
 
 ```
 Start UdpNTPClient on NUCLEO_F767ZI, using W5x00 & Ethernet_Generic Library
-EthernetWebServer_STM32 v1.4.1
+Ethernet_Generic v2.2.0
+EthernetWebServer_STM32 v1.5.0
 [EWS] Board : NUCLEO_F767ZI , setCsPin: 10
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1181,7 +1234,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with LAN8742A Ethernet
 
 ```
 Starting SimpleWebSocket on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.4.1
+EthernetWebServer_STM32 v1.5.0
 Using mac index = 10
 Connected! IP address: 192.168.2.139
 starting WebSocket client
@@ -1211,7 +1264,8 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with W5x00 & Ethernet_
 
 ```
 Starting SimpleWebSocket on NUCLEO_F767ZI with W5x00 & Ethernet_Generic Library
-EthernetWebServer_STM32 v1.4.1
+Ethernet_Generic v2.2.0
+EthernetWebServer_STM32 v1.5.0
 [EWS] =========== USE_Ethernet_Generic ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1251,7 +1305,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with LAN8742A Ethernet
 
 ```
 Starting SimpleHTTPExample on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.4.1
+EthernetWebServer_STM32 v1.5.0
 Connected! IP address: 192.168.2.139
 startedRequest ok
 Got status code: 200
@@ -1309,7 +1363,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with LAN8742A Ethernet
 
 ```
 Start MQTTClient_Auth on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.4.1
+EthernetWebServer_STM32 v1.5.0
 Connected! IP address: 192.168.2.152
 Attempting MQTT connection to broker.emqx.io...connected
 Message Send : MQTT_Pub => Hello from MQTTClient_Auth on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
@@ -1332,7 +1386,7 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with ENC28J60 & Ethern
 
 ```
 Start MQTTClient_Auth on NUCLEO_F767ZI with ENC28J60 & EthernetENC Library
-EthernetWebServer_STM32 v1.4.1
+EthernetWebServer_STM32 v1.5.0
 [EWS] =========== USE_ETHERNET_ENC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1371,7 +1425,8 @@ The terminal output of **STM32F7 Nucleo-144 NUCLEO_F767ZI with W5x00 & Ethernet_
 
 ```
 Start MQTTClient_Auth on NUCLEO_F767ZI with W5x00 & Ethernet_Generic Library
-EthernetWebServer_STM32 v1.4.1
+Ethernet_Generic v2.2.0
+EthernetWebServer_STM32 v1.5.0
 [EWS] =========== USE_Ethernet_Generic ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1396,7 +1451,7 @@ The terminal output of **STM32F4 BLACK_F407VE with LAN8720 Ethernet and STM32Eth
 
 ```
 Starting SimpleWebSocket_LAN8720 on BLACK_F407VE with LAN8720 Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.4.1
+EthernetWebServer_STM32 v1.5.0
 Using mac index = 6
 Connected! IP address: 192.168.2.138
 starting WebSocket client
@@ -1421,7 +1476,7 @@ The terminal output of **BLACK_F407VE using LAN8720 Ethernet and STM32Ethernet L
 
 ```
 Start WebClient_LAN8720 on BLACK_F407VE, using LAN8720 Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.4.1
+EthernetWebServer_STM32 v1.5.0
 You're connected to the network, IP = 192.168.2.139
 Connecting...
 HTTP/1.1 200 OK
@@ -1484,6 +1539,7 @@ alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400
 Disconnecting from server... 
 ```
 
+
 ---
 
 #### 12. AdvancedWebServer_LAN8720 on BLACK_F407VE, using LAN8720 Ethernet and STM32Ethernet Library
@@ -1497,10 +1553,40 @@ Following is debug terminal output and screen shot when running example [Advance
 
 ```
 Start AdvancedWebServer_LAN8720 on BLACK_F407VE, using LAN8720 Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.4.1
+EthernetWebServer_STM32 v1.5.0
 .[EWS] String Len = 0, extend to 2048
 ......... .......... .......... .......... .......... .......... .......... ..........
 ```
+
+
+---
+
+#### 13. AdvancedWebServer on NUCLEO_L552ZE_Q with W5x00 using Ethernet_Generic Library and custom SPI
+
+Following is debug terminal output and screen shot when running example [AdvancedWebServer](examples/AdvancedWebServer) on NUCLEO_L552ZE_Q, using W5500 Ethernet with Ethernet_Generic Library and custom SPI
+
+<p align="center">
+    <img src="https://github.com/khoih-prog/EthernetWebServer_STM32/blob/master/pics/AdvancedWebServer_NUCLEO_L552ZE_Q.png">
+</p>
+
+
+```
+Start AdvancedWebServer on NUCLEO_L552ZE_Q, with W5x00 using Ethernet_Generic Library and custom SPI
+Ethernet_Generic v2.2.0
+EthernetWebServer_STM32 v1.5.0
+[EWS] Default SPI pinout:
+[EWS] MOSI: 22
+[EWS] MISO: 25
+[EWS] SCK: 23
+[EWS] SS: 24
+[EWS] =========================
+Connected! IP address: 192.168.2.116
+HTTP EthernetWebServer is @ IP : 192.168.2.116
+.[EWS] String Len = 0, extend to 2048
+........ ....
+```
+
+
 
 ---
 ---
@@ -1568,8 +1654,10 @@ Submit issues to: [EthernetWebServer_STM32 issues](https://github.com/khoih-prog
 12. Use new [**Ethernet_Generic** library](https://github.com/khoih-prog/Ethernet_Generic) as default for W5x00.
 13. Rewrite library and add example [multiFileProject](examples/multiFileProject) to demo for multiple-file project to fix `multiple-definitions` linker error
 14. Change from `arduino.cc` to `arduino.tips` in examples
+15. Add support to any custom hardware / software `SPI` for W5x00 using [Ethernet_Generic Library](https://github.com/khoih-prog/Ethernet_Generic)
+16. Add support to STM32L5 boards, such as `Nucleo-L552ZE-Q`
 
-
+---
 ---
 
 ### Contributions and Thanks
@@ -1601,6 +1689,7 @@ If you want to contribute to this project:
 - Create issues and pull requests
 - Tell other people about this library
 
+---
 ---
 
 ### License

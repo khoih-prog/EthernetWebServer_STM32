@@ -12,6 +12,7 @@
 ## Table of Contents
 
 * [Changelog](#changelog)
+  * [Releases v1.5.0](#releases-v150)
   * [Releases v1.4.1](#releases-v141)
   * [Releases v1.4.0](#releases-v140)
   * [Releases v1.3.4](#releases-v134)
@@ -34,6 +35,11 @@
 ---
 
 ## Changelog
+
+### Releases v1.5.0
+
+1. Add support to any custom hardware / software `SPI` for W5x00 using [Ethernet_Generic Library](https://github.com/khoih-prog/Ethernet_Generic)
+2. Add support to STM32L5 boards, such as `Nucleo-L552ZE-Q`
 
 ### Releases v1.4.1
 
