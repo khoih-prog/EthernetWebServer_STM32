@@ -15,7 +15,8 @@
 ## Table of Contents
 
 * [Important Note for STM32F boards using built-in LAN8742A Ethernet](#important-note-for-stm32f-boards-using-built-in-lan8742a-ethernet)
-  * [Currently Supported Boards by AsyncWebServer_STM32](#currently-supported-boards-by-asyncwebserver_stm32)
+* [Important Note for STM32F boards using built-in LAN8720 Ethernet](#important-note-for-stm32f-boards-using-built-in-lan8720-ethernet)
+* [Currently Supported Boards by AsyncWebServer_STM32](#currently-supported-boards-by-asyncwebserver_stm32)
 * [Why do we need the new Async AsyncWebServer_STM32 library](#why-do-we-need-the-new-async-asyncwebserver_stm32-library)
 * [Why do we need this EthernetWebServer_STM32 library](#why-do-we-need-this-ethernetwebserver_stm32-library)
   * [Features](#features)
@@ -171,6 +172,13 @@ void loop(void)
 }
 ```
 
+### Important Note for STM32F boards using built-in LAN8720 Ethernet
+
+The support to `LAN8720` for **STM32F4, F7 (ARDUINO_BLACK_F407VE, ARDUINO_NUCLEO_H743ZI, etc.)**, has been broken by new [**STM32 core v2.3.0**](https://github.com/stm32duino/Arduino_Core_STM32/releases/tag/2.3.0).
+
+You have to use STM32 core **v2.2.0 or v2.1.0**, if it's neccesary to use LAN8720 Ethernet
+
+
 #### Currently Supported Boards by [**AsyncWebServer_STM32**](https://github.com/khoih-prog/AsyncWebServer_STM32)
 
 1. Nucleo-144 (F429ZI, F746ZG, F756ZG, F767ZI)
@@ -276,7 +284,7 @@ Check [`EthernetWebServer Library Issue: Support for STM32F Series`](https://git
 ## Prerequisites
 
  1. [`Arduino IDE 1.8.19+` for Arduino](https://github.com/arduino/Arduino). [![GitHub release](https://img.shields.io/github/release/arduino/Arduino.svg)](https://github.com/arduino/Arduino/releases/latest)
- 2. [`Arduino Core for STM32 v2.2.0+`](https://github.com/stm32duino/Arduino_Core_STM32) for STM32 boards. [![GitHub release](https://img.shields.io/github/release/stm32duino/Arduino_Core_STM32.svg)](https://github.com/stm32duino/Arduino_Core_STM32/releases/latest)
+ 2. [`Arduino Core for STM32 v2.2.0+`](https://github.com/stm32duino/Arduino_Core_STM32) for STM32 boards. [![GitHub release](https://img.shields.io/github/release/stm32duino/Arduino_Core_STM32.svg)](https://github.com/stm32duino/Arduino_Core_STM32/releases/latest). Check [Important Note for STM32F boards using built-in LAN8720 Ethernet](#important-note-for-stm32f-boards-using-built-in-lan8720-ethernet)
  3.  [`Functional-Vlpp library v1.0.2+`](https://github.com/khoih-prog/functional-vlpp) to use server's lambda function. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/Functional-Vlpp.svg?)](https://www.ardu-badge.com/Functional-Vlpp)
  4. For built-in LAN8742A or LAN8720 Ethernet:
    - [`STM32Ethernet library v1.3.0+`](https://github.com/stm32duino/STM32Ethernet) for built-in LAN8742A Ethernet on (Nucleo-144, Discovery). [![GitHub release](https://img.shields.io/github/release/stm32duino/STM32Ethernet.svg)](https://github.com/stm32duino/STM32Ethernet/releases/latest)
