@@ -176,7 +176,7 @@ void loop(void)
 
 The support to `LAN8720` for **STM32F4, F7 (ARDUINO_BLACK_F407VE, ARDUINO_NUCLEO_H743ZI, etc.)**, has been broken by new [**STM32 core v2.3.0**](https://github.com/stm32duino/Arduino_Core_STM32/releases/tag/2.3.0).
 
-You have to use STM32 core **v2.2.0 or v2.1.0**, if it's neccesary to use LAN8720 Ethernet
+You have to use STM32 core **v2.2.0 or v2.1.0**, if it's necessary to use LAN8720 Ethernet
 
 
 #### Currently Supported Boards by [**AsyncWebServer_STM32**](https://github.com/khoih-prog/AsyncWebServer_STM32)
@@ -341,7 +341,7 @@ Supposing the STM32 stm32 core version is 2.2.0. These files must be copied into
 - `~/.arduino15/packages/STM32/hardware/stm32/2.2.0/system/STM32F7xx/stm32f7xx_hal_conf_default.h` for Nucleo-144 STM32F7.
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz,
-theses files must be copied into the corresponding directory:
+these files must be copied into the corresponding directory:
 
 - `~/.arduino15/packages/STM32/hardware/stm32/x.yy.zz/system/STM32F4xx/stm32f4xx_hal_conf_default.h`
 - `~/.arduino15/packages/STM32/hardware/stm32/x.yy.zz/system/STM32F7xx/stm32f7xx_hal_conf_default.h
@@ -357,7 +357,7 @@ Supposing the STM32 stm32 core version is 2.2.0. These files must be copied into
 - `~/.arduino15/packages/STM32/hardware/stm32/2.2.0/variants/STM32L0xx/L052R(6-8)T_L053R(6-8)T_L063R8T/NUCLEO_L053R8/variant.h` for Nucleo-64 NUCLEO_L053R8.
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz,
-theses files must be copied into the corresponding directory:
+these files must be copied into the corresponding directory:
 
 - `~/.arduino15/packages/STM32/hardware/stm32/x.yy.zz/variants/STM32F7xx/F765Z(G-I)T_F767Z(G-I)T_F777ZIT/NUCLEO_F767ZI/variant.h`
 - `~/.arduino15/packages/STM32/hardware/stm32/x.yy.zz/variants/STM32L0xx/L052R(6-8)T_L053R(6-8)T_L063R8T/NUCLEO_L053R8/variant.h`
@@ -626,7 +626,7 @@ To use SPI2 or any custom SPI
 
 **The default CS/SS pin is 10 for all boards, and is configurable in code.**
 
-If the default pin is not corect, select another CS/SS pin (e.e. D22) to use as follows:
+If the default pin is not correct, select another CS/SS pin (e.e. D22) to use as follows:
 
 ```cpp
 // To override the default CS/SS pin. Don't use unless you know exactly which pin to use
