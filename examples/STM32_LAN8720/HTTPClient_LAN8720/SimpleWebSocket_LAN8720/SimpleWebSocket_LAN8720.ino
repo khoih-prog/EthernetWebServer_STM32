@@ -54,10 +54,10 @@ void setup()
 void loop()
 {
   Serial.println("starting WebSocket client");
-  
+
   wsClient.begin();
 
-  while (wsClient.connected()) 
+  while (wsClient.connected())
   {
     Serial.print("Sending Hello ");
     Serial.println(count);
@@ -65,7 +65,8 @@ void loop()
     // send a hello #
     wsClient.beginMessage(TYPE_TEXT);
     wsClient.print(count);
-    String data = " => Hello from SimpleWebSocket on " + String(BOARD_NAME) + " using LAN8720, millis = " + String(millis());
+    String data = " => Hello from SimpleWebSocket on " + String(BOARD_NAME) + " using LAN8720, millis = " + String(
+                    millis());
     wsClient.print(data);
     wsClient.endMessage();
 
@@ -75,7 +76,7 @@ void loop()
     // check if a message is available to be received
     int messageSize = wsClient.parseMessage();
 
-    if (messageSize > 0) 
+    if (messageSize > 0)
     {
       Serial.println("Received a message:");
       Serial.println(wsClient.readString());

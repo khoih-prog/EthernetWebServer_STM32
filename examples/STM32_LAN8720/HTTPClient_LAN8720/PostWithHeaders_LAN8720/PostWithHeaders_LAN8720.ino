@@ -52,7 +52,7 @@ void setup()
   Serial.println(Ethernet.localIP());
 }
 
-void loop() 
+void loop()
 {
   Serial.println("making POST request");
   String postData = "name=Alice&age=12";

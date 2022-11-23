@@ -50,11 +50,11 @@ void setup()
   Serial.println(Ethernet.localIP());
 }
 
-void loop() 
+void loop()
 {
   Serial.println("Making GET request");
   httpClient.beginRequest();
-  
+
   httpClient.get("/");
   httpClient.sendHeader("X-CUSTOM-HEADER", "custom_value");
   httpClient.endRequest();

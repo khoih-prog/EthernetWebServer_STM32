@@ -13,7 +13,7 @@
    1) STM32 boards with built-in Ethernet (to use USE_BUILTIN_ETHERNET = true) such as :
       - Nucleo-144 (F429ZI, F767ZI)
       - Discovery (STM32F746G-DISCOVERY)
-      - STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet, 
+      - STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet,
       - See How To Use Built-in Ethernet at (https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
    2) STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running ENC28J60 shields (to use USE_BUILTIN_ETHERNET = false)
    3) STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running W5x00 shields
@@ -61,7 +61,8 @@ void handlePlain()
     digitalWrite(led, 1);
     server.send(405, "text/plain", "Method Not Allowed");
     digitalWrite(led, 0);
-  } else
+  }
+  else
   {
     digitalWrite(led, 1);
     server.send(200, "text/plain", "POST body was:\n" + server.arg("plain"));
@@ -81,10 +82,12 @@ void handleForm()
   {
     digitalWrite(led, 1);
     String message = "POST form was:\n";
+
     for (uint8_t i = 0; i < server.args(); i++)
     {
       message += " " + server.argName(i) + ": " + server.arg(i) + "\n";
     }
+
     server.send(200, "text/plain", message);
     digitalWrite(led, 0);
   }
@@ -101,10 +104,12 @@ void handleNotFound()
   message += "\nArguments: ";
   message += server.args();
   message += "\n";
+
   for (uint8_t i = 0; i < server.args(); i++)
   {
     message += " " + server.argName(i) + ": " + server.arg(i) + "\n";
   }
+
   server.send(404, "text/plain", message);
   digitalWrite(led, 0);
 }
@@ -126,7 +131,7 @@ void setup()
   // Use Static IP
   //Ethernet.begin(mac[index], ip);
   Ethernet.begin(mac[index]);
-  
+
   Serial.print(F("Connected! IP address: "));
   Serial.println(Ethernet.localIP());
 

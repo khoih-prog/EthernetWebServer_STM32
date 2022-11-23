@@ -49,7 +49,7 @@ void setup()
   Serial.println(Ethernet.localIP());
 }
 
-void loop() 
+void loop()
 {
   Serial.println("making DELETE request");
   String contentType = "application/x-www-form-urlencoded";

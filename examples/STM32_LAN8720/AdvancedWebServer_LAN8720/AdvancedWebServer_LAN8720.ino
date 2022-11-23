@@ -1,6 +1,6 @@
 /****************************************************************************************************************************
   AdvancedWebServer_LAN8720.h - Dead simple web-server for Ethernet shields
-  
+
   For STM32 with built-in Ethernet LAN8742A (Nucleo-144, DISCOVERY, etc) or W5x00/ENC28J60 shield/module
 
   EthernetWebServer_STM32 is a library for the STM32 running Ethernet WebServer
@@ -8,24 +8,24 @@
   Based on and modified from ESP8266 https://github.com/esp8266/Arduino/releases
   Built by Khoi Hoang https://github.com/khoih-prog/EthernetWebServer_STM32
   Licensed under MIT license
-  
+
   Copyright (c) 2015, Majenko Technologies
   All rights reserved.
-  
+
   Redistribution and use in source and binary forms, with or without modification,
   are permitted provided that the following conditions are met:
-  
+
   Redistributions of source code must retain the above copyright notice, this
   list of conditions and the following disclaimer.
-  
+
   Redistributions in binary form must reproduce the above copyright notice, this
   list of conditions and the following disclaimer in the documentation and/or
   other materials provided with the distribution.
-  
+
   Neither the name of Majenko Technologies nor the names of its
   contributors may be used to endorse or promote products derived from
   this software without specific prior written permission.
-  
+
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
   ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
   WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -42,7 +42,7 @@
    1) STM32 boards with built-in LAN8742A Ethernet (to use USE_BUILTIN_ETHERNET = true) such as :
       - Nucleo-144 (F429ZI, F767ZI)
       - Discovery (STM32F746G-DISCOVERY)
-      - STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet, 
+      - STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet,
       - See How To Use Built-in Ethernet at (https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
    2) STM32 boards with LAN8720 Ethernet (to use USE_BUILTIN_ETHERNET and USING_LAN8720 = true) such as :
       - BLACK_F407XX (BLACK_F407VE, BLACK_F407VG, BLACK_F407ZE, BLACK_F407ZG, BLACK_F407VE-mini), NUCLEO_F429ZI, DISCO_F746NG,
@@ -132,7 +132,7 @@ void drawGraph()
            "<g stroke=\"blue\">\n");
 
   char temp[70];
-  
+
   int y = rand() % 130;
 
   for (int x = 10; x < 300; x += 10)
@@ -142,7 +142,7 @@ void drawGraph()
     out += temp;
     y = y2;
   }
-  
+
   out += F("</g>\n</svg>\n");
 
   ET_LOGDEBUG1(F("String Len = "), out.length());
@@ -152,7 +152,7 @@ void drawGraph()
     ET_LOGERROR3(F("String Len > "), previousStrLen, F(", extend to"), out.length() + 48);
 
     previousStrLen = out.length() + 48;
-    
+
     out.reserve(previousStrLen);
   }
   else
@@ -167,9 +167,9 @@ void setup()
   digitalWrite(led, 0);
 
   Serial.begin(115200);
-  
+
   delay(2000);
- 
+
   Serial.println("\nStart AdvancedWebServer_LAN8720 on " + String(BOARD_NAME) + ", using " + String(SHIELD_TYPE));
   Serial.println(ETHERNET_WEBSERVER_STM32_VERSION);
 
@@ -179,7 +179,7 @@ void setup()
   // Use Static IP
   //Ethernet.begin(mac[index], ip);
   Ethernet.begin(mac[index]);
-  
+
   Serial.print(F("Connected! IP address: "));
   Serial.println(Ethernet.localIP());
 

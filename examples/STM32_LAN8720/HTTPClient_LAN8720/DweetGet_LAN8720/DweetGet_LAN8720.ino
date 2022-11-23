@@ -34,7 +34,7 @@ void setup()
 {
   Serial.begin(115200);
   delay(2000);
-  
+
   Serial.print("\nStarting DweetGet_LAN8720 on " + String(BOARD_NAME));
   Serial.println(" with " + String(SHIELD_TYPE));
   Serial.println(ETHERNET_WEBSERVER_STM32_VERSION);

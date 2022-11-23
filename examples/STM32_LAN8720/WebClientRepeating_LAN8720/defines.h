@@ -16,7 +16,7 @@
 #if !( defined(ARDUINO_BLACK_F407VE) || defined(ARDUINO_BLACK_F407VG) || defined(ARDUINO_BLACK_F407ZE) || defined(ARDUINO_BLACK_F407ZG)  || \
        defined(ARDUINO_BLUE_F407VE_Mini) || defined(ARDUINO_DIYMORE_F407VGT) || defined(ARDUINO_FK407M1) || defined(ARDUINO_NUCLEO_F429ZI) || \
        defined(ARDUINO_DISCO_F746NG) || defined(ARDUINO_NUCLEO_F746ZG) || defined(ARDUINO_NUCLEO_F756ZG) || defined(ARDUINO_NUCLEO_H743ZI) )
-  #error This code is designed to run on some STM32F407XX NUCLEO-F429ZI, STM32F746 and STM32F756 platform! Please check your Tools->Board setting.
+#error This code is designed to run on some STM32F407XX NUCLEO-F429ZI, STM32F746 and STM32F756 platform! Please check your Tools->Board setting.
 #endif
 
 #define DEBUG_ETHERNET_WEBSERVER_PORT       Serial
@@ -26,7 +26,7 @@
 
 #define USING_LAN8720           true
 
-// If USE_BUILTIN_ETHERNET == false and USE_UIP_ETHERNET == false => 
+// If USE_BUILTIN_ETHERNET == false and USE_UIP_ETHERNET == false =>
 // either use W5x00 with EthernetXYZ library
 // or ENC28J60 with EthernetENC library
 #define USE_BUILTIN_ETHERNET    true
@@ -44,7 +44,7 @@
 #if !(USE_BUILTIN_ETHERNET || USE_UIP_ETHERNET)
   // Only one if the following to be true
   #define USE_ETHERNET_GENERIC  true
-  #define USE_ETHERNET_ESP8266  false 
+  #define USE_ETHERNET_ESP8266  false
   #define USE_ETHERNET_ENC      false
   #define USE_CUSTOM_ETHERNET   false
 #endif
@@ -73,13 +73,13 @@
   #define ETHERNET_LARGE_BUFFERS
 
   #define _ETG_LOGLEVEL_                      1
-      
+
   #warning Using W5x00 & Ethernet_Generic lib
-  #define SHIELD_TYPE           "W5x00 using Ethernet_Generic Library"  
+  #define SHIELD_TYPE           "W5x00 using Ethernet_Generic Library"
 #elif USE_ETHERNET_ESP8266
   #include "Ethernet_ESP8266.h"
-  #warning Using W5x00 & Ethernet_ESP8266 lib 
-  #define SHIELD_TYPE           "W5x00 & Ethernet_ESP8266 Library" 
+  #warning Using W5x00 & Ethernet_ESP8266 lib
+  #define SHIELD_TYPE           "W5x00 & Ethernet_ESP8266 Library"
 #elif USE_ETHERNET_ENC
   #include "EthernetENC.h"
   #warning Using ENC28J60 & EthernetENC lib
@@ -90,7 +90,7 @@
   #warning Using Custom Ethernet library. You must include a library and initialize.
   #define SHIELD_TYPE           "Custom Ethernet & Ethernet_XYZ Library"
 #else
-   #define USE_ETHERNET_GENERIC   true
+  #define USE_ETHERNET_GENERIC   true
   #include "Ethernet_Generic.h"
   #warning Using default Ethernet_Generic lib
   #define SHIELD_TYPE           "W5x00 using default Ethernet_Generic Library"

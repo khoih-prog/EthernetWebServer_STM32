@@ -13,7 +13,7 @@
    1) STM32 boards with built-in LAN8742A Ethernet (to use USE_BUILTIN_ETHERNET = true) such as :
       - Nucleo-144 (F429ZI, F767ZI)
       - Discovery (STM32F746G-DISCOVERY)
-      - STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet, 
+      - STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet,
       - See How To Use Built-in Ethernet at (https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
    2) STM32 boards with LAN8720 Ethernet (to use USE_BUILTIN_ETHERNET and USING_LAN8720 = true) such as :
       - BLACK_F407XX (BLACK_F407VE, BLACK_F407VG, BLACK_F407ZE, BLACK_F407ZG, BLACK_F407VE-mini), NUCLEO_F429ZI, DISCO_F746NG,
@@ -32,7 +32,7 @@ void setup()
 {
   // Open serial communications and wait for port to open:
   Serial.begin(115200);
-  
+
   delay(2000);
 
   Serial.println("\nStart WebServer_LAN8720 on " + String(BOARD_NAME) + ", using " + String(SHIELD_TYPE));
@@ -71,6 +71,7 @@ void loop()
       {
         char c = client.read();
         Serial.write(c);
+
         // if you've gotten to the end of the line (received a newline
         // character) and the line is blank, the http request has ended,
         // so you can send a reply
@@ -114,6 +115,7 @@ void loop()
         }
       }
     }
+
     // give the web browser time to receive the data
     delay(10);
 

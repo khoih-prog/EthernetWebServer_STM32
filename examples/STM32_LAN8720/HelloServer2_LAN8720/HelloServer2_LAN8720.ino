@@ -13,7 +13,7 @@
    1) STM32 boards with built-in LAN8742A Ethernet (to use USE_BUILTIN_ETHERNET = true) such as :
       - Nucleo-144 (F429ZI, F767ZI)
       - Discovery (STM32F746G-DISCOVERY)
-      - STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet, 
+      - STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet,
       - See How To Use Built-in Ethernet at (https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
    2) STM32 boards with LAN8720 Ethernet (to use USE_BUILTIN_ETHERNET and USING_LAN8720 = true) such as :
       - BLACK_F407XX (BLACK_F407VE, BLACK_F407VG, BLACK_F407ZE, BLACK_F407ZG, BLACK_F407VE-mini), NUCLEO_F429ZI, DISCO_F746NG,
@@ -41,9 +41,12 @@ void handleNotFound()
   message += "\nArguments: ";
   message += server.args();
   message += "\n";
-  for (uint8_t i = 0; i < server.args(); i++) {
+
+  for (uint8_t i = 0; i < server.args(); i++)
+  {
     message += " " + server.argName(i) + ": " + server.arg(i) + "\n";
   }
+
   server.send(404, "text/plain", message);
 }
 
@@ -51,30 +54,33 @@ void setup()
 {
   // Open serial communications and wait for port to open:
   Serial.begin(115200);
-  
+
   delay(2000);
 
   Serial.println("\nStart HelloServer2_LAN8720 on " + String(BOARD_NAME) + ", using " + String(SHIELD_TYPE));
   Serial.println(ETHERNET_WEBSERVER_STM32_VERSION);
-  
+
   // start the ethernet connection and the server:
   // Use DHCP dynamic IP and random mac
   uint16_t index = millis() % NUMBER_OF_MAC;
   // Use Static IP
   //Ethernet.begin(mac[index], ip);
   Ethernet.begin(mac[index]);
-  
+
   Serial.print(F("Connected! IP address: "));
   Serial.println(Ethernet.localIP());
 
   server.on("/", handleRoot);
 
-  server.on("/inline", []() {
+  server.on("/inline", []()
+  {
     server.send(200, "text/plain", "This works as well");
   });
 
-  server.on("/gif", []() {
-    static const uint8_t gif[] = {
+  server.on("/gif", []()
+  {
+    static const uint8_t gif[] =
+    {
       0x47, 0x49, 0x46, 0x38, 0x37, 0x61, 0x10, 0x00, 0x10, 0x00, 0x80, 0x01,
       0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0x2c, 0x00, 0x00, 0x00, 0x00,
       0x10, 0x00, 0x10, 0x00, 0x00, 0x02, 0x19, 0x8c, 0x8f, 0xa9, 0xcb, 0x9d,

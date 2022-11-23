@@ -8,18 +8,18 @@
   Built by Khoi Hoang https://github.com/khoih-prog/EthernetWebServer_STM32
   Licensed under MIT license
  *****************************************************************************************************************************/
- /*
-   Currently support
-   1) STM32 boards with built-in LAN8742A Ethernet (to use USE_BUILTIN_ETHERNET = true) such as :
-      - Nucleo-144 (F429ZI, F767ZI)
-      - Discovery (STM32F746G-DISCOVERY)
-      - STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet, 
-      - See How To Use Built-in Ethernet at (https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
-   2) STM32 boards with LAN8720 Ethernet (to use USE_BUILTIN_ETHERNET and USING_LAN8720 = true) such as :
-      - BLACK_F407XX (BLACK_F407VE, BLACK_F407VG, BLACK_F407ZE, BLACK_F407ZG, BLACK_F407VE-mini), NUCLEO_F429ZI, DISCO_F746NG,
-        NUCLEO_F7x6ZG
-   3) STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running ENC28J60 shields (to use USE_BUILTIN_ETHERNET = false)
-   4) STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running W5x00 shields
+/*
+  Currently support
+  1) STM32 boards with built-in LAN8742A Ethernet (to use USE_BUILTIN_ETHERNET = true) such as :
+     - Nucleo-144 (F429ZI, F767ZI)
+     - Discovery (STM32F746G-DISCOVERY)
+     - STM32 boards (STM32F/L/H/G/WB/MP1) with 32K+ Flash, with Built-in Ethernet,
+     - See How To Use Built-in Ethernet at (https://github.com/khoih-prog/EthernetWebServer_STM32/issues/1)
+  2) STM32 boards with LAN8720 Ethernet (to use USE_BUILTIN_ETHERNET and USING_LAN8720 = true) such as :
+     - BLACK_F407XX (BLACK_F407VE, BLACK_F407VG, BLACK_F407ZE, BLACK_F407ZG, BLACK_F407VE-mini), NUCLEO_F429ZI, DISCO_F746NG,
+       NUCLEO_F7x6ZG
+  3) STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running ENC28J60 shields (to use USE_BUILTIN_ETHERNET = false)
+  4) STM32F/L/H/G/WB/MP1 boards (with 32+K Flash) running W5x00 shields
 */
 
 #include "defines.h"
@@ -70,7 +70,7 @@ void setup()
 
   Serial.println("\nStart UdpNTPClient_LAN8720 on " + String(BOARD_NAME) + ", using " + String(SHIELD_TYPE));
   Serial.println(ETHERNET_WEBSERVER_STM32_VERSION);
- 
+
   // start the ethernet connection and the server:
   // Use DHCP dynamic IP and random mac
   uint16_t index = millis() % NUMBER_OF_MAC;
@@ -91,6 +91,7 @@ void loop()
 
   // wait for a reply for UDP_TIMEOUT miliseconds
   unsigned long startMs = millis();
+
   while (!Udp.available() && (millis() - startMs) < UDP_TIMEOUT) {}
 
   // if there's data available, read a packet
@@ -105,7 +106,7 @@ void loop()
     Serial.print(remoteIp);
     Serial.print(F(", port "));
     Serial.println(Udp.remotePort());
-    
+
     // We've received a packet, read the data from it into the buffer
     Udp.read(packetBuffer, NTP_PACKET_SIZE);
 
@@ -134,18 +135,25 @@ void loop()
     Serial.print(F("The UTC time is "));       // UTC is the time at Greenwich Meridian (GMT)
     Serial.print((epoch  % 86400L) / 3600); // print the hour (86400 equals secs per day)
     Serial.print(F(":"));
-    if (((epoch % 3600) / 60) < 10) {
+
+    if (((epoch % 3600) / 60) < 10)
+    {
       // In the first 10 minutes of each hour, we'll want a leading '0'
       Serial.print(F("0"));
     }
+
     Serial.print((epoch  % 3600) / 60); // print the minute (3600 equals secs per minute)
     Serial.print(F(":"));
-    if ((epoch % 60) < 10) {
+
+    if ((epoch % 60) < 10)
+    {
       // In the first 10 seconds of each minute, we'll want a leading '0'
       Serial.print(F("0"));
     }
+
     Serial.println(epoch % 60); // print the second
   }
+
   // wait ten seconds before asking for the time again
   delay(10000);
 }

@@ -51,7 +51,7 @@ void setup()
   Serial.println(Ethernet.localIP());
 }
 
-void loop() 
+void loop()
 {
   Serial.println("making GET request with HTTP basic authentication");
   httpClient.beginRequest();
@@ -67,7 +67,7 @@ void loop()
   Serial.println(statusCode);
   Serial.print("Response: ");
   Serial.println(response);
-  
+
   Serial.println("Wait five seconds");
   delay(5000);
 }

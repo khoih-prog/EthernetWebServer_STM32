@@ -48,7 +48,8 @@ void setup()
   Serial.println(Ethernet.localIP());
 }
 
-void loop() {
+void loop()
+{
   Serial.println("making GET request");
   httpClient.get("/");
 

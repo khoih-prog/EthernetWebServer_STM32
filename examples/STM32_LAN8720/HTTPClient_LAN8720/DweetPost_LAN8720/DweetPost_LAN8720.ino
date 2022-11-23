@@ -52,7 +52,7 @@ void setup()
   Serial.println(Ethernet.localIP());
 }
 
-void loop() 
+void loop()
 {
   // assemble the path for the POST message:
   String dweetName = "scandalous-cheese-hoarder";
@@ -61,7 +61,7 @@ void loop()
 
   // assemble the body of the POST message:
   int sensorValue = analogRead(A0);
-  String postData = "{\"sensorValue\":\""; 
+  String postData = "{\"sensorValue\":\"";
   postData += sensorValue;
   postData += "\"}";
 

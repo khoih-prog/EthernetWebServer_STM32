@@ -57,7 +57,7 @@ void setup()
   Serial.println(Ethernet.localIP());
 }
 
-void sendRequest(int light, String cmd, String value) 
+void sendRequest(int light, String cmd, String value)
 {
   // make a String for the HTTP request path:
   String request = "/api/" + hueUserName;
@@ -72,7 +72,7 @@ void sendRequest(int light, String cmd, String value)
   hueCmd += "\":";
   hueCmd += value;
   hueCmd += "}";
-  
+
   // see what you assembled to send:
   Serial.print("PUT request to server: ");
   Serial.println(request);
