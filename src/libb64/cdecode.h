@@ -41,12 +41,12 @@
 extern "C" {
 #endif
 
-typedef enum 
+typedef enum
 {
   step_a, step_b, step_c, step_d
 } base64_decodestep;
 
-typedef struct 
+typedef struct
 {
   base64_decodestep step;
   char plainchar;

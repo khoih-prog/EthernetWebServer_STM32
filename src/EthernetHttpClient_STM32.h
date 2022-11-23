@@ -44,5 +44,5 @@
 #include "Ethernet_HTTPClient/Ethernet_WebSocketClient.h"
 #include "Ethernet_HTTPClient/Ethernet_URLEncoder.h"
 
-#endif		// ETHERNET_HTTP_CLIENT_STM32_H
+#endif    // ETHERNET_HTTP_CLIENT_STM32_H
 

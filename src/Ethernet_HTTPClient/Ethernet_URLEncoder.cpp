@@ -61,17 +61,17 @@ String EthernetURLEncoderClass::encode(const char* str, int length)
 
   encoded.reserve(length);
 
-  for (int i = 0; i < length; i++) 
+  for (int i = 0; i < length; i++)
   {
     char c = str[i];
 
     const char HEX_DIGIT_MAPPER[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-    if (isAlphaNumeric(c) || (c == '-') || (c == '.') || (c == '_') || (c == '~')) 
+    if (isAlphaNumeric(c) || (c == '-') || (c == '.') || (c == '_') || (c == '~'))
     {
       encoded += c;
-    } 
-    else 
+    }
+    else
     {
       char s[4];
 

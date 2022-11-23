@@ -27,7 +27,7 @@
   1.4.1   K Hoang      27/04/2022 Change from `arduino.cc` to `arduino.tips` in examples
   1.5.0   K Hoang      04/04/2022 Add support to custom SPI, such as SPI2, SPI3, SPI_New, etc.
  *************************************************************************************************************************************/
- 
+
 // (c) Copyright Arduino. 2016
 // Released under Apache License, version 2.0
 
@@ -64,7 +64,7 @@ int EthernetWebSocketClient::begin(const char* aPath)
   // start the GET request
   beginRequest();
   connectionKeepAlive();
-  
+
   int status = get(aPath);
 
   if (status == 0)
@@ -77,7 +77,7 @@ int EthernetWebSocketClient::begin(const char* aPath)
     {
       randomKey[i] = random(0x01, 0xff);
     }
-    
+
     memset(base64RandomKey, 0x00, sizeof(base64RandomKey));
     base64_encode(randomKey, sizeof(randomKey), (unsigned char*)base64RandomKey, sizeof(base64RandomKey));
 
@@ -165,11 +165,11 @@ int EthernetWebSocketClient::endMessage()
   {
     maskKey[i] = random(0xff);
   }
-  
+
   EthernetHttpClient::write(maskKey, sizeof(maskKey));
 
   // mask the data and send
-  for (int i = 0; i < (int)iTxSize; i++) 
+  for (int i = 0; i < (int)iTxSize; i++)
   {
     iTxBuffer[i] ^= maskKey[i % sizeof(maskKey)];
   }
@@ -284,12 +284,12 @@ int EthernetWebSocketClient::parseMessage()
   else if (TYPE_PING == messageType())
   {
     beginMessage(TYPE_PONG);
-    
+
     while (available())
     {
       write(read());
     }
-    
+
     endMessage();
 
     iRxSize = 0;
@@ -343,7 +343,7 @@ int EthernetWebSocketClient::ping()
 
   beginMessage(TYPE_PING);
   write(pingData, sizeof(pingData));
-  
+
   return endMessage();
 }
 

@@ -48,14 +48,14 @@ class RequestHandler
     {
       ETW_UNUSED(method);
       ETW_UNUSED(uri);
-      
+
       return false;
     }
 
     virtual bool canUpload(String uri)
     {
       ETW_UNUSED(uri);
-      
+
       return false;
     }
 
@@ -64,11 +64,11 @@ class RequestHandler
       ETW_UNUSED(server);
       ETW_UNUSED(requestMethod);
       ETW_UNUSED(requestUri);
-      
+
       return false;
     }
 
-    virtual void upload(EthernetWebServer& server, String requestUri, HTTPUpload& upload) 
+    virtual void upload(EthernetWebServer& server, String requestUri, HTTPUpload& upload)
     {
       ETW_UNUSED(server);
       ETW_UNUSED(requestUri);
@@ -90,4 +90,4 @@ class RequestHandler
     RequestHandler* _next = nullptr;
 };
 
-#endif		// REQUEST_HANDLER_STM32_H
+#endif    // REQUEST_HANDLER_STM32_H

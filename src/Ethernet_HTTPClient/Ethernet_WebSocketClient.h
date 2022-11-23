@@ -27,7 +27,7 @@
   1.4.1   K Hoang      27/04/2022 Change from `arduino.cc` to `arduino.tips` in examples
   1.5.0   K Hoang      04/04/2022 Add support to custom SPI, such as SPI2, SPI3, SPI_New, etc.
  *************************************************************************************************************************************/
- 
+
 // (c) Copyright Arduino. 2016
 // Released under Apache License, version 2.0
 
@@ -53,8 +53,10 @@ class EthernetWebSocketClient : public EthernetHttpClient
 {
   public:
     EthernetWebSocketClient(Client& aClient, const char* aServerName, uint16_t aServerPort = EthernetHttpClient::kHttpPort);
-    EthernetWebSocketClient(Client& aClient, const String& aServerName, uint16_t aServerPort = EthernetHttpClient::kHttpPort);
-    EthernetWebSocketClient(Client& aClient, const IPAddress& aServerAddress, uint16_t aServerPort = EthernetHttpClient::kHttpPort);
+    EthernetWebSocketClient(Client& aClient, const String& aServerName,
+                            uint16_t aServerPort = EthernetHttpClient::kHttpPort);
+    EthernetWebSocketClient(Client& aClient, const IPAddress& aServerAddress,
+                            uint16_t aServerPort = EthernetHttpClient::kHttpPort);
 
     /** Start the Web Socket connection to the specified path
       @param aURLPath     Path to use in request (optional, "/" is used by default)
@@ -105,7 +107,7 @@ class EthernetWebSocketClient : public EthernetHttpClient
     // Inherited from Print
     virtual size_t write(uint8_t aByte);
     virtual size_t write(const uint8_t *aBuffer, size_t aSize);
-    
+
     // Inherited from Stream
     virtual int   available();
     /** Read the next byte from the server.
@@ -131,4 +133,4 @@ class EthernetWebSocketClient : public EthernetHttpClient
     uint8_t   iRxMaskKey[4];
 };
 
-#endif		// ETHERNET_WEBSOCKET_CLIENT_H
+#endif    // ETHERNET_WEBSOCKET_CLIENT_H

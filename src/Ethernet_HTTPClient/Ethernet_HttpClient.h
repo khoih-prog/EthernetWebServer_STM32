@@ -318,13 +318,13 @@ class EthernetHttpClient : public Client
       @return true if we are now at the end of the body, else false
     */
     bool endOfBodyReached();
-    
-    virtual bool endOfStream() 
+
+    virtual bool endOfStream()
     {
       return endOfBodyReached();
     };
-    
-    virtual bool completed() 
+
+    virtual bool completed()
     {
       return endOfBodyReached();
     };
@@ -340,7 +340,7 @@ class EthernetHttpClient : public Client
     /** Returns if the response body is chunked
       @return true if response body is chunked, false otherwise
     */
-    int isResponseChunked() 
+    int isResponseChunked()
     {
       return iIsChunked;
     }
@@ -363,77 +363,78 @@ class EthernetHttpClient : public Client
     // Inherited from Print
     // Note: 1st call to these indicates the user is sending the body, so if need
     // Note: be we should finish the header first
-    virtual size_t write(uint8_t aByte) 
+    virtual size_t write(uint8_t aByte)
     {
-      if (iState < eRequestSent) 
+      if (iState < eRequestSent)
       {
         finishHeaders();
       };
-      
+
       return iClient-> write(aByte);
     };
-    
-    virtual size_t write(const uint8_t *aBuffer, size_t aSize) 
+
+    virtual size_t write(const uint8_t *aBuffer, size_t aSize)
     {
-      if (iState < eRequestSent) 
+      if (iState < eRequestSent)
       {
         finishHeaders();
       };
+
       return iClient->write(aBuffer, aSize);
     };
-    
+
     // Inherited from Stream
     virtual int available();
-    
+
     /** Read the next byte from the server.
       @return Byte read or -1 if there are no bytes available.
     */
     virtual int read();
     virtual int read(uint8_t *buf, size_t size);
-    
-    virtual int peek() 
+
+    virtual int peek()
     {
       return iClient->peek();
     };
-    
-    virtual void flush() 
+
+    virtual void flush()
     {
       iClient->flush();
     };
 
     // Inherited from Client
-    virtual int connect(IPAddress ip, uint16_t port) 
+    virtual int connect(IPAddress ip, uint16_t port)
     {
       return iClient->connect(ip, port);
     };
-    
-    virtual int connect(const char *host, uint16_t port) 
+
+    virtual int connect(const char *host, uint16_t port)
     {
       return iClient->connect(host, port);
     };
-    
+
     virtual void stop();
-    
-    virtual uint8_t connected() 
+
+    virtual uint8_t connected()
     {
       return iClient->connected();
     };
-    
-    virtual operator bool() 
+
+    virtual operator bool()
     {
       return bool(iClient);
     };
-    
-    virtual uint32_t httpResponseTimeout() 
+
+    virtual uint32_t httpResponseTimeout()
     {
       return iHttpResponseTimeout;
     };
-    
-    virtual void setHttpResponseTimeout(uint32_t timeout) 
+
+    virtual void setHttpResponseTimeout(uint32_t timeout)
     {
       iHttpResponseTimeout = timeout;
     };
-    
+
   protected:
     /** Reset internal state data back to the "just initialised" state
     */
@@ -454,10 +455,10 @@ class EthernetHttpClient : public Client
     /** Reading any pending data from the client (used in connection keep alive mode)
     */
     void flushClientRx();
-   
+
     static const char* kContentLengthPrefix;
     static const char* kTransferEncodingChunked;
-    
+
     typedef enum
     {
       eIdle,
@@ -502,4 +503,4 @@ class EthernetHttpClient : public Client
     String iHeaderLine;
 };
 
-#endif		// ETHERNET_HTTP_CLIENT_H
+#endif    // ETHERNET_HTTP_CLIENT_H

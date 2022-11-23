@@ -27,7 +27,7 @@
   1.4.1   K Hoang      27/04/2022 Change from `arduino.cc` to `arduino.tips` in examples
   1.5.0   K Hoang      04/04/2022 Add support to custom SPI, such as SPI2, SPI3, SPI_New, etc.
  *************************************************************************************************************************************/
- 
+
 #pragma once
 
 #ifndef BASE64_H
@@ -35,4 +35,4 @@
 
 int base64_encode(const unsigned char* aInput, int aInputLen, unsigned char* aOutput, int aOutputLen);
 
-#endif		// BASE64_H
+#endif    // BASE64_H

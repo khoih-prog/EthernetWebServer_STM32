@@ -40,7 +40,8 @@ class FunctionRequestHandler : public RequestHandler
 {
   public:
 
-    FunctionRequestHandler(EthernetWebServer::THandlerFunction fn, EthernetWebServer::THandlerFunction ufn, const String &uri, HTTPMethod method)
+    FunctionRequestHandler(EthernetWebServer::THandlerFunction fn, EthernetWebServer::THandlerFunction ufn,
+                           const String &uri, HTTPMethod method)
       : _fn(fn)
       , _ufn(ufn)
       , _uri(uri)
@@ -79,7 +80,7 @@ class FunctionRequestHandler : public RequestHandler
     bool handle(EthernetWebServer& server, HTTPMethod requestMethod, String requestUri) override
     {
       ETW_UNUSED(server);
-      
+
       if (!canHandle(requestMethod, requestUri))
         return false;
 
@@ -91,7 +92,7 @@ class FunctionRequestHandler : public RequestHandler
     {
       ETW_UNUSED(server);
       ETW_UNUSED(upload);
-      
+
       if (canUpload(requestUri))
         _ufn();
     }
@@ -133,14 +134,14 @@ class StaticRequestHandler : public RequestHandler
         if (path.endsWith(buff))
         {
           strcpy(buff, mimeTable[i].mimeType);
-          
+
           return String(buff);
         }
       }
 
       // Fall-through and just return default type
       strcpy(buff, mimeTable[sizeof(mimeTable) / sizeof(mimeTable[0]) - 1].mimeType);
-      
+
       return String(buff);
     }
 
@@ -148,27 +149,48 @@ class StaticRequestHandler : public RequestHandler
 
     static String getContentType(const String& path)
     {
-      if (path.endsWith(".html"))           return "text/html";
-      else if (path.endsWith(".htm"))       return "text/html";
-      else if (path.endsWith(".css"))       return "text/css";
-      else if (path.endsWith(".txt"))       return "text/plain";
-      else if (path.endsWith(".js"))        return "application/javascript";
-      else if (path.endsWith(".png"))       return "image/png";
-      else if (path.endsWith(".gif"))       return "image/gif";
-      else if (path.endsWith(".jpg"))       return "image/jpeg";
-      else if (path.endsWith(".ico"))       return "image/x-icon";
-      else if (path.endsWith(".svg"))       return "image/svg+xml";
-      else if (path.endsWith(".ttf"))       return "application/x-font-ttf";
-      else if (path.endsWith(".otf"))       return "application/x-font-opentype";
-      else if (path.endsWith(".woff"))      return "application/font-woff";
-      else if (path.endsWith(".woff2"))     return "application/font-woff2";
-      else if (path.endsWith(".eot"))       return "application/vnd.ms-fontobject";
-      else if (path.endsWith(".sfnt"))      return "application/font-sfnt";
-      else if (path.endsWith(".xml"))       return "text/xml";
-      else if (path.endsWith(".pdf"))       return "application/pdf";
-      else if (path.endsWith(".zip"))       return "application/zip";
-      else if (path.endsWith(".gz"))        return "application/x-gzip";
-      else if (path.endsWith(".appcache"))  return "text/cache-manifest";
+      if (path.endsWith(".html"))
+        return "text/html";
+      else if (path.endsWith(".htm"))
+        return "text/html";
+      else if (path.endsWith(".css"))
+        return "text/css";
+      else if (path.endsWith(".txt"))
+        return "text/plain";
+      else if (path.endsWith(".js"))
+        return "application/javascript";
+      else if (path.endsWith(".png"))
+        return "image/png";
+      else if (path.endsWith(".gif"))
+        return "image/gif";
+      else if (path.endsWith(".jpg"))
+        return "image/jpeg";
+      else if (path.endsWith(".ico"))
+        return "image/x-icon";
+      else if (path.endsWith(".svg"))
+        return "image/svg+xml";
+      else if (path.endsWith(".ttf"))
+        return "application/x-font-ttf";
+      else if (path.endsWith(".otf"))
+        return "application/x-font-opentype";
+      else if (path.endsWith(".woff"))
+        return "application/font-woff";
+      else if (path.endsWith(".woff2"))
+        return "application/font-woff2";
+      else if (path.endsWith(".eot"))
+        return "application/vnd.ms-fontobject";
+      else if (path.endsWith(".sfnt"))
+        return "application/font-sfnt";
+      else if (path.endsWith(".xml"))
+        return "text/xml";
+      else if (path.endsWith(".pdf"))
+        return "application/pdf";
+      else if (path.endsWith(".zip"))
+        return "application/zip";
+      else if (path.endsWith(".gz"))
+        return "application/x-gzip";
+      else if (path.endsWith(".appcache"))
+        return "text/cache-manifest";
 
       return "application/octet-stream";
     }
@@ -184,4 +206,4 @@ class StaticRequestHandler : public RequestHandler
     size_t _baseUriLength;
 };
 
-#endif		// REQUEST_HANDLER_IMPL_STM32_H
+#endif    // REQUEST_HANDLER_IMPL_STM32_H

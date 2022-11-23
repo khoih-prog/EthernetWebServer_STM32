@@ -44,7 +44,7 @@
     {
       "owner": "khoih-prog",
       "name": "Ethernet_Generic",
-      "version": "^2.2.0"
+      "version": "^2.7.1"
     }
   ],
   "frameworks": "arduino",

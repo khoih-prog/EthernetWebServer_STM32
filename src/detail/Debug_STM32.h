@@ -36,9 +36,9 @@
 #include <stdio.h>
 
 #ifdef DEBUG_ETHERNET_WEBSERVER_PORT
-#define ET_DEBUG_OUTPUT DEBUG_ETHERNET_WEBSERVER_PORT
+  #define ET_DEBUG_OUTPUT DEBUG_ETHERNET_WEBSERVER_PORT
 #else
-#define ET_DEBUG_OUTPUT Serial
+  #define ET_DEBUG_OUTPUT Serial
 #endif
 
 // Change _ETHERNET_WEBSERVER_LOGLEVEL_ to set tracing and logging verbosity
@@ -101,4 +101,4 @@ const char EWS_LINE[]  = "========================================\n";
 
 ///////////////////////////////////////
 
-#endif		// DEBUG_STM32_H
+#endif    // DEBUG_STM32_H

@@ -27,7 +27,7 @@
   1.4.1   K Hoang      27/04/2022 Change from `arduino.cc` to `arduino.tips` in examples
   1.5.0   K Hoang      04/04/2022 Add support to custom SPI, such as SPI2, SPI3, SPI_New, etc.
  *************************************************************************************************************************************/
- 
+
 // Library to simplify HTTP fetching on Arduino
 // (c) Copyright Arduino. 2019
 // Released under Apache License, version 2.0
@@ -57,4 +57,4 @@ class EthernetURLEncoderClass
 
 extern EthernetURLEncoderClass EthernetURLEncoder;
 
-#endif		// ETHERNET_URL_ENCODER_H
+#endif    // ETHERNET_URL_ENCODER_H
