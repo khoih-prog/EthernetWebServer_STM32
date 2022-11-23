@@ -52,47 +52,48 @@ void sendNTPpacket(char *ntpSrv)
 void setup()
 {
   Serial.begin(115200);
+
   while (!Serial && millis() < 5000);
 
   Serial.println("\nStart UdpNTPClient on " + String(BOARD_NAME) + ", using " + String(SHIELD_TYPE));
-  
+
 #if USE_ETHERNET_GENERIC
   Serial.println(ETHERNET_GENERIC_VERSION);
 #endif
-  
+
   Serial.println(ETHERNET_WEBSERVER_STM32_VERSION);
 
 #if !(USE_BUILTIN_ETHERNET)
-  #if (USING_SPI2)
-    #if defined(CUR_PIN_MISO)
-      ET_LOGWARN(F("Default SPI pinout:"));
-      ET_LOGWARN1(F("MOSI:"), CUR_PIN_MOSI);
-      ET_LOGWARN1(F("MISO:"), CUR_PIN_MISO);
-      ET_LOGWARN1(F("SCK:"),  CUR_PIN_SCK);
-      ET_LOGWARN1(F("SS:"),   CUR_PIN_SS);
-      ET_LOGWARN(F("========================="));
-    #endif
-  #else
-    ET_LOGWARN(F("Default SPI pinout:"));
-    ET_LOGWARN1(F("MOSI:"), MOSI);
-    ET_LOGWARN1(F("MISO:"), MISO);
-    ET_LOGWARN1(F("SCK:"),  SCK);
-    ET_LOGWARN1(F("SS:"),   SS);
-    ET_LOGWARN(F("========================="));
-  #endif
+#if (USING_SPI2)
+#if defined(CUR_PIN_MISO)
+  ET_LOGWARN(F("Default SPI pinout:"));
+  ET_LOGWARN1(F("MOSI:"), CUR_PIN_MOSI);
+  ET_LOGWARN1(F("MISO:"), CUR_PIN_MISO);
+  ET_LOGWARN1(F("SCK:"),  CUR_PIN_SCK);
+  ET_LOGWARN1(F("SS:"),   CUR_PIN_SS);
+  ET_LOGWARN(F("========================="));
+#endif
+#else
+  ET_LOGWARN(F("Default SPI pinout:"));
+  ET_LOGWARN1(F("MOSI:"), MOSI);
+  ET_LOGWARN1(F("MISO:"), MISO);
+  ET_LOGWARN1(F("SCK:"),  SCK);
+  ET_LOGWARN1(F("SS:"),   SS);
+  ET_LOGWARN(F("========================="));
+#endif
 #endif
 
 #if !(USE_BUILTIN_ETHERNET || USE_UIP_ETHERNET)
   // For other boards, to change if necessary
-  #if ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
+#if ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
   Ethernet.init (USE_THIS_SS_PIN);
 
-  #elif USE_CUSTOM_ETHERNET
+#elif USE_CUSTOM_ETHERNET
   // You have to add initialization for your Custom Ethernet here
   // This is just an example to setCSPin to USE_THIS_SS_PIN, and can be not correct and enough
   //Ethernet.init(USE_THIS_SS_PIN);
 
-  #endif  //( ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
+#endif  //( ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
 #endif
 
   // start the ethernet connection and the server:
@@ -114,6 +115,7 @@ void loop()
 
   // wait for a reply for UDP_TIMEOUT miliseconds
   unsigned long startMs = millis();
+
   while (!Udp.available() && (millis() - startMs) < UDP_TIMEOUT) {}
 
   // if there's data available, read a packet
@@ -128,7 +130,7 @@ void loop()
     Serial.print(remoteIp);
     Serial.print(F(", port "));
     Serial.println(Udp.remotePort());
-    
+
     // We've received a packet, read the data from it into the buffer
     Udp.read(packetBuffer, NTP_PACKET_SIZE);
 
@@ -157,18 +159,25 @@ void loop()
     Serial.print(F("The UTC time is "));       // UTC is the time at Greenwich Meridian (GMT)
     Serial.print((epoch  % 86400L) / 3600); // print the hour (86400 equals secs per day)
     Serial.print(F(":"));
-    if (((epoch % 3600) / 60) < 10) {
+
+    if (((epoch % 3600) / 60) < 10)
+    {
       // In the first 10 minutes of each hour, we'll want a leading '0'
       Serial.print(F("0"));
     }
+
     Serial.print((epoch  % 3600) / 60); // print the minute (3600 equals secs per minute)
     Serial.print(F(":"));
-    if ((epoch % 60) < 10) {
+
+    if ((epoch % 60) < 10)
+    {
       // In the first 10 seconds of each minute, we'll want a leading '0'
       Serial.print(F("0"));
     }
+
     Serial.println(epoch % 60); // print the second
   }
+
   // wait ten seconds before asking for the time again
   delay(10000);
 }

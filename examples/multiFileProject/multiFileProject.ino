@@ -19,28 +19,31 @@
 // To be included only in main(), .ino with setup() to avoid `Multiple Definitions` Linker Error
 #include <EthernetWebServer_STM32.h>      // https://github.com/khoih-prog/EthernetWebServer_STM32
 
-void setup() 
+void setup()
 {
   Serial.begin(115200);
+
   while (!Serial && millis() < 5000);
 
   delay(500);
-  
+
   Serial.println("\nStart multiFileProject");
   Serial.println(ETHERNET_WEBSERVER_STM32_VERSION);
 
 #if defined(ETHERNET_WEBSERVER_STM32_VERSION_MIN)
+
   if (ETHERNET_WEBSERVER_STM32_VERSION_INT < ETHERNET_WEBSERVER_STM32_VERSION_MIN)
   {
     Serial.print("Warning. Must use this example on Version equal or later than : ");
     Serial.println(ETHERNET_WEBSERVER_STM32_VERSION_MIN_TARGET);
   }
+
 #endif
 
   Serial.print("You're OK now");
 }
 
-void loop() 
+void loop()
 {
   // put your main code here, to run repeatedly:
 }

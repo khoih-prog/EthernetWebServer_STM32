@@ -31,6 +31,7 @@ int count = 0;
 void setup()
 {
   Serial.begin(115200);
+
   while (!Serial && millis() < 5000);
 
   Serial.print("\nStarting SimpleWebSocket on " + String(BOARD_NAME));
@@ -39,49 +40,49 @@ void setup()
 #if USE_ETHERNET_GENERIC
   Serial.println(ETHERNET_GENERIC_VERSION);
 #endif
-  
+
   Serial.println(ETHERNET_WEBSERVER_STM32_VERSION);
 
 #if !(USE_BUILTIN_ETHERNET)
-  #if (USING_SPI2)
-    #if defined(CUR_PIN_MISO)
-      ET_LOGWARN(F("Default SPI pinout:"));
-      ET_LOGWARN1(F("MOSI:"), CUR_PIN_MOSI);
-      ET_LOGWARN1(F("MISO:"), CUR_PIN_MISO);
-      ET_LOGWARN1(F("SCK:"),  CUR_PIN_SCK);
-      ET_LOGWARN1(F("SS:"),   CUR_PIN_SS);
-      ET_LOGWARN(F("========================="));
-    #endif
-  #else
-    ET_LOGWARN(F("Default SPI pinout:"));
-    ET_LOGWARN1(F("MOSI:"), MOSI);
-    ET_LOGWARN1(F("MISO:"), MISO);
-    ET_LOGWARN1(F("SCK:"),  SCK);
-    ET_LOGWARN1(F("SS:"),   SS);
-    ET_LOGWARN(F("========================="));
-  #endif
+#if (USING_SPI2)
+#if defined(CUR_PIN_MISO)
+  ET_LOGWARN(F("Default SPI pinout:"));
+  ET_LOGWARN1(F("MOSI:"), CUR_PIN_MOSI);
+  ET_LOGWARN1(F("MISO:"), CUR_PIN_MISO);
+  ET_LOGWARN1(F("SCK:"),  CUR_PIN_SCK);
+  ET_LOGWARN1(F("SS:"),   CUR_PIN_SS);
+  ET_LOGWARN(F("========================="));
+#endif
+#else
+  ET_LOGWARN(F("Default SPI pinout:"));
+  ET_LOGWARN1(F("MOSI:"), MOSI);
+  ET_LOGWARN1(F("MISO:"), MISO);
+  ET_LOGWARN1(F("SCK:"),  SCK);
+  ET_LOGWARN1(F("SS:"),   SS);
+  ET_LOGWARN(F("========================="));
+#endif
 #endif
 
-  #if !(USE_BUILTIN_ETHERNET || USE_UIP_ETHERNET)
-    // For other boards, to change if necessary
-    #if ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
-      Ethernet.init (USE_THIS_SS_PIN);
-      
-    #elif USE_CUSTOM_ETHERNET
-      // You have to add initialization for your Custom Ethernet here
-      // This is just an example to setCSPin to USE_THIS_SS_PIN, and can be not correct and enough
-      //Ethernet.init(USE_THIS_SS_PIN);
-      
-    #endif  //( ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
-  #endif
-  
+#if !(USE_BUILTIN_ETHERNET || USE_UIP_ETHERNET)
+  // For other boards, to change if necessary
+#if ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
+  Ethernet.init (USE_THIS_SS_PIN);
+
+#elif USE_CUSTOM_ETHERNET
+  // You have to add initialization for your Custom Ethernet here
+  // This is just an example to setCSPin to USE_THIS_SS_PIN, and can be not correct and enough
+  //Ethernet.init(USE_THIS_SS_PIN);
+
+#endif  //( ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
+#endif
+
   // start the ethernet connection and the server:
   // Use DHCP dynamic IP and random mac
   uint16_t index = millis() % NUMBER_OF_MAC;
   // Use Static IP
   //Ethernet.begin(mac[index], ip);
   Ethernet.begin(mac[index]);
-  
+
   Serial.print(F("Connected! IP address: "));
   Serial.println(Ethernet.localIP());
 }
@@ -89,10 +90,10 @@ void setup()
 void loop()
 {
   Serial.println("starting WebSocket client");
-  
+
   wsClient.begin();
 
-  while (wsClient.connected()) 
+  while (wsClient.connected())
   {
     Serial.print("Sending Hello ");
     Serial.println(count);
@@ -110,7 +111,7 @@ void loop()
     // check if a message is available to be received
     int messageSize = wsClient.parseMessage();
 
-    if (messageSize > 0) 
+    if (messageSize > 0)
     {
       Serial.println("Received a message:");
       Serial.println(wsClient.readString());

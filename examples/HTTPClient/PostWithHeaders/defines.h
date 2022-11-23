@@ -16,7 +16,7 @@
 #if !( defined(STM32F0) || defined(STM32F1) || defined(STM32F2) || defined(STM32F3)  ||defined(STM32F4) || defined(STM32F7) || \
        defined(STM32L0) || defined(STM32L1) || defined(STM32L4) || defined(STM32H7)  ||defined(STM32G0) || defined(STM32G4) || \
        defined(STM32WB) || defined(STM32MP1) || defined(STM32L5) )
-  #error This code is designed to run on STM32F/L/H/G/WB/MP1 platform! Please check your Tools->Board setting.
+#error This code is designed to run on STM32F/L/H/G/WB/MP1 platform! Please check your Tools->Board setting.
 #endif
 
 #define DEBUG_ETHERNET_WEBSERVER_PORT       Serial
@@ -24,7 +24,7 @@
 // Debug Level from 0 to 4
 #define _ETHERNET_WEBSERVER_LOGLEVEL_       2
 
-// If USE_BUILTIN_ETHERNET == false and USE_UIP_ETHERNET == false => 
+// If USE_BUILTIN_ETHERNET == false and USE_UIP_ETHERNET == false =>
 // either use W5x00 with EthernetXYZ library
 // or ENC28J60 with EthernetENC library
 //#define USE_BUILTIN_ETHERNET    true
@@ -42,7 +42,7 @@
 #if !(USE_BUILTIN_ETHERNET || USE_UIP_ETHERNET)
   // Only one if the following to be true
   #define USE_ETHERNET_GENERIC  true
-  #define USE_ETHERNET_ESP8266  false 
+  #define USE_ETHERNET_ESP8266  false
   #define USE_ETHERNET_ENC      false
   #define USE_CUSTOM_ETHERNET   false
 #endif
@@ -60,13 +60,13 @@
 #elif (USE_UIP_ETHERNET)
   #warning Using ENC28J60 & UIPEthernet lib
   #define SHIELD_TYPE           "ENC28J60 & UIPEthernet Library"
-#elif USE_ETHERNET_GENERIC     
+#elif USE_ETHERNET_GENERIC
   #warning Using W5x00 & Ethernet_Generic lib
-  //#define SHIELD_TYPE           "W5x00 using Ethernet_Generic Library"  
+  //#define SHIELD_TYPE           "W5x00 using Ethernet_Generic Library"
 #elif USE_ETHERNET_ESP8266
   #include "Ethernet_ESP8266.h"
-  #warning Using W5x00 & Ethernet_ESP8266 lib 
-  #define SHIELD_TYPE           "W5x00 & Ethernet_ESP8266 Library" 
+  #warning Using W5x00 & Ethernet_ESP8266 lib
+  #define SHIELD_TYPE           "W5x00 & Ethernet_ESP8266 Library"
 #elif USE_ETHERNET_ENC
   #include "EthernetENC.h"
   #warning Using ENC28J60 & EthernetENC lib
@@ -87,7 +87,7 @@
 #if USE_ETHERNET_GENERIC
 
   #include <SPI.h>
-  
+
   // Be sure to use true only if necessary for your board, or compile error
   #define USING_CUSTOM_SPI            true
 
@@ -95,8 +95,8 @@
     // Currently test OK for F767ZI and L552ZE_Q
     #define USING_SPI2                  true
 
-    #define SHIELD_TYPE           "W5x00 using Ethernet_Generic Library and custom SPI" 
-  
+    #define SHIELD_TYPE           "W5x00 using Ethernet_Generic Library and custom SPI"
+
     #if (USING_SPI2)
       // For L552ZE-Q, F767ZI, but you can change the pins for any other boards
       // SCK: 23,  MOSI: 22, MISO: 25, SS/CS: 24 for SPI1
@@ -104,34 +104,34 @@
       #define CUR_PIN_MOSI              22
       #define CUR_PIN_SCK               23
       #define CUR_PIN_SS                24
-  
+
       #define SPI_NEW_INITIALIZED       true
-  
+
       // Don't create the instance with CUR_PIN_SS, or Ethernet not working
       // To change for other boards' SPI libraries
       SPIClass SPI_New(CUR_PIN_MOSI, CUR_PIN_MISO, CUR_PIN_SCK);
-      
+
       //#warning Using USE_THIS_SS_PIN = CUR_PIN_SS = 24
-  
+
       #if defined(USE_THIS_SS_PIN)
         #undef USE_THIS_SS_PIN
-      #endif   
+      #endif
       #define USE_THIS_SS_PIN       CUR_PIN_SS    //24
-      
+
     #endif
 
   #else
 
-    #define SHIELD_TYPE           "W5x00 using Ethernet_Generic Library"  
-    
+    #define SHIELD_TYPE           "W5x00 using Ethernet_Generic Library"
+
   #endif
-  
+
   #include "Ethernet_Generic.h"
 
   #define ETHERNET_LARGE_BUFFERS
 
   #define _ETG_LOGLEVEL_                      1
-  
+
 #endif
 
 //////////////////////////////////////////////////////////////////////////
@@ -165,7 +165,7 @@
   #define BOARD_TYPE  "STM32L4"
 #elif defined(STM32L5)
   #warning STM32L5 board selected
-  #define BOARD_TYPE  "STM32L5"  
+  #define BOARD_TYPE  "STM32L5"
 #elif defined(STM32H7)
   #warning STM32H7 board selected
   #define BOARD_TYPE  "STM32H7"
