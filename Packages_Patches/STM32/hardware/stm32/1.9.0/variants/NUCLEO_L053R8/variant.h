@@ -24,8 +24,8 @@ extern "C" {
 #endif // __cplusplus
 
 /*----------------------------------------------------------------------------
- *        Pins
- *----------------------------------------------------------------------------*/
+          Pins
+  ----------------------------------------------------------------------------*/
 
 #define PA3  0
 #define PA2  1
@@ -116,8 +116,8 @@ extern "C" {
 } // extern "C"
 #endif
 /*----------------------------------------------------------------------------
- *        Arduino objects - C++ only
- *----------------------------------------------------------------------------*/
+          Arduino objects - C++ only
+  ----------------------------------------------------------------------------*/
 
 #ifdef __cplusplus
   // These serial port names are intended to allow libraries and architecture-neutral
@@ -136,7 +136,7 @@ extern "C" {
   // SERIAL_PORT_HARDWARE_OPEN  Hardware serial ports which are open for use.  Their RX & TX
   //                            pins are NOT connected to anything by default.
   #define SERIAL_PORT_MONITOR     Serial
-  
+
   // KH mod to add Serial1, for ESP-AT
   //#define SERIAL_PORT_HARDWARE    Serial
   #define SERIAL_PORT_HARDWARE    Serial1
